@@ -1,1 +1,1 @@
-# software-engineering-course-project
+Tema: Reģistrācijas sistēma viesnīcā
