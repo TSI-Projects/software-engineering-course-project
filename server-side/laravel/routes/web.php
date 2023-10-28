@@ -1,18 +1,13 @@
 <?php
 
+use App\Http\Controllers\Web\SocialiteController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('/auth')->group(static function () {
+    Route::prefix('/socialite')->group(static function () {
+        Route::prefix('/{provider}')->group(static function () {
+            Route::get('/login', [SocialiteController::class, 'login'])->name('socialite.index');
+            Route::get('/callback', [SocialiteController::class, 'callback'])->name('socialite.callback');
+        })->whereIn('provider', ['google']);
+    });
 });
