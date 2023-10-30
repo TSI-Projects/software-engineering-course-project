@@ -1,19 +1,40 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\V1\AmenityController;
+use App\Http\Controllers\API\V1\Auth\CompleteRegisterController;
+use App\Http\Controllers\API\V1\BedController;
+use App\Http\Controllers\API\V1\BookingController;
+use App\Http\Controllers\API\V1\MeBookingController;
+use App\Http\Controllers\API\V1\MeController;
+use App\Http\Controllers\API\V1\RoomController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+Route::prefix('/v1')->group(static function () {
+    Route::prefix('/auth')->group(static function () {
+        Route::post('/register/complete', [CompleteRegisterController::class, 'store'])->name('auth.register.complete');
+        Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth:sanctum')->name('auth.logout');
+    });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::prefix('/me')->middleware('auth:sanctum')->group(static function () {
+        Route::get('/', [MeController::class, 'index'])->name('me');
+        Route::get('/bookings', [MeBookingController::class, 'index'])->name('me.bookings');
+    });
+
+    Route::prefix('/beds')->group(static function () {
+        Route::get('/', [BedController::class, 'index'])->name('beds.index');
+    });
+
+    Route::prefix('/amenities')->group(static function () {
+        Route::get('/', [AmenityController::class, 'index'])->name('amenities.index');
+    });
+
+    Route::prefix('/rooms')->group(static function () {
+        Route::get('/', [RoomController::class, 'index'])->name('rooms.index');
+        Route::get('/{room}', [RoomController::class, 'show'])->name('rooms.show');
+    });
+
+    Route::prefix('/bookings')->group(static function () {
+        Route::get('/', [BookingController::class, 'index'])->name('bookings.index');
+        Route::post('/', [BookingController::class, 'store'])->middleware(['throttle:store-booking', 'auth:sanctum'])->name('bookings.store');
+    });
 });

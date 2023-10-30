@@ -24,7 +24,19 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        RateLimiter::for('api', function (Request $request) {
+        RateLimiter::for('store-booking', static function (Request $request) {
+            if (! app()->environment('production')) {
+                return Limit::none();
+            }
+
+            return Limit::perDay(2)->by($request->ip());
+        });
+
+        RateLimiter::for('api', static function (Request $request) {
+            if (! app()->environment('production')) {
+                return Limit::none();
+            }
+
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
