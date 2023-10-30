@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,13 +10,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Room extends Model
 {
-    use Filterable;
     use HasFactory;
     use HasUuids;
 
     protected $fillable = [
-        'checkin_at',
-        'checkout_at',
+        'name',
+        'description',
+        'price',
     ];
 
     public function bookings(): HasMany
@@ -27,8 +26,8 @@ class Room extends Model
 
     public function beds(): BelongsToMany
     {
-        return $this->belongsToMany(Room::class, 'room_bed')
-            ->withPivot('count');
+        return $this->belongsToMany(Bed::class, 'room_bed')
+            ->withPivot(['count']);
     }
 
     public function amenities(): BelongsToMany

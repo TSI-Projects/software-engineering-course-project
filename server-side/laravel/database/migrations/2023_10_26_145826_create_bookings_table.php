@@ -10,14 +10,10 @@ return new class extends Migration
     {
         Schema::create('bookings', static function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('room_id')->constrained('rooms')->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedTinyInteger('adult_count')->default(1);
             $table->unsignedTinyInteger('children_count')->default(0);
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('country_iso_code');
             $table->datetime('checkin_at');
             $table->datetime('checkout_at');
             $table->unsignedTinyInteger('status');

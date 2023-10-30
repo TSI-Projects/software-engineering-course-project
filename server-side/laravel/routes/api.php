@@ -1,16 +1,23 @@
 <?php
 
 use App\Http\Controllers\API\V1\AmenityController;
-use App\Http\Controllers\API\V1\Auth\LoginController;
+use App\Http\Controllers\API\V1\Auth\CompleteRegisterController;
 use App\Http\Controllers\API\V1\BedController;
 use App\Http\Controllers\API\V1\BookingController;
+use App\Http\Controllers\API\V1\MeBookingController;
+use App\Http\Controllers\API\V1\MeController;
 use App\Http\Controllers\API\V1\RoomController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v1')->group(static function () {
     Route::prefix('/auth')->group(static function () {
-        Route::post('/login', [LoginController::class, 'login'])->name('auth.login');
-        Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum')->name('auth.logout');
+        Route::post('/register/complete', [CompleteRegisterController::class, 'store'])->name('auth.register.complete');
+        Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth:sanctum')->name('auth.logout');
+    });
+
+    Route::prefix('/me')->middleware('auth:sanctum')->group(static function () {
+        Route::get('/', [MeController::class, 'index'])->name('me');
+        Route::get('/bookings', [MeBookingController::class, 'index'])->name('me.bookings');
     });
 
     Route::prefix('/beds')->group(static function () {

@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Laravel\Sanctum\PersonalAccessToken;
 
-class LoginController extends Controller
+class LogoutController extends Controller
 {
-    public function logout(Request $request): Response
+    public function index(Request $request): Response
     {
         if (! $bearerToken = $request->bearerToken()) {
             abort(401);

@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\TokenTrait;
 use App\Models\User;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Session;
-use Laravel\Socialite\Facades\Socialite;
-use Laravel\Socialite\Contracts\User as SocialiteUser;
 use Laravel\Socialite\Contracts\Provider as SocialiteProvider;
-use App\Http\Controllers\Controller;
+use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\InvalidStateException;
 use SocialiteProviders\Manager\Exception\InvalidArgumentException;
 
@@ -18,11 +14,7 @@ class SocialiteController extends Controller
 {
     use TokenTrait;
 
-    public const TOKEN_NAME = 'API Auth';
-
-    public const ELECTRON_DEEP_LINK = 'electron-fiddle';
-
-    public function login(string $provider)
+    public function redirect(string $provider)
     {
         return $this->resolveProvider($provider)->redirect();
     }
@@ -37,23 +29,13 @@ class SocialiteController extends Controller
 
         $user = User::query()
             ->where('email', $socialiteUser->getEmail())
-            ->firstOr(function () use ($socialiteUser) {
-                return $this->createNewUser($socialiteUser);
-            });
+            ->first();
 
-        $accessToken = $this->createToken($user, 'API Auth');
+        if ($user) {
+            return $this->redirectToToken($user);
+        }
 
-        $redirectUrl = sprintf('%s://oauth/token?accessToken=%s', static::ELECTRON_DEEP_LINK, $accessToken->plainTextToken);
-
-        return Redirect::away($redirectUrl);
-    }
-
-    protected function createNewUser(SocialiteUser $socialiteUser): User
-    {
-        return User::create([
-            'email' => $socialiteUser->getEmail(),
-            'email_verified_at' => now(),
-        ]);
+        return $this->redirectToRegisterComplete($socialiteUser);
     }
 
     protected function resolveProvider(string $provider): SocialiteProvider

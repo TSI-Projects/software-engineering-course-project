@@ -7,34 +7,35 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Booking extends Model
 {
-    use HasUuids;
     use HasFactory;
+    use HasUuids;
 
     protected $fillable = [
+        'user_id',
         'room_id',
-        'checkin_at',
-        'checkout_at',
         'adult_count',
         'children_count',
-        'first_name',
-        'last_name',
-        'phone',
-        'email',
         'country_iso_code',
+        'checkin_at',
+        'checkout_at',
     ];
 
     protected $casts = [
-        'chekin_at' => 'date',
-        'checkout_at' => 'date',
+        'chekin_at' => 'datetime',
+        'checkout_at' => 'datetime',
         'status' => BookingStatus::class,
     ];
 
     public function room(): BelongsTo
     {
         return $this->belongsTo(Room::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
