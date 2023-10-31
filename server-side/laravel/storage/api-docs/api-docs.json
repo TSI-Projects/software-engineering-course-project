@@ -1,0 +1,609 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Hotel Reservation API Documentation",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api/v1",
+            "description": "Main server"
+        }
+    ],
+    "paths": {
+        "/amenities": {
+            "get": {
+                "operationId": "getListOfAmenities",
+                "tags": [
+                    "amenities"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Amenity"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/beds": {
+            "get": {
+                "operationId": "getListOfBeds",
+                "tags": [
+                    "beds"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Bed"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rooms": {
+            "get": {
+                "tags": [
+                    "rooms"
+                ],
+                "operationId": "listOfRooms",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Room"
+                                        },
+                                        {
+                                            "properties": {
+                                                "beds": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "allOf": [
+                                                            {
+                                                                "$ref": "#/components/schemas/Bed"
+                                                            },
+                                                            {
+                                                                "properties": {
+                                                                    "row_bed": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "count": {
+                                                                                "type": "number",
+                                                                                "format": "uint1"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "amenities": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Amenity"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/room/{room}": {
+            "get": {
+                "tags": [
+                    "rooms"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "room",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "UUID of the room to get"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Room"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/bookings": {
+            "post": {
+                "operationId": "storeNewBooking",
+                "tags": [
+                    "bookings"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "room_id": {
+                                        "type": "string",
+                                        "format": "uuid"
+                                    },
+                                    "adults_count": {
+                                        "type": "number",
+                                        "format": "uint1"
+                                    },
+                                    "childrens_count": {
+                                        "type": "number",
+                                        "format": "uint1"
+                                    },
+                                    "checkin_at": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "checkout_at": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Booking"
+                                        },
+                                        {
+                                            "properties": {
+                                                "room": {
+                                                    "type": "object",
+                                                    "$ref": "#/components/schemas/Room"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+
+                    },
+                    "422": {
+                        "description": "Validation failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrors"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/me": {
+            "get": {
+                "operationId": "getCurrentUser",
+                "tags": [
+                    "user"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/me/bookings": {
+            "get": {
+                "operationId": "getCurrentUserBookings",
+                "tags": [
+                    "user"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/components/schemas/Booking"
+                                            },
+                                            {
+                                                "type": "object",
+                                                "properties": {
+                                                    "room": {
+                                                        "type": "object",
+                                                        "$ref": "#/components/schemas/Room"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "operationId": "logout",
+                "tags": [
+                    "auth"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/register/complete": {
+            "post": {
+                "operationId": "completeRegistration",
+                "tags": [
+                    "auth"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "phone"
+                                    },
+                                    "country_iso_code": {
+                                        "type": "string",
+                                        "format": "country-code"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "accessToken": {
+                                            "type": "string",
+                                            "format": "token"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Forbidden"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "UnauthorizedResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "default": "Unauthorized"
+                    }
+                }
+            },
+            "ValidationErrors": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "format": "text"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "Model": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "Room": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Model"
+                    },
+                    {
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            "name": {
+                                "type": "string",
+                                "format": "name"
+                            },
+                            "description": {
+                                "type": "string",
+                                "format": "description"
+                            },
+                            "price": {
+                                "type": "string",
+                                "format": "price"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Bed": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Model"
+                    },
+                    {
+                        "properties": {
+                            "slug": {
+                                "type": "string",
+                                "format": "slug"
+                            },
+                            "name": {
+                                "type": "string",
+                                "format": "name"
+                            },
+                            "size": {
+                                "type": "number",
+                                "format": "uint1"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Amenity": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Model"
+                    },
+                    {
+                        "properties": {
+                            "slug": {
+                                "type": "string",
+                                "format": "slug"
+                            },
+                            "name": {
+                                "type": "string",
+                                "format": "name"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Booking": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Model"
+                    },
+                    {
+                        "properties": {
+                            "adults_count": {
+                                "type": "number",
+                                "format": "uint1"
+                            },
+                            "childrens_count": {
+                                "type": "number",
+                                "format": "uint1"
+                            },
+                            "checkin_at": {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "checkout_at": {
+                                "type": "string",
+                                "format": "date-time"
+                            }
+                        }
+                    }
+                ]
+            },
+            "User": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Model"
+                    },
+                    {
+                        "properties": {
+                            "first_name": {
+                                "type": "string",
+                                "format": "text"
+                            },
+                            "last_name": {
+                                "type": "string",
+                                "format": "text"
+                            },
+                            "email": {
+                                "type": "string",
+                                "format": "email"
+                            },
+                            "phone": {
+                                "type": "string",
+                                "format": "phone"
+                            },
+                            "country_iso_code": {
+                                "type": "string",
+                                "format": "iso-code"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "rooms",
+            "description": "Everything about rooms"
+        },
+        {
+            "name": "bookings",
+            "description": "Everything about bookings"
+        },
+        {
+            "name": "user",
+            "description": "Everything about current user"
+        },
+        {
+            "name": "auth",
+            "description": "Everything about authentication"
+        },
+        {
+            "name": "amenities",
+            "description": "Everything about amenities"
+        },        {
+            "name": "beds",
+            "description": "Everything about beds"
+        }
+    ]
+}
