@@ -84,7 +84,7 @@
                                                             },
                                                             {
                                                                 "properties": {
-                                                                    "row_bed": {
+                                                                    "room_bed": {
                                                                         "type": "object",
                                                                         "properties": {
                                                                             "count": {
@@ -136,7 +136,44 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Room"
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Room"
+                                        },
+                                        {
+                                            "properties": {
+                                                "amenities": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Amenity"
+                                                    }
+                                                },
+                                                "beds": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "allOf": [
+                                                            {
+                                                                "$ref": "#/components/schemas/Bed"
+                                                            },
+                                                            {
+                                                                "properties": {
+                                                                    "room_bed": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "count": {
+                                                                                "type": "number",
+                                                                                "format": "uint1"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
                                 }
                             }
                         }
