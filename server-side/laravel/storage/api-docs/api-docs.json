@@ -165,11 +165,11 @@
                                         "type": "string",
                                         "format": "uuid"
                                     },
-                                    "adults_count": {
+                                    "adult_count": {
                                         "type": "number",
                                         "format": "uint1"
                                     },
-                                    "childrens_count": {
+                                    "children_count": {
                                         "type": "number",
                                         "format": "uint1"
                                     },
@@ -522,11 +522,11 @@
                     },
                     {
                         "properties": {
-                            "adults_count": {
+                            "adult_count": {
                                 "type": "number",
                                 "format": "uint1"
                             },
-                            "childrens_count": {
+                            "children_count": {
                                 "type": "number",
                                 "format": "uint1"
                             },
