@@ -18,7 +18,6 @@ class Booking extends Model
         'room_id',
         'adult_count',
         'children_count',
-        'country_iso_code',
         'checkin_at',
         'checkout_at',
     ];
