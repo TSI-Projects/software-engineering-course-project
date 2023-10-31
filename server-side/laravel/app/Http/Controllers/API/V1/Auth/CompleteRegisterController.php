@@ -25,12 +25,16 @@ class CompleteRegisterController extends Controller
             ->exists();
 
         if ($exists) {
-            abort(401);
+            abort(403);
         }
 
-        return $this->redirectToToken(
+        $accessToken = $this->createToken(
             $this->createNewUser($validated),
         );
+
+        return [
+            'accessToken' => $accessToken,
+        ];
     }
 
     protected function createNewUser(array $validated)
@@ -50,15 +54,15 @@ class CompleteRegisterController extends Controller
         try {
             $token = Crypt::decrypt($validated['token']);
         } catch (DecryptException) {
-            abort(401);
+            abort(403);
         }
 
         if (! hash_equals($token['email'], $validated['email'])) {
-            abort(401);
+            abort(403);
         }
 
         if (now() >= Carbon::parse($token['expires_at'])) {
-            abort(401);
+            abort(403);
         }
     }
 }

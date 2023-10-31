@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\V1\AmenityController;
 use App\Http\Controllers\API\V1\Auth\CompleteRegisterController;
+use App\Http\Controllers\API\V1\Auth\LogoutController;
 use App\Http\Controllers\API\V1\BedController;
 use App\Http\Controllers\API\V1\BookingController;
 use App\Http\Controllers\API\V1\MeBookingController;

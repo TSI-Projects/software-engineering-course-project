@@ -12,6 +12,7 @@ class MeBookingController extends Controller
     public function index()
     {
         $bookings = Booking::query()
+            ->with(['room'])
             ->where('user_id', Auth::id())
             ->paginate(20);
 
