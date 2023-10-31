@@ -62,3 +62,7 @@ This command will build docker image for the project.
 ./vendor/bin/sail up -d
 ```
 This will launch a development server at http://localhost.
+
+# API Documentation
+
+API documentation is located at http://localhost/api/documentation.
