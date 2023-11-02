@@ -63,6 +63,14 @@ This command will build docker image for the project.
 ```
 This will launch a development server at http://localhost.
 
+## Database
+
+To create the database tables and seeds data, run the following command:
+```bash
+./vendor/bin/sail artisan migrate:fresh --seed
+```
+This command deletes the current database and recreates it from scratch and also seeds dummy data, so you can use this command if you want to recreate database.
+
 # API Documentation
 
 API documentation is located at http://localhost/api/documentation.
