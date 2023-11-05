@@ -1,0 +1,30 @@
+:host {
+    .wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+    }
+
+    .reservation-container {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+    }
+
+    img {
+        min-width: 550px;
+        height: 300px;
+    }
+
+    input {
+        background-color: rgb(245, 245, 245);
+        height: 30px;
+        border-radius: 2px;
+        border: rgb(216, 216, 216) solid 1px;
+        padding-left:10px ;
+    }
+}

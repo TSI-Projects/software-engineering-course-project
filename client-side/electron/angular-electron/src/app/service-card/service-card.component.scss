@@ -1,0 +1,19 @@
+:host {
+    .wrapper {
+        width: 200px;
+        height: 200px;
+        position: relative;
+    }
+
+    img {
+        height: 200px;
+        width: 250px;
+    }
+
+    .service-name {
+        position: absolute;
+        color: white;
+        bottom: 10px;
+        left: 20px;
+    }
+}

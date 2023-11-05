@@ -1,7 +1,16 @@
-<div class="container">
-  <h1 class="title">
-    {{ 'PAGES.HOME.TITLE' | translate }}
-  </h1>
+<!-- <div class="wrapper"></div> -->
 
-  <a routerLink="/detail">{{ 'PAGES.HOME.GO_TO_DETAIL' | translate }}</a>
+<div class="wrapper">
+  <app-header-page></app-header-page>
+  <app-detail></app-detail>
+  <div class="container">
+    <app-service-card [service]="serviceInfo[0]"></app-service-card>
+    <app-service-card  [service]="serviceInfo[1]"></app-service-card>
+    <app-service-card  [service]="serviceInfo[1]"></app-service-card>
+    <app-service-card  [service]="serviceInfo[1]"></app-service-card>
+    <app-service-card  [service]="serviceInfo[1]"></app-service-card>
+    <app-room-panel [room]="roomInfo[0]"></app-room-panel>
+    <app-room-panel [room]="roomInfo[1]"></app-room-panel>
+    <app-reservation-widget></app-reservation-widget>
+  </div>
 </div>

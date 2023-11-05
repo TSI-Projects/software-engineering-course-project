@@ -1,3 +1,8 @@
 :host {
-  
+  .wrapper {
+    height: 100%;
+    width: 100%;
+    background: url(../../assets/img/bg2.png) no-repeat;
+    // background: url(../../assets/img/bg2.png) no-repeat center fixed;
+}
 }
