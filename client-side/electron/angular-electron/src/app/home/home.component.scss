@@ -1,16 +1,17 @@
 :host {
+    color: white;
     font-family: Roboto;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
 
-    
+
     .wrapper {
         display: flex;
         flex-direction: column;
         overflow: hidden;
     }
-    
+
     .start-page {
         width: 100vw;
         height: 100vh;
@@ -57,7 +58,7 @@
                     border-radius: 38px;
                     border: 0;
                     background: linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%), linear-gradient(90deg, #FFA800 0%, #F047FF 100%);
-                    box-shadow: 0px 0px 150px 10px #F4C25F;
+                    box-shadow: 0px 0px 60px 0.5px #F4C25F;
 
                     .outline {
                         display: flex;
@@ -71,6 +72,143 @@
                 }
 
 
+            }
+        }
+    }
+
+    .about-us-page {
+        width: 100vw;
+        height: 100vh;
+        background: #0C0E15;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        .info-container {
+            width: 100%;
+            height: 100%;
+            padding: 8% 10% 0 10%;
+            position: relative;
+        }
+
+        .address {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding-left: 1rem;
+            border-left: white solid 1px;
+
+            h4,
+            h5,
+            h6 {
+                margin: 0;
+            }
+        }
+
+        .rot-text {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            transform: rotate(-90deg);
+            font-weight: 400;
+            position: absolute;
+            top: 60%;
+            right: -5%;
+
+            span {
+                margin-left: 10px;
+                font-size: 0.75em;
+            }
+
+            div {
+                background-color: white;
+                height: 1px;
+                width: 100px;
+            }
+        }
+
+        .transition-img {
+            background-image: url("../../assets/img/transition_city_1.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100%;
+            min-height: 317px
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            .map {
+                height: 100%;
+                width: 58%;
+                background-image: url("../../assets/img/map.png");
+                background-position: center;
+                background-repeat: no-repeat;
+                position: relative;
+
+                .map-container {
+                    display: flex;
+                    align-items: center;
+                    top: 50%;
+                    right: 47%;
+                    position: absolute;
+                }
+
+                .point {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 10px;
+
+                    background-color: rgba(126, 154, 245, 0.25);
+                    border-radius: 50%;
+
+
+                    .dot {
+                        width: 15px;
+                        height: 15px;
+                        border-radius: 50%;
+                        background: #B2C0ED;
+                    }
+                }
+            }
+
+            .description {
+                height: 100%;
+                width: 37%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+
+                h4 {
+                    font-size: 1.5rem;
+                    margin: 0 0 1rem 0
+                }
+
+                p {
+                    margin: 0 0 1rem 0;
+                    font-size: 1rem;
+                    color: #94A2D5;
+                    text-align: justify;
+                }
+
+                .imgs {
+                    display: flex;
+                    gap: 1rem;
+
+                    img {
+                        margin-right: 3rem;
+                    }
+
+                }
             }
         }
     }
