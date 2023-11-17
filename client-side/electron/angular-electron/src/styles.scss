@@ -1,10 +1,13 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-size: 20px; 
-
+  scroll-behavior: smooth;
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 @import "primeng/resources/themes/lara-light-blue/theme.css";
@@ -17,20 +20,26 @@ html, body {
   font-style: normal;
 }
 
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1200px) {
   html {
     font-size: 14px;
   }
 }
 
-@media (min-width: 601px) and (max-width: 1440px) {
+@media only screen and (min-width: 1201px) and (max-width: 1440px) {
   html {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
-@media (min-width: 1920px) {
+@media only screen and (min-width: 1441px) {
   html {
-    font-size: 20px;
+    font-size: 16px;
   }
 }

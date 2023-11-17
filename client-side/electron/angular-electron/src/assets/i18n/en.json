@@ -1,12 +1,14 @@
 {
   "PAGES": {
-      "HOME": {
-          "TITLE": "App works !",
-          "GO_TO_DETAIL": "Go to Detail"
-      },
-      "DETAIL": {
-        "TITLE": "Detail page !",
-        "BACK_TO_HOME": "Back to Home"
+    "HOME": {
+      "START": {
+        "TITLE": "Experience the Next Level of Immersive Stays",
+        "TEXT": "At Gaming Hotel, we're not just a place to rest; we're an escape into the worlds you love. Here, every room is a portal to virtual realms, tailored for the gamer who desires more than just a play session. "
+      }
+    },
+    "DETAIL": {
+      "TITLE": "Detail page !",
+      "BACK_TO_HOME": "Back to Home"
     }
   }
 }
