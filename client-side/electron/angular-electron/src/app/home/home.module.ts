@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 
 import { HomeComponent } from './home.component';
 import { SharedModule } from '../shared/shared.module';
+import { RatingModule } from 'primeng/rating';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule, 
     SharedModule, 
-    HomeRoutingModule
+    HomeRoutingModule,
+    RatingModule,
   ]
 })
 export class HomeModule {}

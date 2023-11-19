@@ -80,6 +80,46 @@
         </div>
       </div>
     </div>
+  </section >
+  <section class="our-rooms">
+    <h1>Our Rooms</h1>
+    <div class="rooms-container">
+      <div class="rooms-info">
+        <span>{{'PAGES.HOME.OUR_ROOMS.TEXT_1' | translate}}</span>
+          <div class="room-panel"
+            [ngStyle]="{'background-image': 'url(../../assets/img/our_rooms_1.png)'}">
+            <div class="info">
+              <h5>Minimalist Realm</h5>
+              <div class="rating"> 
+                <p-rating [(ngModel)]="rating" [stars]="5" [readonly]="true" [cancel]="false"></p-rating>
+                <span>(294 visitors)</span>
+              </div>
+              <span>$102 / night</span>
+            </div>
+            <button>Book now</button>
+        </div>
+      </div>
+      <div class="rooms-info">
+        <div class="room-panel"
+          [ngStyle]="{'background-image': 'url(../../assets/img/our_rooms_2.png)'}">
+          <div class="info">
+            <h5>Gamer's Frost Fortress</h5>
+            <div class="rating"> 
+              <p-rating [(ngModel)]="rating" [stars]="5" [readonly]="true" [cancel]="false"></p-rating>
+              <span>(91 visitors)</span>
+            </div>
+            <span>$102 / night</span>
+          </div>
+          <button>Book now</button>
+        </div>
+        <div class="text">
+          <span>{{'PAGES.HOME.OUR_ROOMS.TEXT_2' | translate}}</span>
+          <div> <button>More Rooms</button></div>
+        </div>
+      </div>
+    </div>
+    <img class="bg1" src="../../assets/img/our_rooms_bg_1.png">
+    <img class="bg2" src="../../assets/img/our_rooms_bg_2.png">
   </section>
 </div>
 

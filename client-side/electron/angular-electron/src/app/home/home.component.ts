@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  public rating = 4
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
