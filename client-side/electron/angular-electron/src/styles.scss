@@ -1,50 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
 html, body {
   margin: 0;
   padding: 0;
-
+  scroll-behavior: smooth;
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* CAN (MUST) BE REMOVED ! Sample Global style */
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+::-webkit-scrollbar {
+  display: none;
+}
 
-  background: url(./assets/background.jpg) no-repeat center fixed;
-  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
-  background-size: cover; /* version standardisée */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "~primeicons/primeicons.css";
 
-  .title {
-    color: white;
-    margin: 0;
-    padding: 50px 20px;
-  }
+@font-face {
+  font-family: 'Roboto';
+  src: url('./assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
-  a {
-    color: #fff !important;
-    text-transform: uppercase;
-    text-decoration: none;
-    background: #ed3330;
-    padding: 20px;
-    border-radius: 5px;
-    display: inline-block;
-    border: none;
-    transition: all 0.4s ease 0s;
-
-    &:hover {
-      background: #fff;
-      color: #ed3330 !important;
-      letter-spacing: 1px;
-      -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
-      -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
-      box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
-      transition: all 0.4s ease 0s;
-    }
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 12px;
   }
 }
 
+@media only screen and (min-width: 601px) and (max-width: 1200px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (min-width: 1201px) and (max-width: 1440px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 1441px) {
+  html {
+    font-size: 18px;
+  }
+}

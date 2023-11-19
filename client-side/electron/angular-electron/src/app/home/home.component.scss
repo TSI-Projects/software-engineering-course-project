@@ -1,3 +1,485 @@
 :host {
-  
+    color: white;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        section {
+            width: 100vw;
+            height: 100vh;
+        }
+    }
+
+    .start-page {
+        background-image: url("../../assets/img/start-img.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: white;
+
+        .start-page-container {
+            width: 100%;
+            height: 100%;
+            padding-top: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+
+            h1 {
+                width: 70%;
+                padding-left: 5%;
+                margin: 0 0 35px 0;
+                font-size: 5em;
+            }
+
+            h3 {
+                width: 50%;
+                font-size: 1.3rem;
+                padding: 0 0 0 5%;
+                margin: 0 0 130px 0;
+            }
+
+            .btn {
+                display: flex;
+                justify-content: center;
+
+                button {
+                    padding: 7px;
+                    color: white;
+                    width: 17rem;
+                    height: 3.5rem;
+                    font-size: 1.5rem;
+                    min-width: fit-content;
+                    border-radius: 38px;
+                    border: 0;
+                    background: linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%), linear-gradient(90deg, #FFA800 0%, #F047FF 100%);
+                    box-shadow: 0px 0px 60px 0.5px #F4C25F;
+
+                    .outline {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 44px;
+                        border: 3px solid #FFF;
+                    }
+                }
+
+
+            }
+        }
+    }
+
+    .about-us-page {
+        background: #0C0E15;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        .info-container {
+            width: 100%;
+            height: 100%;
+            padding: 8% 10% 0 10%;
+            position: relative;
+        }
+
+        .address {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding-left: 1rem;
+            border-left: white solid 1px;
+
+            h4,
+            h5,
+            h6 {
+                margin: 0;
+            }
+        }
+
+        .rot-text {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            transform: rotate(-90deg);
+            font-weight: 400;
+            position: absolute;
+            top: 60%;
+            right: -5%;
+
+            span {
+                margin-left: 10px;
+                font-size: 0.75em;
+            }
+
+            div {
+                background-color: white;
+                height: 1px;
+                width: 100px;
+            }
+        }
+
+        .transition-img {
+            position: absolute;
+            bottom: 0;
+            background-image: url("../../assets/img/transition_city_1.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100%;
+            min-height: 317px
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+
+            .map {
+                max-height: 514px;
+                height: 100%;
+                width: 58%;
+                background-image: url("../../assets/img/map.png");
+                background-position: center;
+                background-repeat: no-repeat;
+                position: relative;
+
+                .map-container {
+                    display: flex;
+                    align-items: center;
+                    top: 50%;
+                    right: 47%;
+                    position: absolute;
+                }
+
+                .point {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 10px;
+
+                    background-color: rgba(126, 154, 245, 0.25);
+                    border-radius: 50%;
+
+
+                    .dot {
+                        width: 15px;
+                        height: 15px;
+                        border-radius: 50%;
+                        background: #B2C0ED;
+                    }
+                }
+            }
+
+            .description {
+                height: 100%;
+                width: 37%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+
+                h4 {
+                    font-size: 1.5rem;
+                    margin: 0 0 1rem 0
+                }
+
+                p {
+                    margin: 0 0 1rem 0;
+                    font-size: 1rem;
+                    color: #94A2D5;
+                    text-align: justify;
+                }
+
+                .imgs {
+                    display: flex;
+                    gap: 1rem;
+
+                    img {
+                        margin-right: 3rem;
+                    }
+
+                }
+            }
+        }
+    }
+
+    .our-service-page {
+        background-color: #0F0F0F;
+        color: white;
+        font-family: Minecraft;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+
+        .transition-img-2 {
+            position: absolute;
+            background-image: url("../../assets/img/transition_city_2.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100%;
+            min-height: 355px;
+        }
+
+        .service-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            padding: 0 7rem 7rem 7rem;
+
+            .service {
+                display: flex;
+                z-index: 999;
+                position: relative;
+                height: fit-content;
+
+                img {
+                    width: 20rem;
+                    height: 15rem;
+                }
+            }
+
+            .service-column {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .service-column-2 {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+
+            .service-info-reverse,
+            .service-info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-left: 2rem;
+                width: 400px;
+                min-width: 200px;
+
+                h3 {
+                    color: #FDB01B;
+                    font-size: 24px;
+                    font-weight: 700;
+                    margin: 0 0 5px 0;
+                }
+
+                div {
+                    margin-bottom: 20px;
+                    text-align: left;
+                }
+
+                .minecraft-button {
+                    width: 160px;
+                    height: 45px;
+                    border: 2px solid #828282;
+                    background: #5A575C;
+                    color: #FFF;
+                    font-family: Minecraft;
+                    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
+                    font-size: 16px;
+                    font-weight: 700;
+                }
+            }
+
+            .service-info-reverse {
+                margin: 0 2rem 0 0;
+
+                div {
+                    margin-bottom: 20px;
+                    text-align: right;
+                }
+
+
+                h3 {
+                    text-align: right;
+                }
+
+                .minecraft-button {
+                    margin-left: auto;
+                }
+            }
+        }
+
+        h1 {
+            margin-top: 140px;
+            margin-bottom: 90px;
+            text-align: center;
+            font-size: 4rem;
+            font-weight: 400;
+            z-index: 999;
+        }
+    }
+
+
+    .our-rooms {
+        font-family: Roboto;
+        position: relative;
+        background-color: #F1F1F1;
+        color: #4A4A4A;
+        padding: 4rem 8rem;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+
+         
+        
+        .bg2 {
+            width: 56.5rem;
+            height: 20rem;
+            position:absolute;
+            left: 0;
+            top: 40%
+        }
+
+        .bg1 {
+            width: 33.5rem;
+            height: 20rem;
+            position:absolute;
+            right: 0;
+            top:6rem
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 6rem;
+            text-align: center;
+        }
+
+        .rooms-container {
+            display: flex;
+            position: relative;
+            z-index: 999;
+            width: 100%;
+            height: 100%;
+            gap: 180px;
+
+            .rooms-info {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+
+                span {
+                    text-align: center;
+                    font-family: Roboto;
+                    font-size: 36px;
+                    font-weight: 700;
+                    max-width: 670px;
+                }
+
+                button {
+                    padding: 1rem 2rem;
+                    border-radius: 19px;
+                    background: #000;
+                    color: #FFF;
+                    text-align: center;
+                    font-family: Roboto;
+                    font-size: 1.5rem;
+                    font-weight: 500;
+
+                }
+
+                .text {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 100%;
+
+                    button {
+                        margin-top: 40px;
+                    }
+
+                }
+
+                .room-panel {
+                    color: white;
+                    display: flex;
+                    justify-content: flex-start;
+                    flex-direction: row;
+                    align-items: flex-end;
+                    width: 32.5rem;
+                    height: 19rem;
+                    border-radius: 20px;
+                    filter: drop-shadow(5px 15px 50px rgba(0, 0, 0, 0.50));
+                    padding: 20px 40px;
+
+
+                    &:last-child {
+                        width: 43rem;
+                        height: 26rem;
+                    }
+
+                    h5 {
+                        margin: 0;
+                        font-size: 1.5rem;
+                        font-weight: 500;
+                        margin-bottom: 5px;
+                    }
+
+                    span {
+                        font-size: 1rem;
+                    }
+
+                    .rating {
+                        display: flex;
+                        justify-content: flex-start;
+                        margin-bottom: 5px;
+
+                        span {
+                            margin-left: 15px;
+                        }
+                    }
+
+                    button {
+                        margin-left: auto;
+                        padding: 12px 30px;
+                        border-radius: 25px;
+                        border: 2px solid #FFF;
+                        background: rgba(217, 217, 217, 0.00);
+                        color: #FFF;
+                        font-size: 1rem;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+
+    }
+
+    ::ng-deep .p-rating .p-rating-icon {
+        color: white !important;
+    }
+
+    ::ng-deep .p-rating .p-rating-icon.p-rating-icon-active {
+        color: white !important;
+    }
+
+    app-header {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 0;
+    }
 }

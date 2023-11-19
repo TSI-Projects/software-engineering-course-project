@@ -1,12 +1,30 @@
 {
   "PAGES": {
-      "HOME": {
-          "TITLE": "App works !",
-          "GO_TO_DETAIL": "Go to Detail"
+    "HOME": {
+      "START": {
+        "TITLE": "Experience the Next Level of Immersive Stays",
+        "TEXT": "At Gaming Hotel, we're not just a place to rest; we're an escape into the worlds you love. Here, every room is a portal to virtual realms, tailored for the gamer who desires more than just a play session. "
       },
-      "DETAIL": {
-        "TITLE": "Detail page !",
-        "BACK_TO_HOME": "Back to Home"
+      "ABOUT_US": {
+        "TEXT_1": "In the vibrant heart of Latvia, 2023 marked a new era for gamers and travel enthusiasts with the inception of a first-of-its-kind gaming hotel. Nestled in the bustling streets of Riga, this innovative hotel emerged as a beacon of modern entertainment and comfort, blending gaming with the luxury of hospitality.",
+        "TEXT_2": "At Level Up Lodge, every aspect of your stay is infused with the spirit of gaming. Our rooms, each designed with a specific gaming theme, offer an immersive experience, from retro arcades to futuristic VR adventures. Whether you're a fan of classic games or the latest releases, there's a room that resonates with your gaming soul."
+      },
+      "OUR_SERVICES": {
+        "TITLE_1": "Experience Ultimate Gaming Comfort",
+        "TEXT_1": "Dive into our state-of-the-art gaming rooms, equipped with the latest consoles, high-speed internet, and ergonomic gaming chairs. Whether you're a console fan or a PC enthusiast, we've got you covered!",
+        "TITLE_2": "Exclusive Tournaments and Events",
+        "TEXT_2": "Join in on our weekly gaming tournaments and events. Compete with fellow gamers and win exclusive prizes!",
+        "TITLE_3": "Taste the World of Games",
+        "TEXT_3": "Our one-of-a-kind bar and restaurant bring your favorite games to life through an exciting culinary experience. Enjoy a diverse menu of dishes and drinks inspired by iconic games, ranging from fantasy-themed feasts to sci-fi delicacies. It's a true gastronomic adventure through the universe of gaming!"
+      },
+      "OUR_ROOMS": {
+        "TEXT_1" : "Rooms Crafted for the True Gamer \nWhere Every Stay is a New Level to Conquer!",
+        "TEXT_2" : "We have much more room for creativity, \nimagination, and epic gaming adventures."
+      }
+    },
+    "DETAIL": {
+      "TITLE": "Detail page !",
+      "BACK_TO_HOME": "Back to Home"
     }
   }
 }
