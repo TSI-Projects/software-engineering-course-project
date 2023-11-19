@@ -5,16 +5,18 @@
     font-weight: 500;
     line-height: normal;
 
-
     .wrapper {
         display: flex;
         flex-direction: column;
         overflow: hidden;
+
+        section {
+            width: 100vw;
+            height: 100vh;
+        }
     }
 
     .start-page {
-        width: 100vw;
-        height: 100vh;
         background-image: url("../../assets/img/start-img.png");
         background-position: center;
         background-repeat: no-repeat;
@@ -77,8 +79,6 @@
     }
 
     .about-us-page {
-        width: 100vw;
-        height: 100vh;
         background: #0C0E15;
         display: flex;
         flex-direction: column;
@@ -128,6 +128,8 @@
         }
 
         .transition-img {
+            position: absolute;
+            bottom: 0;
             background-image: url("../../assets/img/transition_city_1.png");
             background-position: center;
             background-repeat: no-repeat;
@@ -140,11 +142,11 @@
             width: 100%;
             height: 100%;
             display: flex;
-
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
 
             .map {
+                max-height: 514px;
                 height: 100%;
                 width: 58%;
                 background-image: url("../../assets/img/map.png");
@@ -210,6 +212,120 @@
 
                 }
             }
+        }
+    }
+
+    .our-service-page {
+        background-color: #0F0F0F;
+        color: white;
+        font-family: Minecraft;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+
+        .transition-img-2 {
+            position: absolute;
+            background-image: url("../../assets/img/transition_city_2.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100%;
+            min-height: 355px;
+        }
+
+        .service-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            padding: 0 7rem 7rem 7rem;
+
+            .service {
+                display: flex;
+                z-index: 999;
+                position: relative;
+                height: fit-content;
+
+                img {
+                    width: 20rem;
+                    height: 15rem;
+                }
+            }
+
+            .service-column {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .service-column-2 {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+
+            .service-info-reverse,
+            .service-info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-left: 2rem;
+                width: 400px;
+                min-width: 200px;
+
+                h3 {
+                    color: #FDB01B;
+                    font-size: 24px;
+                    font-weight: 700;
+                    margin: 0 0 5px 0;
+                }
+
+                div {
+                    margin-bottom: 20px;
+                    text-align: left;
+                }
+
+                .minecraft-button {
+                    width: 160px;
+                    height: 45px;
+                    border: 2px solid #828282;
+                    background: #5A575C;
+                    color: #FFF;
+                    font-family: Minecraft;
+                    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
+                    font-size: 16px;
+                    font-weight: 700;
+                }
+            }
+
+            .service-info-reverse {
+                margin: 0 2rem 0 0;
+
+                div {
+                    margin-bottom: 20px;
+                    text-align: right;
+                }
+
+
+                h3 {
+                    text-align: right;
+                }
+
+                .minecraft-button {
+                    margin-left: auto;
+                }
+            }
+        }
+
+        h1 {
+            margin-top: 140px;
+            margin-bottom: 90px;
+            text-align: center;
+            font-size: 4rem;
+            font-weight: 400;
+            z-index: 999;
         }
     }
 
