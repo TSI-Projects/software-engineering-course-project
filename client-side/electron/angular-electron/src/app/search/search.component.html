@@ -1,0 +1,57 @@
+<app-header></app-header>
+<section class="wrapper">
+    <div class="search-container">
+        <div class="search">
+            <p-calendar 
+                [(ngModel)]="rangeDates"
+                selectionMode="range"
+                placeholder="Check-in date - Check-out Date" 
+                [readonlyInput]="true" 
+                [minDate]="minDate">
+            </p-calendar>
+
+            <button class="occupancy-btn" (click)="op.toggle($event)">
+                <span>{{adultsCount}} Adults · {{childrenCount}} Children · {{roomsCount}} room</span>
+                <i class="pi pi-angle-down"></i>
+                <p-overlayPanel #op>
+                    <ng-template pTemplate="content">
+                        <div class="overlay-panel-template">
+                            <div class="choice">
+                                <span>Adult</span>
+                                <div class="btns">
+                                    <i class="pi pi-minus" (click)="adultsCount = decrement(adultsCount)"></i>
+                                    <span>{{adultsCount}}</span>
+                                    <i class="pi pi-plus" (click)="adultsCount = increment(adultsCount)"></i>
+                                </div>
+                            </div>
+                            <div class="choice">
+                                <span>Children</span>
+                                <div class="btns">
+                                    <i class="pi pi-minus" (click)="childrenCount = decrement(childrenCount)"></i>
+                                    <span>{{childrenCount}}</span>
+                                    <i class="pi pi-plus" (click)="childrenCount = increment(childrenCount)"></i>
+                                </div>
+                            </div>
+                            <div class="choice">
+                                <span>Rooms</span>
+                                <div class="btns">
+                                    <i class="pi pi-minus" (click)="roomsCount = decrement(roomsCount)"></i>
+                                    <span>{{roomsCount}}</span>
+                                    <i class="pi pi-plus" (click)="roomsCount = increment(roomsCount)"></i>
+                                </div>
+                            </div>
+                            <button class="done-btn">Done</button>
+                        </div>
+                    </ng-template>
+                </p-overlayPanel>
+            </button>
+            <p-dropdown 
+              [options]="sortByArray" 
+              [(ngModel)]="sortChoice" 
+              placeholder="Sort by ..." 
+              [editable]="true" 
+              optionLabel="name">
+            </p-dropdown>
+        </div>
+    </div>
+</section>
