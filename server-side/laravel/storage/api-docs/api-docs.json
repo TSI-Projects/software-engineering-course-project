@@ -103,6 +103,16 @@
                                                     "items": {
                                                         "$ref": "#/components/schemas/Amenity"
                                                     }
+                                                },
+                                                "media": {
+                                                    "type": "object",
+                                                    "additionalProperties": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "format": "url"
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -142,12 +152,6 @@
                                         },
                                         {
                                             "properties": {
-                                                "amenities": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "$ref": "#/components/schemas/Amenity"
-                                                    }
-                                                },
                                                 "beds": {
                                                     "type": "array",
                                                     "items": {
@@ -169,6 +173,22 @@
                                                                 }
                                                             }
                                                         ]
+                                                    }
+                                                },
+                                                "amenities": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Amenity"
+                                                    }
+                                                },
+                                                "media": {
+                                                    "type": "object",
+                                                    "additionalProperties": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "format": "url"
+                                                        }
                                                     }
                                                 }
                                             }
