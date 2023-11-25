@@ -103,6 +103,16 @@
                                                     "items": {
                                                         "$ref": "#/components/schemas/Amenity"
                                                     }
+                                                },
+                                                "media": {
+                                                    "type": "object",
+                                                    "additionalProperties": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "format": "url"
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -142,12 +152,6 @@
                                         },
                                         {
                                             "properties": {
-                                                "amenities": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "$ref": "#/components/schemas/Amenity"
-                                                    }
-                                                },
                                                 "beds": {
                                                     "type": "array",
                                                     "items": {
@@ -170,10 +174,141 @@
                                                             }
                                                         ]
                                                     }
+                                                },
+                                                "amenities": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Amenity"
+                                                    }
+                                                },
+                                                "media": {
+                                                    "type": "object",
+                                                    "additionalProperties": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "format": "url"
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
                                     ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/room/{room}/media/upload": {
+            "post": {
+                "tags": [
+                    "rooms"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "room",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "UUID of the room to get"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "images": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "images"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Successful response"
+                    },
+                    "422": {
+                        "description": "Validation failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrors"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/room/{room}/media": {
+            "delete": {
+                "tags": [
+                    "rooms"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "room",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "UUID of the room to get"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "media_ids": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "uuid"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Successful response"
+                    },
+                    "422": {
+                        "description": "Validation failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrors"
                                 }
                             }
                         }

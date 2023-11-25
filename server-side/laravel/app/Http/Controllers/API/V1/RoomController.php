@@ -14,6 +14,7 @@ class RoomController extends Controller
     public function index()
     {
         $rooms = Room::query()
+            ->withMedia(['image'])
             ->with(['beds', 'amenities'])
             ->paginate(20);
 
@@ -22,6 +23,7 @@ class RoomController extends Controller
 
     public function show(Room $room, Request $request)
     {
+        $room->loadMedia(['image']);
         $room->load(['beds', 'amenities']);
 
         $additional = [];
