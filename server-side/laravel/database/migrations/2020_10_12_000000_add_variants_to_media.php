@@ -15,11 +15,8 @@ class AddVariantsToMedia extends Migration
                 $table->string('variant_name', 255)
                     ->after('size')
                     ->nullable();
-                $table->uuid('original_media_id')
-                    ->after('variant_name')
-                    ->nullable();
-
                 $table->foreignUuid('original_media_id', 'original_media_id')
+                    ->after('variant_name')
                     ->constrained('media')
                     ->cascadeOnUpdate()
                     ->nullOnDelete();
