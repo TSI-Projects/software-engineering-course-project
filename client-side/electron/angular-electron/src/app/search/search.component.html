@@ -40,11 +40,12 @@
                                     <i class="pi pi-plus" (click)="roomsCount = increment(roomsCount)"></i>
                                 </div>
                             </div>
-                            <button class="done-btn">Done</button>
+                            <button class="done-btn" (click)="op.hide()">Done</button>
                         </div>
                     </ng-template>
                 </p-overlayPanel>
             </button>
+
             <p-dropdown 
               [options]="sortByArray" 
               [(ngModel)]="sortChoice" 
@@ -52,6 +53,8 @@
               [editable]="true" 
               optionLabel="name">
             </p-dropdown>
+
+            <button class="search-btn"></button>
         </div>
     </div>
 </section>

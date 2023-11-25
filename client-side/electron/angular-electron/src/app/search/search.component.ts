@@ -11,11 +11,16 @@ export class SearchComponent {
   public adultsCount: number = 0;
   public childrenCount: number = 0;
   public roomsCount: number = 0;
-  public sortByArray: string[] = ["Popular", "Price", "Reviews"]
+  public sortByArray: Item[];
   public sortChoice: string | undefined;
 
   constructor() {
     this.minDate = new Date()
+    this.sortByArray = [
+      {name: 'Rating'},
+      {name: 'Price'},
+      {name: 'Review'}
+    ]
   }
 
   public decrement(count: number): number {
@@ -28,4 +33,8 @@ export class SearchComponent {
   public increment(count: number): number {
     return count+=1
   }
+}
+
+export interface Item {
+  name: string
 }
