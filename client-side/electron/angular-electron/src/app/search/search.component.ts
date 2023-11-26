@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Room, RoomResponse, RoomsResponse, RoomsService } from '../shared/services/rooms.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent {
+
+export class SearchComponent implements OnInit{
   public rangeDates: Date[] | undefined;
   public minDate: Date;
   public adultsCount: number = 0;
@@ -14,13 +17,38 @@ export class SearchComponent {
   public sortByArray: Item[];
   public sortChoice: string | undefined;
 
-  constructor() {
+  public rooms: RoomsResponse | undefined = undefined;
+  public room: RoomResponse | undefined = undefined;
+
+  constructor(
+   private searchService: RoomsService,
+  ) {
     this.minDate = new Date()
     this.sortByArray = [
       {name: 'Rating'},
       {name: 'Price'},
       {name: 'Review'}
     ]
+  }
+
+  ngOnInit(): void {
+
+  }
+
+
+  public search(): void {
+    const rooms = this.searchService.rooms
+ 
+    rooms.subscribe(response => {
+      if (response) {
+        this.rooms = response
+        this.searchService.getRoom(response.data[0].id).subscribe(data => {
+          this.room = data
+          console.log(this.rooms)
+          console.log(this.room)
+        })
+      }
+    })
   }
 
   public decrement(count: number): number {
