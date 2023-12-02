@@ -10,6 +10,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { DropdownModule } from 'primeng/dropdown';
 import { RoomsService } from '../shared/services/rooms.service';
+import { ChipModule } from 'primeng/chip';
+import { DividerModule } from 'primeng/divider';
+import { TooltipModule } from 'primeng/tooltip';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +29,9 @@ import { RoomsService } from '../shared/services/rooms.service';
     OverlayPanelModule,
     RatingModule,
     DropdownModule,
+    ChipModule,
+    DividerModule,
+    TooltipModule
   ]
 })
 

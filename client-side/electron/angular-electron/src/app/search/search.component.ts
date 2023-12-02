@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Room, RoomResponse, RoomsResponse, RoomsService } from '../shared/services/rooms.service';
-import { MessageService } from 'primeng/api';
+import { Room, RoomResponse, RoomsService } from '../shared/services/rooms.service';
 
 @Component({
   selector: 'app-search',
@@ -17,8 +16,9 @@ export class SearchComponent implements OnInit{
   public sortByArray: Item[];
   public sortChoice: string | undefined;
 
-  public rooms: RoomsResponse | undefined = undefined;
-  public room: RoomResponse | undefined = undefined;
+  public rooms: Room[] = [];
+
+  public defaultImg = '../../assets/img/our_rooms_2.png'
 
   constructor(
    private searchService: RoomsService,
@@ -31,25 +31,14 @@ export class SearchComponent implements OnInit{
     ]
   }
 
-  ngOnInit(): void {
-
+  async ngOnInit(): Promise<void> {
+    this.rooms = await this.searchService.getRooms()
   }
-
-
+  
   public search(): void {
-    const rooms = this.searchService.rooms
- 
-    rooms.subscribe(response => {
-      if (response) {
-        this.rooms = response
-        this.searchService.getRoom(response.data[0].id).subscribe(data => {
-          this.room = data
-          console.log(this.rooms)
-          console.log(this.room)
-        })
-      }
-    })
+
   }
+
 
   public decrement(count: number): number {
     if (count > 0) {

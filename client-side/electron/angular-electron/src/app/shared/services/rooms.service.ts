@@ -1,7 +1,7 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { APP_CONFIG } from '../../../environments/environment';
-import { Observable, catchError, of } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { MessageService } from 'primeng/api';
 
 @Injectable({
@@ -13,23 +13,30 @@ export class RoomsService {
     private messageService: MessageService
   ) { }
 
-  get rooms(): Observable<RoomsResponse | undefined> {
-    return this.http.get<RoomsResponse>(APP_CONFIG.HotelRoomsEndpoint).pipe(
-      catchError(error => this.handleError(error))
-    )
+  public async getRooms(): Promise<Room[]> {
+    try {
+      const roomsData$ = this.http.get<RoomsResponse>(APP_CONFIG.HotelRoomsEndpoint)
+      const response = await lastValueFrom(roomsData$)
+      return response.data
+    } catch  {
+      this.handleResponseError()
+      return []
+    }
   }
 
-  public getRoom(id: string): Observable<RoomResponse | undefined> {
-    const endpoint = `${APP_CONFIG.HotelRoomEndpoint}/${id}`
-    return this.http.get<RoomResponse>(endpoint).pipe(
-      catchError(error => this.handleError(error))
-    )
+  public async getRoom(id: string): Promise<Room | null> {
+    try {
+      const roomData$ = this.http.get<RoomResponse>(`${APP_CONFIG.HotelRoomEndpoint}/${id}`)
+      const response = await lastValueFrom(roomData$)
+      return response.data
+    } catch {
+      this.handleResponseError()
+      return null
+    }
   }
 
-  private handleError(error: HttpErrorResponse):Observable<undefined> {
-    console.log(error)
+  private handleResponseError() {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong :( Please try again later!' })
-    return of(undefined);
   }
 }
 
@@ -71,4 +78,5 @@ export interface Bed {
 export interface Amenities {
   id: string 
   name: string 
+  icon: string
 }
