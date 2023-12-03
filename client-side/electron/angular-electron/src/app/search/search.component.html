@@ -58,36 +58,41 @@
         </div>
     </div>
 
-    <div class="rooms-container">
-        <div
-          class="room" 
-          *ngFor="let room of rooms">
-            <h4>{{room.name}}</h4>
-            <div class="room-card">
-                <img [src]="defaultImg">
-                <div class="details">
-                    <h5>Room at a glance</h5>
-                    <p-chip label="Max. guests : {{room.beds.length * 2}} adults, 1 child "></p-chip>
-                    <div>
-                        <p-chip  class="mr-10" label="Bed type : 2 twin or 1 queen"></p-chip> 
-                        <p-chip label="Size: 19m²"></p-chip>
+    <div class="rooms-list-container">
+        <app-rooms-filter></app-rooms-filter>
+        <div class="rooms-container">
+            <div
+              class="room" 
+              *ngFor="let room of _rooms.filtredRooms$ | async">
+                <h4>{{room.name}}</h4>
+                <div class="room-card">
+                    <img [src]="defaultImg">
+                    <div class="details">
+                        <h5>Room at a glance</h5>
+                        <p-chip label="Max. guests : {{room.beds.length * 2}} adults, 1 child "></p-chip>
+                        <div>
+                            <p-chip  class="mr-10" label="Bed type : 2 twin or 1 queen"></p-chip> 
+                            <p-chip label="Size: 19m²"></p-chip>
+                        </div>
+                        <div class="amenities">
+                            <ng-container *ngFor="let amenitie of room.amenities ; index as i ">
+                                <i class="material-icons-outlined" pTooltip="{{amenitie.name}}" tooltipPosition="top" >{{amenitie.icon || 'desktop_windows'}}</i>
+                                <p-divider *ngIf="room.amenities.length-1 == i && i > 0" layout="vertical"></p-divider>
+                            </ng-container>
+                        </div>
+                        <a routerLink="/room/{{room.id}}">More details</a>
                     </div>
-                    <div class="amenities">
-                        <ng-container *ngFor="let amenitie of room.amenities ; index as i ">
-                            <i class="material-icons-outlined" pTooltip="{{amenitie.name}}" tooltipPosition="top" >{{amenitie.icon || 'desktop_windows'}}</i>
-                            <p-divider *ngIf="room.amenities.length-1 == i && i > 0" layout="vertical"></p-divider>
-                        </ng-container>
+                    <div class="book">
+                        <div class="price">
+                            <span class="cash">EUR {{room.price || 'NaN'}}</span>
+                            <span class="gray">/night</span>
+                        </div>
+                        <button>BOOK NOW</button>
                     </div>
-                    <a routerLink="/room/{{room.id}}">More details</a>
-                </div>
-                <div class="book">
-                    <div class="price">
-                        <span class="cash">EUR {{room.price || 'NaN'}}</span>
-                        <span class="gray">/night</span>
-                    </div>
-                    <button>BOOK NOW</button>
                 </div>
             </div>
         </div>
     </div>
+
+    
 </section>

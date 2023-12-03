@@ -1,27 +1,46 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { APP_CONFIG } from '../../../environments/environment';
-import { lastValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, lastValueFrom, map, of } from 'rxjs';
 import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomsService {
+  private roomsSubject: BehaviorSubject<Room[] | null> = new BehaviorSubject<Room[] | null>([]);
+  public rooms$: Observable<Room[] | null> = this.roomsSubject.asObservable();
+
+  private filtredRoomsSubject: BehaviorSubject<Room[] | null> = new BehaviorSubject<Room[] | null>([])
+  public filtredRooms$: Observable<Room[] | null> = this.filtredRoomsSubject.asObservable();
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService
-  ) { }
+  ) {
+    this.loadRooms()
+  }
 
-  public async getRooms(): Promise<Room[]> {
-    try {
-      const roomsData$ = this.http.get<RoomsResponse>(APP_CONFIG.HotelRoomsEndpoint)
-      const response = await lastValueFrom(roomsData$)
-      return response.data
-    } catch  {
-      this.handleResponseError()
-      return []
-    }
+  get rooms(): Room[] {
+    return this.roomsSubject.value ?? []
+  }
+
+  private loadRooms(): void {
+    this.http.get<RoomsResponse>(APP_CONFIG.HotelRoomsEndpoint)
+      .pipe(
+        map(response => response.data),
+        catchError(() => {
+          this.handleResponseError()
+          return of(null)
+        }))
+      .subscribe(rooms => {
+        this.roomsSubject.next(rooms)
+        this.updateFiltredRooms(rooms)
+      });
+  }
+
+  public updateFiltredRooms(rooms: Room[] | null) {
+    this.filtredRoomsSubject.next(rooms)
   }
 
   public async getRoom(id: string): Promise<Room | null> {
@@ -60,8 +79,8 @@ export interface Meta {
 
 export interface Room {
   id: string
-  name: string 
-  description: string 
+  name: string
+  description: string
   price: string
   beds: Bed[]
   amenities: Amenities[]
@@ -71,12 +90,12 @@ export interface Room {
 export interface Bed {
   id: string
   name: string
-  size: number 
+  size: number
   count: number
 }
 
 export interface Amenities {
-  id: string 
-  name: string 
+  id: string
+  name: string
   icon: string
 }

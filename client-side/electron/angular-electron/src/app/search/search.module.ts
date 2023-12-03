@@ -13,7 +13,8 @@ import { RoomsService } from '../shared/services/rooms.service';
 import { ChipModule } from 'primeng/chip';
 import { DividerModule } from 'primeng/divider';
 import { TooltipModule } from 'primeng/tooltip';
-
+import { RoomsFilterModule } from './rooms-filter/rooms-filter.module';
+import { SliderModule } from 'primeng/slider';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,8 @@ import { TooltipModule } from 'primeng/tooltip';
   ],
   providers: [RoomsService],
   imports: [
-    CommonModule, 
-    SharedModule, 
+    CommonModule,
+    SharedModule,
     SearchRoutingModule,
     CalendarModule,
     BrowserAnimationsModule,
@@ -31,8 +32,10 @@ import { TooltipModule } from 'primeng/tooltip';
     DropdownModule,
     ChipModule,
     DividerModule,
-    TooltipModule
+    TooltipModule,
+    RoomsFilterModule,
+    SliderModule
   ]
 })
 
-export class SearchModule {}
+export class SearchModule { }
