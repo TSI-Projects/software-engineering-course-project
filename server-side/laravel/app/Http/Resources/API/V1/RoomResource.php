@@ -11,6 +11,7 @@ class RoomResource extends JsonResource
     {
         return [
             'id' => $this->getKey(),
+            'price' => $this->price,
             'name' => $this->name,
             'description' => $this->description,
             'amenities' => AmenityResource::collection($this->whenLoaded('amenities')),
