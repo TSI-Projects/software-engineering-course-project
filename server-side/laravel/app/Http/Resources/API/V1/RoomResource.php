@@ -15,6 +15,8 @@ class RoomResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'size' => $this->size,
+            'rating' => $this->rating,
+            'room_count' => $this->room_count,
             'amenities' => AmenityResource::collection($this->whenLoaded('amenities')),
             'beds' => BedResource::collection($this->whenLoaded('beds')),
             'media' => $this->whenLoaded('media', function () {
