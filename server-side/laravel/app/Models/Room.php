@@ -19,6 +19,9 @@ class Room extends Model
         'name',
         'description',
         'price',
+        'size',
+        'room_count',
+        'rating',
     ];
 
     public function bookings(): HasMany
