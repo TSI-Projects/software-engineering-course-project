@@ -19,10 +19,8 @@ class RoomResource extends JsonResource
             'room_count' => $this->room_count,
             'amenities' => AmenityResource::collection($this->whenLoaded('amenities')),
             'beds' => BedResource::collection($this->whenLoaded('beds')),
-            'media' => $this->whenLoaded('media', function () {
-                return collect($this->media)->mapWithKeys(function (Media $media) {
-                    return [$media->pivot->tag => $media->getUrl()];
-                });
+            'images' => $this->whenLoaded('media', function () {
+                return collect($this->media)->transform(fn (Media $media) => $media->getUrl());
             }),
             'updated_at' => $this->updated_at,
             'created_at' => $this->created_at,
