@@ -84,14 +84,9 @@
                                                             },
                                                             {
                                                                 "properties": {
-                                                                    "room_bed": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "count": {
-                                                                                "type": "number",
-                                                                                "format": "uint1"
-                                                                            }
-                                                                        }
+                                                                    "count": {
+                                                                        "type": "number",
+                                                                        "format": "uint1"
                                                                     }
                                                                 }
                                                             }
@@ -104,14 +99,110 @@
                                                         "$ref": "#/components/schemas/Amenity"
                                                     }
                                                 },
-                                                "media": {
-                                                    "type": "object",
-                                                    "additionalProperties": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "string",
-                                                            "format": "url"
-                                                        }
+                                                "images": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "format": "url"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rooms/filter": {
+            "post": {
+                "tags": [
+                    "rooms"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "adult_count": {
+                                        "type": "number"
+                                    },
+                                    "children_count": {
+                                        "type": "number"
+                                    },
+                                    "room_count": {
+                                        "type": "number"
+                                    },
+                                    "order_by": {
+                                        "type": "object",
+                                        "properties": {
+                                            "direction": {
+                                                "type": "string",
+                                                "enum": ["asc", "desc"]
+                                            },
+                                            "column": {
+                                                "type": "string",
+                                                "enum": ["rating"]
+                                            }
+                                        }
+                                    },
+                                    "checkin_at": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "checkout_at": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Room"
+                                        },
+                                        {
+                                            "properties": {
+                                                "beds": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "allOf": [
+                                                            {
+                                                                "$ref": "#/components/schemas/Bed"
+                                                            },
+                                                            {
+                                                                "properties": {
+                                                                    "count": {
+                                                                        "type": "number",
+                                                                        "format": "uint1"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "amenities": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Amenity"
+                                                    }
+                                                },
+                                                "images": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "format": "url"
                                                     }
                                                 }
                                             }
@@ -161,14 +252,9 @@
                                                             },
                                                             {
                                                                 "properties": {
-                                                                    "room_bed": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "count": {
-                                                                                "type": "number",
-                                                                                "format": "uint1"
-                                                                            }
-                                                                        }
+                                                                    "count": {
+                                                                        "type": "number",
+                                                                        "format": "uint1"
                                                                     }
                                                                 }
                                                             }
@@ -181,14 +267,11 @@
                                                         "$ref": "#/components/schemas/Amenity"
                                                     }
                                                 },
-                                                "media": {
-                                                    "type": "object",
-                                                    "additionalProperties": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "string",
-                                                            "format": "url"
-                                                        }
+                                                "images": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "format": "url"
                                                     }
                                                 }
                                             }
@@ -635,11 +718,23 @@
                             },
                             "description": {
                                 "type": "string",
-                                "format": "description"
+                                "format": "text"
                             },
                             "price": {
                                 "type": "string",
                                 "format": "price"
+                            },
+                            "size": {
+                                "type": "number",
+                                "format": "uint16"
+                            },
+                            "rating": {
+                                "type": "number",
+                                "format": "uint1"
+                            },
+                            "room_count": {
+                                "type": "number",
+                                "format": "uint1"
                             }
                         }
                     }
@@ -682,6 +777,10 @@
                             "name": {
                                 "type": "string",
                                 "format": "name"
+                            },
+                            "icon": {
+                                "type": "string",
+                                "format": "icon"
                             }
                         }
                     }

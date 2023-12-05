@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('amenities', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('icon');
             $table->string('slug')->unique();
             $table->string('name');
             $table->timestamps();

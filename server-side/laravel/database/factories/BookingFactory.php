@@ -19,11 +19,11 @@ class BookingFactory extends Factory
         ];
 
         if (random_int(1, 100) >= 50) {
-            $attributes['checkin_at'] = fake()->dateTimeBetween(startDate: 'now', endDate: '+32 days', timezone: 'UTC');
-            $attributes['checkout_at'] = fake()->dateTimeBetween(startDate: '+33 days', endDate: '+360 days', timezone: 'UTC');
+            $attributes['checkin_at'] = fake()->unique()->dateTimeBetween(startDate: 'now', endDate: '+32 days', timezone: 'UTC');
+            $attributes['checkout_at'] = fake()->unique()->dateTimeBetween(startDate: '+33 days', endDate: '+360 days', timezone: 'UTC');
         } else {
-            $attributes['checkin_at'] = fake()->dateTimeBetween(startDate: '-120 days', endDate: 'now', timezone: 'UTC');
-            $attributes['checkout_at'] = fake()->dateTimeBetween(startDate: '-60 days', endDate: 'now', timezone: 'UTC');
+            $attributes['checkin_at'] = fake()->unique()->dateTimeBetween(startDate: '-120 days', endDate: 'now', timezone: 'UTC');
+            $attributes['checkout_at'] = fake()->unique()->dateTimeBetween(startDate: '-60 days', endDate: 'now', timezone: 'UTC');
         }
 
         return $attributes;

@@ -10,6 +10,7 @@ class AmenityResource extends JsonResource
     {
         return [
             'id' => $this->getKey(),
+            'icon' => $this->icon,
             'slug' => $this->slug,
             'name' => $this->name,
             'updated_at' => $this->updated_at,

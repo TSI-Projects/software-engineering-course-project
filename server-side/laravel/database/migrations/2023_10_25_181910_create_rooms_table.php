@@ -14,6 +14,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->unsignedTinyInteger('size');
+            $table->unsignedTinyInteger('room_count');
+            $table->unsignedTinyInteger('rating');
             $table->timestamps();
         });
     }

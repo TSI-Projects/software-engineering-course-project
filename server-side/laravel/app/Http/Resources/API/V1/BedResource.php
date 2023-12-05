@@ -13,10 +13,8 @@ class BedResource extends JsonResource
             'slug' => $this->slug,
             'name' => $this->name,
             'size' => $this->size,
-            'room_bed' => $this->whenPivotLoaded('room_bed', function () {
-                return [
-                    'count' => $this->pivot->count,
-                ];
+            'count' => $this->whenPivotLoaded('room_bed', function () {
+                return $this->pivot->count;
             }),
             'updated_at' => $this->updated_at,
             'created_at' => $this->created_at,

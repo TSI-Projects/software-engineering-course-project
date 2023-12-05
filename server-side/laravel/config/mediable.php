@@ -13,7 +13,7 @@ return [
      *
      * Should extend `Plank\Mediable\Media`
      */
-    'model' => Plank\Mediable\Media::class,
+    'model' => App\Models\Media::class,
 
     /*
      * Name to be used for mediables joining table
@@ -94,7 +94,7 @@ return [
                 'jpeg',
                 'png',
                 'gif',
-            ]
+            ],
         ],
         Plank\Mediable\Media::TYPE_IMAGE_VECTOR => [
             'mime_types' => [
@@ -102,7 +102,7 @@ return [
             ],
             'extensions' => [
                 'svg',
-            ]
+            ],
         ],
         Plank\Mediable\Media::TYPE_PDF => [
             'mime_types' => [
@@ -110,7 +110,7 @@ return [
             ],
             'extensions' => [
                 'pdf',
-            ]
+            ],
         ],
         Plank\Mediable\Media::TYPE_AUDIO => [
             'mime_types' => [
@@ -119,7 +119,7 @@ return [
                 'audio/mpeg',
                 'audio/mp3',
                 'audio/mpeg',
-                'audio/wav'
+                'audio/wav',
             ],
             'extensions' => [
                 'aac',
@@ -127,22 +127,22 @@ return [
                 'oga',
                 'mp3',
                 'wav',
-            ]
+            ],
         ],
         Plank\Mediable\Media::TYPE_VIDEO => [
             'mime_types' => [
                 'video/mp4',
                 'video/mpeg',
                 'video/ogg',
-                'video/webm'
+                'video/webm',
             ],
             'extensions' => [
                 'mp4',
                 'm4v',
                 'mov',
                 'ogv',
-                'webm'
-            ]
+                'webm',
+            ],
         ],
         Plank\Mediable\Media::TYPE_ARCHIVE => [
             'mime_types' => [
@@ -152,7 +152,7 @@ return [
             ],
             'extensions' => [
                 'zip',
-            ]
+            ],
         ],
         Plank\Mediable\Media::TYPE_DOCUMENT => [
             'mime_types' => [
@@ -162,7 +162,7 @@ return [
                 'text/json',
                 'application/json',
                 'application/msword',
-                'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             ],
             'extensions' => [
                 'doc',
@@ -171,7 +171,7 @@ return [
                 'text',
                 'xml',
                 'json',
-            ]
+            ],
         ],
         Plank\Mediable\Media::TYPE_SPREADSHEET => [
             'mime_types' => [
@@ -181,21 +181,19 @@ return [
             'extensions' => [
                 'xls',
                 'xlsx',
-            ]
+            ],
         ],
         Plank\Mediable\Media::TYPE_PRESENTATION => [
-            'mime_types' =>
-                [
-                    'application/vnd.ms-powerpoint',
-                    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-                    'application/vnd.openxmlformats-officedocument.presentationml.slideshow'
-                ],
-            'extensions' =>
-                [
-                    'ppt',
-                    'pptx',
-                    'ppsx',
-                ]
+            'mime_types' => [
+                'application/vnd.ms-powerpoint',
+                'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+                'application/vnd.openxmlformats-officedocument.presentationml.slideshow',
+            ],
+            'extensions' => [
+                'ppt',
+                'pptx',
+                'ppsx',
+            ],
         ],
     ],
 
@@ -213,7 +211,7 @@ return [
         'pattern' => [
             '^https?://' => Plank\Mediable\SourceAdapters\RemoteUrlAdapter::class,
             '^/' => Plank\Mediable\SourceAdapters\LocalPathAdapter::class,
-            '^[a-zA-Z]:\\\\' => Plank\Mediable\SourceAdapters\LocalPathAdapter::class
+            '^[a-zA-Z]:\\\\' => Plank\Mediable\SourceAdapters\LocalPathAdapter::class,
         ],
     ],
 

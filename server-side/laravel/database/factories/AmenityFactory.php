@@ -13,6 +13,7 @@ class AmenityFactory extends Factory
     {
         return [
             'slug' => fake()->slug(6),
+            'icon' => '',
             'name' => fake()->domainName(),
         ];
     }
