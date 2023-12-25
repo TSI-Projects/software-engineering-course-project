@@ -9,7 +9,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 
 class LogoutController extends Controller
 {
-    public function index(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         if (! $bearerToken = $request->bearerToken()) {
             abort(401);
