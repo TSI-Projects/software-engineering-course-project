@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\API\V1\AmenityController;
-use App\Http\Controllers\API\V1\Auth\CompleteRegisterController;
+use App\Http\Controllers\API\V1\Auth\LoginController;
 use App\Http\Controllers\API\V1\Auth\LogoutController;
+use App\Http\Controllers\API\V1\Auth\RegisterController;
 use App\Http\Controllers\API\V1\BedController;
 use App\Http\Controllers\API\V1\BookingController;
 use App\Http\Controllers\API\V1\MeBookingController;
@@ -14,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v1')->group(static function () {
     Route::prefix('/auth')->group(static function () {
-        Route::post('/register/complete', [CompleteRegisterController::class, 'store'])->name('auth.register.complete');
-        Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth:sanctum')->name('auth.logout');
+        Route::post('/login', LoginController::class)->middleware('guest:sanctum')->name('auth.login');
+        Route::post('/register', RegisterController::class)->middleware('guest:sanctum')->name('auth.register');
+        Route::post('/logout', LogoutController::class)->middleware('auth:sanctum')->name('auth.logout');
     });
 
     Route::prefix('/me')->middleware('auth:sanctum')->group(static function () {

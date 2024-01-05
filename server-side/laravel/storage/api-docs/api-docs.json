@@ -118,6 +118,7 @@
         },
         "/rooms/filter": {
             "post": {
+                "operationId": "getFilteredRooms",
                 "tags": [
                     "rooms"
                 ],
@@ -211,12 +212,23 @@
                                 }
                             }
                         }
+                    },
+                    "422": {
+                        "description": "Validation failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrors"
+                                }
+                            }
+                        }
                     }
                 }
             }
         },
         "/room/{room}": {
             "get": {
+                "operationId": "getRoom",
                 "tags": [
                     "rooms"
                 ],
@@ -286,6 +298,7 @@
         },
         "/room/{room}/media/upload": {
             "post": {
+                "operationId": "uploadRoomImage",
                 "tags": [
                     "rooms"
                 ],
@@ -345,6 +358,7 @@
         },
         "/room/{room}/media": {
             "delete": {
+                "operationId": "deleteRoomImage",
                 "tags": [
                     "rooms"
                 ],
@@ -583,9 +597,9 @@
                 }
             }
         },
-        "/register/complete": {
+        "/auth/register": {
             "post": {
-                "operationId": "completeRegistration",
+                "operationId": "register",
                 "tags": [
                     "auth"
                 ],
@@ -612,6 +626,10 @@
                                     "country_iso_code": {
                                         "type": "string",
                                         "format": "country-code"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password"
                                     }
                                 }
                             }
@@ -635,18 +653,67 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "422": {
+                        "description": "Validation failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrors"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "operationId": "login",
+                "tags": [
+                    "auth"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "message": {
+                                        "accessToken": {
                                             "type": "string",
-                                            "default": "Forbidden"
+                                            "format": "token"
                                         }
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrors"
                                 }
                             }
                         }
