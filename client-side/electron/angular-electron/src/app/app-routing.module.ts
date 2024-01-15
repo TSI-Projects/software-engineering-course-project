@@ -4,6 +4,8 @@ import { PageNotFoundComponent } from './shared/components';
 
 import { HomeRoutingModule } from './home/home-routing.module';
 import { DetailRoutingModule } from './detail/detail-routing.module';
+import { RoomRoutingModule } from './room/room-routing.module';
+import { SearchRoutingModule } from './search/search-routing.module';
 
 const routes: Routes = [
   {
@@ -13,7 +15,9 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: PageNotFoundComponent
+    redirectTo: 'home',
+    pathMatch: 'full'
+    // component: PageNotFoundComponent
   }
 ];
 
@@ -21,7 +25,9 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {}),
     HomeRoutingModule,
-    DetailRoutingModule
+    DetailRoutingModule,
+    RoomRoutingModule,
+    SearchRoutingModule
   ],
   exports: [RouterModule]
 })

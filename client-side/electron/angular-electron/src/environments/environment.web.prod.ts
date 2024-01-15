@@ -1,4 +1,6 @@
 export const APP_CONFIG = {
   production: true,
-  environment: 'WEB-PROD'
+  environment: 'WEB-PROD',
+  HotelRoomsEndpoint: 'http://localhost/api/v1/rooms',
+  HotelRoomEndpoint: 'http://localhost/api/v1/rooms',
 };

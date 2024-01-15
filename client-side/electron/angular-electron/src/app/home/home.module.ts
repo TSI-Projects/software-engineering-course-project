@@ -16,7 +16,7 @@ import { RatingModule } from 'primeng/rating';
     CommonModule, 
     SharedModule, 
     HomeRoutingModule,
-    RatingModule,
+    RatingModule
   ]
 })
 export class HomeModule {}

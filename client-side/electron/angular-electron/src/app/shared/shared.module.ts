@@ -7,6 +7,10 @@ import { PageNotFoundComponent } from './components/';
 import { WebviewDirective } from './directives/';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
+import { RoomsService } from './services/rooms.service';
+import { MessageService } from 'primeng/api';
+import { HttpClientModule } from '@angular/common/http';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [
@@ -14,7 +18,17 @@ import { HeaderComponent } from './components/header/header.component';
     HeaderComponent,
     WebviewDirective
   ],
-  imports: [CommonModule, TranslateModule, FormsModule],
+  providers: [
+    RoomsService,
+    MessageService
+  ],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    FormsModule,
+    MessagesModule,
+    HttpClientModule,
+  ],
   exports: [TranslateModule, WebviewDirective, FormsModule, HeaderComponent]
 })
 export class SharedModule { }

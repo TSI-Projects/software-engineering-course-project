@@ -1,0 +1,47 @@
+<section class="wrapper">
+    <section class="price">
+        <h4>Price</h4>
+        <p-slider [(ngModel)]="rangeValues" [range]="true"></p-slider>
+        <div class="price-range">
+            <div>
+                <div class="gray">From</div>
+                <span>EUR {{minValuePriceRange}} </span>
+            </div>
+            <div>
+                <div class="gray">To</div>
+                <span>EUR {{maxValuePriceRange}}</span>
+            </div>
+            <div></div>
+        </div>
+    </section>
+    <section class="services">
+        <h4>Services</h4>
+        <div 
+          class="service" 
+          *ngFor="let amenity of amenities">
+            <p-checkbox 
+              (click)="filter()"
+              name="group"
+              [(ngModel)]="selectedAmenities" 
+              [value]="amenity"
+              [inputId]="amenity">
+            </p-checkbox>
+            <label [for]="amenity">{{ amenity }}</label>
+        </div>
+    </section>
+    <section class="services">
+        <h4>Bed Type</h4>
+        <div 
+          class="service" 
+          *ngFor="let bed of beds">
+            <p-checkbox 
+              (click)="filter()"
+              name="group"
+              [(ngModel)]="selectedBedTypes" 
+              [value]="bed"
+              [inputId]="bed">
+            </p-checkbox>
+            <label [for]="bed">{{ bed }}</label>
+        </div>
+    </section>
+</section>

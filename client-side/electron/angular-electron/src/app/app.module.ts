@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { MessageService } from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -15,21 +18,25 @@ import { HomeModule } from './home/home.module';
 import { DetailModule } from './detail/detail.module';
 
 import { AppComponent } from './app.component';
+import { SearchModule } from './search/search.module';
 
 // AoT requires an exported function for factories
 const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>  new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent ],
   imports: [
     BrowserModule,
     FormsModule,
+    SearchModule,
     HttpClientModule,
     CoreModule,
     SharedModule,
     HomeModule,
     DetailModule,
     AppRoutingModule,
+    MessagesModule,
+    ToastModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -38,7 +45,7 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>  new Transl
       }
     })
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
