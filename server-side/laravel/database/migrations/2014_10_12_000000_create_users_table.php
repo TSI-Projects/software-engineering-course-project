@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('phone');
             $table->char('country_iso_code', 3);
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
