@@ -14,7 +14,7 @@ class RoomFactory extends Factory
         return [
             'name' => fake()->domainName(),
             'description' => fake()->realTextBetween(),
-            'price' => fake()->numberBetween(100),
+            'price' => fake()->numberBetween(5, 100),
             'size' => fake()->numberBetween(10, 100),
             'room_count' => fake()->numberBetween(1, 10),
             'rating' => fake()->numberBetween(1, 5),
