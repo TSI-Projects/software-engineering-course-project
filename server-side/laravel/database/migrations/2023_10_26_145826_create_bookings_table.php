@@ -12,6 +12,10 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('room_id')->constrained('rooms')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('phone');
+            $table->char('country_iso_code', 3);
             $table->unsignedTinyInteger('adult_count')->default(1);
             $table->unsignedTinyInteger('children_count')->default(0);
             $table->datetime('checkin_at');
