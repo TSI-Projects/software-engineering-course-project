@@ -12,6 +12,10 @@ class StoreBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'first_name' => ['required', 'string'],
+            'last_name' => ['required', 'string'],
+            'phone' => ['required', 'string'],
+            'country_iso_code' => ['required', 'string', 'min:3', 'max:3'],
             'room_id' => ['required', 'uuid', 'exists:App\\Models\\Room,id'],
             'checkin_at' => ['required', 'date', 'after:now'],
             'checkout_at' => ['required', 'date', 'before:+1 month', 'after:checkin_at'],
