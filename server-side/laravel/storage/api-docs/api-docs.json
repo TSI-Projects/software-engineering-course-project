@@ -430,6 +430,20 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "phone"
+                                    },
+                                    "country_iso_code": {
+                                        "type": "string",
+                                        "format": "country-code"
+                                    },
                                     "room_id": {
                                         "type": "string",
                                         "format": "uuid"
@@ -609,23 +623,9 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "first_name": {
-                                        "type": "string"
-                                    },
-                                    "last_name": {
-                                        "type": "string"
-                                    },
                                     "email": {
                                         "type": "string",
                                         "format": "email"
-                                    },
-                                    "phone": {
-                                        "type": "string",
-                                        "format": "phone"
-                                    },
-                                    "country_iso_code": {
-                                        "type": "string",
-                                        "format": "country-code"
                                     },
                                     "password": {
                                         "type": "string",
@@ -860,6 +860,20 @@
                     },
                     {
                         "properties": {
+                            "first_name": {
+                                "type": "string"
+                            },
+                            "last_name": {
+                                "type": "string"
+                            },
+                            "phone": {
+                                "type": "string",
+                                "format": "phone"
+                            },
+                            "country_iso_code": {
+                                "type": "string",
+                                "format": "country-code"
+                            },
                             "adult_count": {
                                 "type": "number",
                                 "format": "uint1"
