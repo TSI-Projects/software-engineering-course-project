@@ -38,7 +38,6 @@ export class RoomsFilterComponent implements OnInit, OnDestroy {
     this.roomSubscription.unsubscribe()
   }
 
-
   private waitUntilRoomsLoaded(): void {
     this.roomSubscription.add(this._rooms.rooms$.subscribe(data => {
       if (!data || data.length == 0) return;
@@ -69,12 +68,27 @@ export class RoomsFilterComponent implements OnInit, OnDestroy {
     return Array.from(new Set(array));
   }
 
+  public filter(): void {
+    if (this.areFiltersNotSelected()) {
+      this._rooms.updateFiltredRooms(this._rooms.rooms)
+      return
+    }
 
-
-  private filter(): void {
-
-
-
+    this._rooms.updateFiltredRooms(this._rooms.rooms.filter(room => {
+      const roomPrice = parseFloat(room.price);
+      const minRangePrice = this.minValuePriceRange;
+      const maxRangePrice = this.maxValuePriceRange;
+      const isPriceInRange = roomPrice >= minRangePrice && roomPrice <= maxRangePrice;
+      const hasSelectedBeds = room.beds.some(bed => this.selectedBedTypes.includes(bed.name));
+      const hasSelectedAmenities = room.amenities.some(amenity => this.selectedAmenities.includes(amenity.name));
+      return isPriceInRange || hasSelectedBeds || hasSelectedAmenities;
+    }));
   }
 
+  public areFiltersNotSelected(): boolean {
+    const isDefaultPriceRange = this.rangeValues[0] === 0 && this.rangeValues[1] === 100;
+    const noAmenitiesSelected = this.selectedAmenities.length === 0;
+    const noBedTypesSelected = this.selectedBedTypes.length === 0;
+    return isDefaultPriceRange && noAmenitiesSelected && noBedTypesSelected;
+  }
 }
