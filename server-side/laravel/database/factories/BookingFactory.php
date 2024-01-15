@@ -13,6 +13,10 @@ class BookingFactory extends Factory
     public function definition(): array
     {
         $attributes = [
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
+            'phone' => fake()->phoneNumber(),
+            'country_iso_code' => fake()->countryISOAlpha3(),
             'adult_count' => fake()->numberBetween(1, 10),
             'children_count' => fake()->numberBetween(1, 10),
             'status' => fake()->randomElement(BookingStatus::cases()),
