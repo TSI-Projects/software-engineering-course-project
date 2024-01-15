@@ -7,7 +7,6 @@ use App\Http\Controllers\Traits\TokenTrait;
 use App\Http\Requests\API\V1\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -18,11 +17,11 @@ class RegisterController extends Controller
         $validated = $request->validated();
 
         $user = User::query()
-            ->create(array_merge($validated, [
+            ->create([
+                'email' => $validated['email'],
                 'email_verified_at' => now(),
-                'country_iso_code' => Str::upper($validated['country_iso_code']),
                 'password' => Hash::make($validated['password']),
-            ]));
+            ]);
 
         $accessToken = $this->createToken($user);
 
