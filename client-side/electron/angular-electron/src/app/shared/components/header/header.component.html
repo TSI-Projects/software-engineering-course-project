@@ -1,14 +1,21 @@
 <header>
     <img src="../../../../assets/img/logo.png">
-    <ul >
-        <li><a>Home</a></li>
-        <li><a>Gallery</a></li>
-        <li><a>About us</a></li>
-        <li><a>Offers</a></li>
+    <ul>
+        <ng-container *ngFor="let item of menuItems">
+            <li *ngIf="item.visible && !item.isButton">
+                <a (click)="clickMenuBtn(item.path)">{{ item.label }}</a>
+            </li>
+        </ng-container>
     </ul>
 
     <div class="buttons">
-        <button class="sign-in-btn">Sign In</button>
-        <button class="reg-btn">Register</button>
+        <ng-container *ngFor="let item of menuItems">
+            <button *ngIf="item.visible && item.isButton" 
+                (click)="clickMenuBtn(item.path)"
+                (click)="item?.action()"
+                [class]="item.class">
+                {{ item.label }}
+            </button>
+        </ng-container>
     </div>
 </header>

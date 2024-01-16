@@ -11,6 +11,7 @@ import { RoomsService } from './services/rooms.service';
 import { MessageService } from 'primeng/api';
 import { HttpClientModule } from '@angular/common/http';
 import { MessagesModule } from 'primeng/messages';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MessagesModule } from 'primeng/messages';
   ],
   providers: [
     RoomsService,
-    MessageService
+    MessageService,
+    AuthService
   ],
   imports: [
     CommonModule,
