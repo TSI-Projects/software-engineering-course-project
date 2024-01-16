@@ -1,30 +1,27 @@
-<div>
-    <form 
-       [formGroup]="registrationForm" 
-       (ngSubmit)="clickRegisterBtn(registrationForm.get('email')?.value!.toString(), registrationForm.get('password')?.value!.toString())">
+<div class="main">
+  <app-header></app-header>
+  <div class="reg-container">
+    <form [formGroup]="registrationForm"
+      (ngSubmit)="clickRegisterBtn(registrationForm.get('email')?.value!.toString(), registrationForm.get('password')?.value!.toString())">
 
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" 
-                   id="email" 
-                   formControlName="email">
-      
-            <div *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.errors">
-              <small class="error" *ngIf="registrationForm.get('email')?.errors?.required">
-                Email is required.
-              </small>
-              <small class="error" *ngIf="registrationForm.get('email')?.errors?.email">
-                Please enter a valid email address.
-              </small>
-            </div>
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email">
+
+        <div *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.errors">
+          <small class="error" *ngIf="registrationForm.get('email')?.errors?.required">
+            Email is required.
+          </small>
+          <small class="error" *ngIf="registrationForm.get('email')?.errors?.email">
+            Please enter a valid email address.
+          </small>
         </div>
+      </div>
 
       <div>
         <label for="password">Password:</label>
-        <input type="password" 
-               id="password" 
-               formControlName="password">
-        
+        <input type="password" id="password" formControlName="password">
+
         <div *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.errors">
           <small class="error" *ngIf="registrationForm.get('password')?.errors?.required">
             Password is required.
@@ -37,11 +34,10 @@
 
       <div>
         <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" 
-               id="confirmPassword" 
-               formControlName="confirmPassword">
-  
-        <div *ngIf="registrationForm.get('confirmPassword')?.touched && registrationForm.get('confirmPassword')?.errors">
+        <input type="password" id="confirmPassword" formControlName="confirmPassword">
+
+        <div
+          *ngIf="registrationForm.get('confirmPassword')?.touched && registrationForm.get('confirmPassword')?.errors">
           <small class="error" *ngIf="registrationForm.get('confirmPassword')?.errors?.required">
             Confirming password is required.
           </small>
@@ -50,10 +46,10 @@
           </small>
         </div>
       </div>
-  
+
       <div>
         <button type="submit" [disabled]="!registrationForm.valid">Register</button>
       </div>
     </form>
   </div>
-  
+</div>

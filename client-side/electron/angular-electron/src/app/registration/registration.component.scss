@@ -1,7 +1,97 @@
 :host {
-    .error {
-        color: red;
-        font-size: 0.8em;
+  $form-background-color: #f8f8f8;
+  $form-text-color: #333;
+  $error-text-color: #d9534f;
+  $button-background-color: #5cb85c;
+  $button-text-color: #fff;
+  $button-disabled-background-color: #ccc;
+  $border-color: #ddd;
+  $input-border-radius: 4px;
+  $form-padding: 20px;
+  $label-spacing: 5px;
+  $max-form-width: 400px;
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    background-color: #eee;
+    box-sizing: border-box;
+
+    .reg-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+
+      form {
+        background-color: $form-background-color;
+        padding: $form-padding;
+        border-radius: $input-border-radius;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: $max-form-width;
+
+        label {
+          display: block;
+          margin-bottom: $label-spacing;
+          color: $form-text-color;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+          width: 100%;
+          padding: 8px;
+          margin-bottom: 10px;
+          border: 1px solid $border-color;
+          border-radius: $input-border-radius;
+          box-sizing: border-box;
+
+          &:focus {
+            border-color: lighten($border-color, 10%);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+          }
+        }
+
+        .error {
+          color: $error-text-color;
+          font-size: 0.8em;
+        }
+
+        button {
+          width: 100%;
+          padding: 10px;
+          border: none;
+          border-radius: $input-border-radius;
+          background-color: $button-background-color;
+          color: $button-text-color;
+          font-size: 1em;
+          cursor: pointer;
+          transition: background-color 0.3s;
+
+          &:hover {
+            background-color: darken($button-background-color, 10%);
+          }
+
+          &:disabled {
+            background-color: $button-disabled-background-color;
+            cursor: default;
+          }
+        }
       }
-      
+    }
+  }
+
+  @media (max-width: 480px) {
+    .main {
+      padding: 10px;
+    }
+
+    .main form {
+      padding: 15px;
+    }
+  }
+
 }
