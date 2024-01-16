@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,11 +9,12 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent { 
   constructor(
-    private router: Router
+    private _router: Router,
+    public _auth: AuthService
     ){}
 
   public clickMenuBtn(path: string): void {
-    this.router.navigate([path])
+    this._router.navigate([path])
   }
 
 }
