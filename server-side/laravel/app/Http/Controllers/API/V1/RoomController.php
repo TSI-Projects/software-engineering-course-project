@@ -83,6 +83,8 @@ class RoomController extends Controller
 
             $room->beds()->attach($beds);
         }
+
+        return RoomResource::make($room);
     }
 
     public function store(StoreRoomRequest $request)
