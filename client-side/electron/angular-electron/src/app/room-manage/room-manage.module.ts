@@ -11,12 +11,14 @@ import { RoomsService } from '../shared/services/rooms.service';
 import { ChipModule } from 'primeng/chip';
 import { DividerModule } from 'primeng/divider';
 import { TooltipModule } from 'primeng/tooltip';
-import { RoomManageComponent } from './room-manage.component';
+import { JoinAmenitiesPipe, RoomManageComponent } from './room-manage.component';
 import { SliderModule } from 'primeng/slider';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
     RoomManageComponent,
+    JoinAmenitiesPipe,
   ],
   providers: [RoomsService],
   imports: [
@@ -30,7 +32,8 @@ import { SliderModule } from 'primeng/slider';
     ChipModule,
     DividerModule,
     TooltipModule,
-    SliderModule
+    SliderModule,
+    CardModule
   ]
 })
 

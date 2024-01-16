@@ -17,7 +17,7 @@ export class LoginComponent {
 
   constructor(
     private _auth: AuthService,
-    private router: Router,
+    private _router: Router,
     private _messageService: MessageService
   ) { }
 
@@ -28,7 +28,7 @@ export class LoginComponent {
       this._auth.login(email!, password!).subscribe({
         next: resp => {
           this._auth.saveToken(resp.accessToken)
-          this.router.navigate(['/home'])
+          this._router.navigate(['/home'])
         },
         error: err => this._messageService.add({ 
           severity: 'error', 
