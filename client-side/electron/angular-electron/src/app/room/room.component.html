@@ -1,1 +1,41 @@
-<p>room works!</p>
+<div class="room-reservation">
+    <app-header></app-header>
+
+    <div class="room-details" *ngIf="room">
+        <p-carousel [value]="room.images">
+            <ng-template pTemplate="item" let-item>
+                <img [src]="item" alt="Room image">
+            </ng-template>
+        </p-carousel>
+
+        <h2>{{ room.name }}</h2>
+        <p>{{ room.description }}</p>
+        <h3>Price: {{ room.price }}</h3>
+
+        <div class="specifications">
+            <div class="beds">
+                <h4>Beds</h4>
+                <ul>
+                    <li *ngFor="let bed of room.beds">
+                        {{ bed.name }}: {{ bed.size }} - {{ bed.count }} pcs
+                    </li>
+                </ul>
+            </div>
+            <div class="amenities">
+                <h4>Amenities</h4>
+                <div *ngFor="let amenity of room.amenities">
+                    <i [ngClass]="amenity.icon"></i> {{ amenity.name }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="booking-form">
+        <h3>Reserve Your Room</h3>
+        <form>
+            <!-- <p-calendar></p-calendar> -->
+            <!-- <p-calendar [(ngModel)]="date"></p-calendar> -->
+            <button pButton type="submit" label="Reserve Now"></button>
+        </form>
+    </div>
+</div>

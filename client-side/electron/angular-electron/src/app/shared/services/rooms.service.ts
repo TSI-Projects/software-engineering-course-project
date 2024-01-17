@@ -14,8 +14,10 @@ export class RoomsService {
   private filtredRoomsSubject: BehaviorSubject<Room[] | null> = new BehaviorSubject<Room[] | null>([])
   public filtredRooms$: Observable<Room[] | null> = this.filtredRoomsSubject.asObservable();
 
+  private selectedRoomIdCache: string = '9b1999eb-c54e-4011-9784-b37d452cd001';
+
   constructor(
-    private http: HttpClient,
+    private _http: HttpClient,
     private messageService: MessageService
   ) {
     this.loadRooms()
@@ -25,8 +27,16 @@ export class RoomsService {
     return this.roomsSubject.value ?? []
   }
 
+  get selectedRoomId(): string {
+    return this.selectedRoomIdCache
+  }
+
+  public saveSelectedRoomId(id: string) {
+    this.selectedRoomIdCache = id
+  }
+
   private loadRooms(): void {
-    this.http.get<RoomsResponse>(APP_CONFIG.HotelRoomsEndpoint)
+    this._http.get<RoomsResponse>(APP_CONFIG.HotelRoomsEndpoint)
       .pipe(
         map(response => response.data),
         catchError(() => {
@@ -39,13 +49,27 @@ export class RoomsService {
       });
   }
 
+  public loadRoom(): Promise<RoomResponse> {
+    return new Promise<RoomResponse>((resolve, reject) => {
+      this._http.get<RoomResponse>(`${APP_CONFIG.HotelRoomEndpoint}/${this.selectedRoomId}`)
+        .subscribe({
+          next: (resp: RoomResponse) => {
+            resolve(resp);
+          },
+          error: () => {
+            reject(new Error("Failed to fetch rooms. Please try again later"));
+          },
+        });
+    });
+  }
+
   public updateFiltredRooms(rooms: Room[] | null) {
     this.filtredRoomsSubject.next(rooms)
   }
 
   public async getRoom(id: string): Promise<Room | null> {
     try {
-      const roomData$ = this.http.get<RoomResponse>(`${APP_CONFIG.HotelRoomEndpoint}/${id}`)
+      const roomData$ = this._http.get<RoomResponse>(`${APP_CONFIG.HotelRoomEndpoint}/${id}`)
       const response = await lastValueFrom(roomData$)
       return response.data
     } catch {
@@ -84,7 +108,7 @@ export interface Room {
   price: string
   beds: Bed[]
   amenities: Amenities[]
-  media: string[]
+  images: string[]
 }
 
 export interface Bed {

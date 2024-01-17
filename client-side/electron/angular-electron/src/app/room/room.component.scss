@@ -1,0 +1,87 @@
+:host {
+
+
+    .room-reservation {
+        .room-details {
+            .carousel {
+                max-width: 600px;
+                margin: auto;
+            }
+
+            h2 {
+                color: #333;
+                font-size: 24px;
+            }
+
+            h3 {
+                color: #666;
+                font-size: 20px;
+            }
+
+            .specifications {
+                display: flex;
+                justify-content: space-around;
+
+                .beds,
+                .amenities {
+                    ul {
+                        list-style: none;
+                        padding: 0;
+                    }
+                }
+            }
+        }
+
+        .booking-form {
+            form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                p-calendar {
+                    margin-bottom: 20px;
+                }
+
+                button {
+                    background-color: #007ad9;
+                    color: white;
+                    border: none;
+                    padding: px 20px;
+                    cursor: pointer;
+                    border-radius: 5px;
+
+                    &:hover {
+                        background-color: darken(#007ad9, 10%);
+                    }
+                }
+            }
+        }
+    }
+
+    h4 {
+        color: #444;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    // Responsive design adjustments
+    @media (max-width: 768px) {
+        .room-reservation {
+            .specifications {
+                flex-direction: column;
+
+                .beds,
+                .amenities {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+
+    }
+}
