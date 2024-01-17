@@ -11,6 +11,10 @@ class BookingResource extends JsonResource
         return [
             'id' => $this->getKey(),
             'room' => RoomResource::make($this->whenLoaded('room')),
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'country_iso_code' => $this->country_iso_code,
+            'phone' => $this->phone,
             'status' => $this->status,
             'checkin_at' => $this->checkin_at,
             'checkout_at' => $this->checkout_at,

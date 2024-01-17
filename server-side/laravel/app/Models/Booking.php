@@ -14,6 +14,11 @@ class Booking extends Model
     use HasUuids;
 
     protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+        'phone',
+        'country_iso_code',
         'user_id',
         'room_id',
         'adult_count',

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\RoomObserver;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,6 +24,11 @@ class Room extends Model
         'room_count',
         'rating',
     ];
+
+    public static function booted()
+    {
+        static::observe(RoomObserver::class);
+    }
 
     public function bookings(): HasMany
     {
