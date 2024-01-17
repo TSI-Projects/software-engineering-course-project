@@ -20,7 +20,11 @@ export class AuthService {
   }
 
   get userRole(): string {
-    return ''
+    return 'admin'
+  }
+
+  public isAdminRole(): boolean {
+    return this.isAuthenticated() && this.userRole == 'admin';
   }
 
   public saveToken(token: string): void {

@@ -83,8 +83,10 @@ export interface Room {
   description: string
   price: string
   beds: Bed[]
-  amenities: Amenities[]
-  media: string[]
+  amenities: Amenity[]
+  images: string[]
+  size?: number
+  roomCount: number
 }
 
 export interface Bed {
@@ -94,7 +96,7 @@ export interface Bed {
   count: number
 }
 
-export interface Amenities {
+export interface Amenity {
   id: string
   name: string
   icon: string
