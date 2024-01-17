@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { RoomsResponse } from './rooms.service';
@@ -32,8 +32,26 @@ export class RoomManageService {
     });
   }
 
-  public deleteRoom(roomId: string): void {
-    
+  public deleteRoom(roomId: string): Promise<RoomsResponse> {
+    if (!this._auth.isAdminRole()) {
+      return Promise.reject(new Error("Permission denied"));
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': this._auth.getToken() ?? ''
+    });
+
+    return new Promise<RoomsResponse>((resolve, reject) => {
+      this._http.delete<RoomsResponse>(`${APP_CONFIG.DeleteRoomEndpoint}/${roomId}`, { headers })
+        .subscribe({
+          next: (resp: RoomsResponse) => {
+            resolve(resp);
+          },
+          error: () => {
+            reject(new Error("Failed to fetch rooms. Please try again later"));
+          },
+        });
+    });
   }
 
 

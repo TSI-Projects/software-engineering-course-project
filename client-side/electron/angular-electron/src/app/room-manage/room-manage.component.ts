@@ -38,8 +38,9 @@ export class RoomManageComponent implements OnInit {
 
   }
 
-  deleteRoom(roomId: string): void {
-    this._roomManageSvc.deleteRoom(roomId)
+  async deleteRoom(roomId: string): Promise<void> {
+   await this._roomManageSvc.deleteRoom(roomId)
+   this.rooms = this.rooms.filter(room => room.id != roomId)
   }
 
   deleteImage(room: Room, index: number) {
