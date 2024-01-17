@@ -44,7 +44,7 @@ Route::prefix('/v1')->group(static function () {
         Route::middleware(['auth:sanctum', 'is_admin'])->group(static function () {
             Route::delete('/{room}', [RoomController::class, 'destroy'])->name('rooms.destory');
             Route::patch('/{room}', [RoomController::class, 'update'])->name('rooms.update');
-            Route::post('/{room}', [RoomController::class, 'store'])->name('rooms.store');
+            Route::post('/', [RoomController::class, 'store'])->name('rooms.store');
         });
     });
 
