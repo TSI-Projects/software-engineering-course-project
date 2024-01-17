@@ -18,6 +18,7 @@ class RegisterController extends Controller
 
         $user = User::query()
             ->create([
+                'is_admin' => false,
                 'email' => $validated['email'],
                 'email_verified_at' => now(),
                 'password' => Hash::make($validated['password']),
