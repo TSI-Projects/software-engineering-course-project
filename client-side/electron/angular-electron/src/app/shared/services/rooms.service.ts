@@ -85,6 +85,8 @@ export interface Room {
   beds: Bed[]
   amenities: Amenity[]
   images: string[]
+  size?: number
+  roomCount: number
 }
 
 export interface Bed {
