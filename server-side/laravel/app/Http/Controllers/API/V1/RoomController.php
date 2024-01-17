@@ -29,36 +29,52 @@ class RoomController extends Controller
         $room->loadMedia(['image']);
         $room->load(['beds', 'amenities']);
 
-        $additional = [];
+        $bookings = Booking::query()
+            ->where('room_id', $room->getKey())
+            ->whereIn('status', [BookingStatus::RESERVED])
+            ->whereDate('checkout_at', '<=', now())
+            ->get();
 
-        if ($request->boolean('include_unavailable_dates')) {
-            $bookings = Booking::query()
-                ->where('room_id', $room->getKey())
-                ->whereIn('status', [BookingStatus::RESERVED])
-                ->whereDate('checkout_at', '<=', now())
-                ->get();
+        $bookings = $bookings->filter(function (Booking $booking) use ($room) {
+            return $booking->room_id === $room->getKey();
+        });
 
-            $bookings = $bookings->filter(function (Booking $booking) use ($room) {
-                return $booking->room_id === $room->getKey();
-            });
+        $reservedDates = $bookings->map(fn (Booking $booking) => [
+            'checkin_at' => $booking->checkin_at,
+            'checkout_at' => $booking->checkout_at,
+        ]);
 
-            $additional['data']['unavailable_dates'] = $bookings->map(fn (Booking $booking) => [
-                'checkin_at' => $booking->checkin_at,
-                'checkout_at' => $booking->checkout_at,
-            ]);
-        }
-
-        return RoomResource::make($room)->additional($additional);
+        return RoomResource::make($room)->additional([
+            'data' => [
+                'reserved_dates' => $reservedDates,
+            ],
+        ]);
     }
 
     public function destroy(Room $room)
     {
+        $this->authorize('delete', $room);
+
         $room->delete();
 
         return Response::noContent();
     }
 
     public function update(Room $room, StoreRoomRequest $request)
+    {
+        $this->authorize('update', $room);
+
+        return $this->save($room, $request);
+    }
+
+    public function store(StoreRoomRequest $request)
+    {
+        $this->authorize('store', Room::class);
+
+        return $this->save(Room::query()->make(), $request);
+    }
+
+    protected function save(Room $room, StoreRoomRequest $request): RoomResource
     {
         $validated = $request->validated();
 
@@ -85,10 +101,5 @@ class RoomController extends Controller
         }
 
         return RoomResource::make($room);
-    }
-
-    public function store(StoreRoomRequest $request)
-    {
-        return $this->update(Room::query()->make(), $request);
     }
 }

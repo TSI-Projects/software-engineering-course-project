@@ -13,6 +13,8 @@ class RoomUploadController extends Controller
 {
     public function store(Room $room, RoomUploadStoreRequest $request)
     {
+        $this->authorize('uploadMedia', $room);
+
         $media = array_map(function () {
             $media = MediaUploader::fromSource()
                 ->useHashForFilename()
@@ -30,6 +32,8 @@ class RoomUploadController extends Controller
 
     public function destroy(Room $room, RoomUploadDestoryRequest $request)
     {
+        $this->authorize('deleteMedia', $room);
+
         $validated = $request->validated();
 
         $room->media()
