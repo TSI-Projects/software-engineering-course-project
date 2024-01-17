@@ -11,6 +11,7 @@ use App\Http\Controllers\API\V1\MeController;
 use App\Http\Controllers\API\V1\RoomController;
 use App\Http\Controllers\API\V1\RoomFilterController;
 use App\Http\Controllers\API\V1\RoomUploadController;
+use App\Http\Controllers\API\V1\UserBookingController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v1')->group(static function () {
@@ -38,10 +39,10 @@ Route::prefix('/v1')->group(static function () {
         Route::post('/filter', RoomFilterController::class)->name('rooms.filter');
         Route::get('/{room}', [RoomController::class, 'show'])->name('rooms.show');
 
-        Route::post('/{room}/media/upload', [RoomUploadController::class, 'store'])->name('rooms.media.store');
-        Route::delete('/{room}/media', [RoomUploadController::class, 'destroy'])->name('rooms.media.destroy');
+        Route::middleware(['auth:sanctum'])->group(static function () {
+            Route::post('/{room}/media/upload', [RoomUploadController::class, 'store'])->name('rooms.media.store');
+            Route::delete('/{room}/media', [RoomUploadController::class, 'destroy'])->name('rooms.media.destroy');
 
-        Route::middleware(['auth:sanctum', 'is_admin'])->group(static function () {
             Route::delete('/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
             Route::patch('/{room}', [RoomController::class, 'update'])->name('rooms.update');
             Route::post('/', [RoomController::class, 'store'])->name('rooms.store');
@@ -49,7 +50,13 @@ Route::prefix('/v1')->group(static function () {
     });
 
     Route::prefix('/bookings')->group(static function () {
-        Route::get('/', [BookingController::class, 'index'])->name('bookings.index');
         Route::post('/', [BookingController::class, 'store'])->middleware(['throttle:store-booking', 'auth:sanctum'])->name('bookings.store');
+        Route::delete('/{booking}', [BookingController::class, 'destroy'])->middleware('auth:sanctum')->name('bookings.destroy');
+    });
+
+    Route::prefix('users')->group(static function () {
+        Route::middleware(['auth:sanctum'])->group(static function () {
+            Route::get('/{user}/bookings', [UserBookingController::class, 'index'])->name('user_bookings.index');
+        });
     });
 });
