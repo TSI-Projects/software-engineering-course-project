@@ -42,7 +42,7 @@ Route::prefix('/v1')->group(static function () {
         Route::delete('/{room}/media', [RoomUploadController::class, 'destroy'])->name('rooms.media.destroy');
 
         Route::middleware(['auth:sanctum', 'is_admin'])->group(static function () {
-            Route::delete('/{room}', [RoomController::class, 'destroy'])->name('rooms.destory');
+            Route::delete('/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
             Route::patch('/{room}', [RoomController::class, 'update'])->name('rooms.update');
             Route::post('/', [RoomController::class, 'store'])->name('rooms.store');
         });
