@@ -17,7 +17,7 @@ class StoreRoomRequest extends FormRequest
             'room_count' => ['required', 'int', 'min:1'],
             'amenities' => ['nullable', 'array:id'],
             'amenities.*.id' => ['nullable', 'uuid', 'exists:App\\Models\\Amenity,id'],
-            'beds' => ['nullable', 'arrayid,count'],
+            'beds' => ['nullable', 'array:id,count'],
             'beds.*.id' => ['nullable', 'uuid', 'exists:App\\Models\\Bed,id'],
             'beds.*.count' => ['nullable', 'int', 'min:1'],
         ];
