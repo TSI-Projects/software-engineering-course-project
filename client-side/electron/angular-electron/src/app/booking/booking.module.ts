@@ -18,6 +18,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCheckboxModule,
     MatRadioModule,
     MatCardModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
   ]
 })

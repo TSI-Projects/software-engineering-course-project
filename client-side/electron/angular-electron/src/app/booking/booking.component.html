@@ -10,7 +10,7 @@
             <p>Your trip</p>
             <div class="date-container">
                 <p><strong>Dates</strong></p>
-                <p>Feb 14-16</p>
+                <p>{{formatedDates}}</p>
             </div>
         </div>
 
@@ -21,14 +21,14 @@
             <div class="payment-method-1">
                 <div>
                     <p><strong>Pay now</strong></p>
-                    <p>Pay the total (€ 200)</p>
+                    <p>Pay the total (€ {{totalPrice}})</p>
                 </div>
                 <mat-radio-button value="after"></mat-radio-button>
             </div>
             <div class="payment-method-2">
                 <div>
                     <p><strong>Pay in the hotel</strong></p>
-                    <p>Pay the total in the hotel. Extra fee 1% (€ 200 + € 2)</p>
+                    <p>Pay the total in the hotel. Extra fee 1% (€ {{nightPrice * nights}} + € {{((nightPrice * nights) * 0.01).toFixed(2)}})</p>
                 </div>
                 <mat-radio-button value="after"></mat-radio-button>
             </div>
@@ -36,15 +36,14 @@
 
         <p-divider></p-divider>
 
-        <div class="user-data-container">
+        <form class="user-data-container" [formGroup]="bookForm">
             <p>Complete your booking details</p>
-            <input placeholder="First name">
-            <input placeholder="Last name">
-            <input placeholder="Phone number">
-            <input placeholder="Email">
+            <input type="text" formControlName="firstName" placeholder="First Name">
+            <input type="text" formControlName="lastName" placeholder="Last Name">
+            <input type="tel" formControlName="phone" placeholder="Phone">
             <p class="policy">We’ll call or text you to confirm your number. Standard message and data rates apply. Privacy Policy</p>
-            <p-button label="Book" [loading]="loading" (onClick)="load()"></p-button>
-        </div>
+            <p-button label="Book" [loading]="loading" (onClick)="book()"></p-button>
+        </form>
     </div>
     <div class="room-info-container">
         <div></div>
@@ -52,10 +51,10 @@
             <div class="room-data">
                 <img src="../../assets/img/our_rooms_1.png">
                 <div class="text">
-                    <p>Cozy Nordlandshus in Brønnøy</p>
+                    <p>{{roomName}}</p>
                     <p>
                         <i class="pi pi-star-fill"></i>
-                        <span> 4.51 (17 reviews)</span>
+                        <span> {{roomRating}}.51 (17 reviews)</span>
                     </p>
                 </div>
             </div>  
@@ -65,12 +64,12 @@
             <div class="price-details-container">
                 <p><strong>Price details</strong></p>
                 <div class="pricing">
-                    <p>€ 87.59 x 2 nights</p>
-                    <span>€ 175.18</span>
+                    <p>€ {{nightPrice}} x {{nights}} nights</p>
+                    <span>€ {{nightPrice * nights}}</span>
                 </div>
                 <div class="pricing">
                     <p>Hotel service fee</p>
-                    <span>€ 32.17</span>
+                    <span>€ {{((nightPrice * nights) * 0.01).toFixed(2)}}</span>
                 </div>
             </div>
 
@@ -78,7 +77,7 @@
 
             <div class="total">
                 <p>Total (EUR)</p>
-                <span>€ 220.49</span>
+                <span>€ {{totalPrice}}</span>
             </div>
         </div>
     </div>

@@ -14,8 +14,6 @@ export class RoomsService {
   private filtredRoomsSubject: BehaviorSubject<Room[] | null> = new BehaviorSubject<Room[] | null>([])
   public filtredRooms$: Observable<Room[] | null> = this.filtredRoomsSubject.asObservable();
 
-  private selectedRoomIdCache: string = '9b1d3ff0-4c47-44b2-8fec-e2fb1e060611';
-
   constructor(
     private _http: HttpClient,
     private messageService: MessageService
@@ -25,14 +23,6 @@ export class RoomsService {
 
   get rooms(): Room[] {
     return this.roomsSubject.value ?? []
-  }
-
-  get selectedRoomId(): string {
-    return this.selectedRoomIdCache
-  }
-
-  public saveSelectedRoomId(id: string) {
-    this.selectedRoomIdCache = id
   }
 
   private loadRooms(): void {
@@ -49,9 +39,9 @@ export class RoomsService {
       });
   }
 
-  public loadRoom(): Promise<RoomResponse> {
+  public loadRoom(roomId: string): Promise<RoomResponse> {
     return new Promise<RoomResponse>((resolve, reject) => {
-      this._http.get<RoomResponse>(`${APP_CONFIG.HotelRoomEndpoint}/${this.selectedRoomId}`)
+      this._http.get<RoomResponse>(`${APP_CONFIG.HotelRoomEndpoint}/${roomId}`)
         .subscribe({
           next: (resp: RoomResponse) => {
             resolve(resp);
@@ -69,7 +59,7 @@ export class RoomsService {
 
   public async getRoom(id: string): Promise<Room | null> {
     try {
-      const roomData$ = this._http.get<RoomResponse>(`${APP_CONFIG.HotelRoomEndpoint}/${id}`)
+      const roomData$ = this._http.get<RoomResponse>(`${APP_CONFIG.HotelRoomEndpoint}/${id}`, { params: { include_unavailable_dates: true } })
       const response = await lastValueFrom(roomData$)
       return response.data
     } catch {
