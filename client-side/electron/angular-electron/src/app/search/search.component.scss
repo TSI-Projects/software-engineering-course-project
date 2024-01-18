@@ -58,6 +58,7 @@
                     flex-direction: row;
 
                     .details {
+                        width: 100%;
                         display: flex;
                         flex-direction: column;
                         margin-left: 20px;
@@ -74,16 +75,20 @@
                         h5 {
                             margin: 0 0 10px 0;
                         }
-
+                        
                         ::ng-deep .p-chip {
                             font-size: 12px;
-                            margin-bottom: 10px;
                             padding: 0;
                         }
 
                         ::ng-deep .p-chip .p-chip-text {
                             line-height: 1.5;
                             margin: 4px 8px
+                        }
+
+                        .mb-10 {
+                            margin-bottom: 10px;
+                            display: block;
                         }
 
                         .mr-10 {
@@ -113,7 +118,11 @@
                     }
 
                     .book {
-                        margin: auto 0 0 auto;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        align-items: flex-end;
+                        width: 100%;
 
 
                         button {
@@ -124,7 +133,7 @@
                             line-height: 22px;
                             text-align: center;
                             height: 50px;
-                            width: 220px;
+                           width: 90%;
                             border-radius: 48px;
                             background: #c20808;
                             color: white;
