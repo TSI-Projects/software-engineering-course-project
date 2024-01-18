@@ -23,7 +23,10 @@ export class RoomManageComponent implements OnInit {
     }],
     amenities: [],
     images: [],
-    roomCount: 1
+    roomCount: 1,
+    size: 0,
+    guests: 0,
+    rating: 0
   }
 
   public rooms: Room[] = []
