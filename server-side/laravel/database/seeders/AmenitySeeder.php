@@ -11,7 +11,7 @@ class AmenitySeeder extends Seeder
     {
         foreach ([
             ['wifi', 'wifi', 'Бесплатный Wi-Fi'],
-            ['mode_fan', 'air_conditioner', 'Кондиционер'],
+            ['air', 'air_conditioner', 'Кондиционер'],
             ['tv', 'tv', 'Телевизор'],
             ['kitchen', 'refrigerator', 'Холодильник'],
             ['videogame_asset', 'game_console', 'Игровая консоль'],
