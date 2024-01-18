@@ -26,7 +26,7 @@
                     <div>
                         <p-divider></p-divider>
                         <h4>Amenities</h4>
-                        
+
                         <div class="amenities">
                             <div *ngFor="let amenity of room.amenities;" class="amenity-item">
                                 <i class="material-icons-outlined">{{amenity.icon}}</i>
@@ -34,38 +34,33 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
 
             </div>
             <div class="payment-booking">
                 <div class="booking">
 
-                    <form [formGroup]="bookingForm" class="booking-form">
-                        <div class="field-group">
-                          <label for="checkin">Check-In</label>
-                          <p-calendar id="checkin" formControlName="checkIn" [showIcon]="true" 
-                                      [minDate]="today" [maxDate]="bookingForm.get('checkOut')?.value"></p-calendar>
-                        </div>
-                        
-                        <div class="field-group">
-                          <label for="checkout">Check-Out</label>
-                          <p-calendar id="checkout" formControlName="checkOut" [showIcon]="true"
-                                      [minDate]="bookingForm.get('checkIn')?.value" [readonlyInput]="true"></p-calendar>
-                        </div>
-                        <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true"></p-calendar>
-                      </form>
-                      
-                      
-                    <!-- <form >
-                        <span>Check in/out date</span>
-                        <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true"></p-calendar>
+                    <form [formGroup]="dateRange">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Выберите даты</mat-label>
+                            <mat-date-range-input [rangePicker]="picker" [min]="todayDate">
+                              <input matStartDate formControlName="start"  placeholder="Начальная дата">
+                              <input matEndDate formControlName="end" placeholder="Конечная дата">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                          </mat-form-field>
 
                         <div class="price">
                             <span class="discounted-price">€{{room.price}} / night</span>
                         </div>
+
                         <button pButton type="button" label="Reserve" class="ui-button-success"></button>
-                    </form> -->
+                      </form>
+                      
+
+                
                 </div>
 
                 <div class="payment-conditions">

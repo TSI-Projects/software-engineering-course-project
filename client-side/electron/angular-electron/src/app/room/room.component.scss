@@ -103,7 +103,10 @@
 
             .payment-booking {
                 width: 33.33%;
-                background-color: #f8f8f8;
+                box-shadow: 1px 1px 21px -1px rgba(0, 0, 0, 0.1);
+                -webkit-box-shadow: 1px 1px 21px -1px rgba(0, 0, 0, 0.1);
+                -moz-box-shadow: 1px 1px 21px -1px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgb(230, 230, 230);
                 padding: 20px;
                 border-radius: 10px;
                 display: flex;
@@ -216,35 +219,35 @@
     font-family: 'Arial', sans-serif;
     width: 300px;
     margin: 0 auto;
-  }
-  
-  .field-group {
+}
+
+.field-group {
     margin-bottom: 20px;
-  }
-  
-  .field-group label {
+}
+
+.field-group label {
     display: block;
     margin-bottom: 5px;
     font-size: 18px;
     font-weight: bold;
     color: #333;
-  }
-  
-  :host ::ng-deep .p-calendar {
+}
+
+:host ::ng-deep .p-calendar {
     width: 100%;
     position: relative;
-  }
-  
-  :host ::ng-deep .p-calendar .p-inputtext {
+}
+
+:host ::ng-deep .p-calendar .p-inputtext {
     width: 100%;
     border: 1px solid #ced4da;
     border-radius: 4px;
     height: 45px;
     padding: 0 40px 0 10px;
     line-height: 1.25;
-  }
-  
-  :host ::ng-deep .p-calendar .p-datepicker-trigger {
+}
+
+:host ::ng-deep .p-calendar .p-datepicker-trigger {
     position: absolute;
     right: 5px;
     top: 50%;
@@ -254,15 +257,15 @@
     padding: 10px;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
-  }
-  
-  ::ng-deep .p-calendar .p-datepicker-trigger i {
+}
+
+::ng-deep .p-calendar .p-datepicker-trigger i {
     display: none;
-  }
-  
-  ::ng-deep .p-calendar .p-datepicker-trigger::before {
+}
+
+::ng-deep .p-calendar .p-datepicker-trigger::before {
     font-family: "PrimeIcons";
     content: "\e909";
     font-size: 1.25em;
     color: white;
-  }
+}

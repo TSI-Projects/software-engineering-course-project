@@ -10,40 +10,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class RoomComponent implements OnInit {
   public room: Room | null = null
   rangeDates: Date[] | undefined;
-  today = new Date();
-  tomorrow = new Date();
-  bookingForm: FormGroup;
+  todayDate: Date = new Date()
  
+  dateRange = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
 
-
-  onCheckInDateChange(event: any) {
-    const checkInDate = event.value; // получаем значение даты заезда
-    const checkOutControl = this.bookingForm.get('checkOut');
-
-    // Проверяем, что checkOutControl не null и что значение checkInDate тоже не null
-    if (checkOutControl && checkInDate) {
-      // Если checkOut уже выбран и он раньше checkInDate, сбрасываем его
-      if (checkOutControl.value && checkInDate > checkOutControl.value) {
-        checkOutControl.setValue(null);
-      }
-
-      // Обновляем минимальную дату для checkOut
-      checkOutControl.setValidators([Validators.required, Validators.min(checkInDate)]);
-      checkOutControl.updateValueAndValidity();
-    }
-  }
-
-  onCheckOutDateChange(event: any) {
-    const checkOutDate = event.value; // получаем значение даты выезда
-    const checkInControl = this.bookingForm.get('checkIn');
-
-    // Проверяем, что checkInControl не null и что значение checkOutDate тоже не null
-    if (checkInControl && checkOutDate) {
-      // Обновляем максимальную дату для checkIn
-      checkInControl.setValidators([Validators.required, Validators.max(checkOutDate)]);
-      checkInControl.updateValueAndValidity();
-    }
-  }
 
   public images = [
     { source: '../../assets/img/start-img.png', thumbnailImageSrc: '../../assets/img/thumbnail1.png' },
@@ -57,12 +30,16 @@ export class RoomComponent implements OnInit {
   constructor(
     private _roomsService: RoomsService
   ) { 
-    this.tomorrow.setDate(this.today.getDate() + 1);
-    this. bookingForm = new FormGroup({
-      checkIn: new FormControl(this.today, Validators.required),
-      checkOut: new FormControl(this.tomorrow, Validators.required)
-    });
+    console.log(this.todayDate)
+    const today = new Date();
+    const tomorrow = new Date(today.getTime() + (24 * 60 * 60 * 1000));
+    this.dateRange.setValue({start: today, end: tomorrow});
   }
+
+  myFilter = (d: Date | null): boolean => {
+    const today = new Date();
+    return d! >= today;
+  };
 
 
   async ngOnInit(): Promise<void> {
