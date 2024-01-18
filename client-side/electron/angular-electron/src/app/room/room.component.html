@@ -1,1 +1,80 @@
-<p>room works!</p>
+<app-header></app-header>
+<section class="main">
+    <div class="hotel-booking-container" *ngIf="room">
+        <h2 class="title">{{room.name}}</h2>
+        <div class="parent">
+            <div *ngFor="let image of room.images; let i = index" [ngClass]="['gallery-item', 'div' + (i + 1)]">
+                <img [src]="image" *ngIf="i < 5 ">
+            </div>
+        </div>
+
+
+        <div class="room-details">
+            <div class="hotel-image-info">
+                <div>
+                    <h2>Gaming Hotel, Riga</h2>
+                    <p>{{room.guests}} guests · {{room.size}} m2 · {{bedsCount}} beds </p>
+                    <p>
+                        <i class="pi pi-star-fill"></i>
+                        <span> {{room.rating}}.51 · 18 reviews </span>
+                    </p>
+                </div>
+                <p-divider></p-divider>
+
+                <div class="room-specs">
+                    <p>{{room.description}}</p>
+                    <div>
+                        <p-divider></p-divider>
+                        <h4>Amenities</h4>
+
+                        <div class="amenities">
+                            <div *ngFor="let amenity of room.amenities;" class="amenity-item">
+                                <i class="material-icons-outlined">{{amenity.icon}}</i>
+                                <span>{{amenity.name}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="payment-booking">
+                <div class="booking">
+
+                    <form [formGroup]="dateRange">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Выберите даты</mat-label>
+                            <mat-date-range-input [rangePicker]="picker" [min]="todayDate">
+                              <input matStartDate formControlName="start"  placeholder="Начальная дата">
+                              <input matEndDate formControlName="end" placeholder="Конечная дата">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                          </mat-form-field>
+
+                        <div class="price">
+                            <span class="discounted-price">€{{room.price}} / night</span>
+                        </div>
+
+                        <button pButton type="button" label="Reserve" class="ui-button-success"></button>
+                      </form>
+                      
+
+                
+                </div>
+
+                <div class="payment-conditions">
+                    <h3>Flexible Payment Terms</h3>
+                    <p><i class="pi pi-check-circle"></i> Participant discount applied!</p>
+                    <p><i class="pi pi-check-circle"></i> Pay at arrival</p>
+                    <p><i class="pi pi-check-circle"></i> Free cancellation until January 17, 2024</p>
+                    <p><i class="pi pi-check-circle"></i> Pay by card</p>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</section>

@@ -21,6 +21,7 @@ import { AppComponent } from './app.component';
 import { SearchModule } from './search/search.module';
 import { LoginModule } from './login/login.module';
 import { RegistrationModule } from './registration/registration.module';
+import { RoomModule } from './room/room.module';
 import { RoomManageComponent } from './room-manage/room-manage.component';
 import { RoomManageModule } from './room-manage/room-manage.module';
 
@@ -42,6 +43,7 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>  new Transl
     MessagesModule,
     ToastModule,
     LoginModule,
+    RoomModule,
     RegistrationModule,
     RoomManageModule,
     TranslateModule.forRoot({
