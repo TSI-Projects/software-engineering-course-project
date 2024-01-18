@@ -13,7 +13,7 @@ class MeBookingController extends Controller
     {
         $bookings = Booking::query()
             ->with(['room'])
-            ->where('user_id', Auth::id())
+            ->where('user_id', Auth::guard('sanctum')->id())
             ->paginate(20);
 
         return BookingResource::collection($bookings);
