@@ -32,6 +32,7 @@ class LoginController extends Controller
 
         return [
             'accessToken' => $accessToken->plainTextToken,
+            'is_admin' => $user->is_admin,
         ];
     }
 }

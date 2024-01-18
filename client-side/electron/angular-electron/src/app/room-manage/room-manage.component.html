@@ -1,0 +1,220 @@
+<app-header></app-header>
+<div class="room-card">
+    <p-card header="Add New Room">
+        <div class="new-room-details">
+            <div class="input-field">
+                <label for="new-room-name">Room Name:</label>
+                <input id="new-room-name" [(ngModel)]="newRoom.name" type="text" pInputText>
+            </div>
+
+            <div class="input-field">
+                <label for="new-room-description">Description:</label>
+                <textarea id="new-room-description" [(ngModel)]="newRoom.description" rows="3"
+                    pInputTextarea></textarea>
+            </div>
+
+            <div class="input-field">
+                <label for="new-room-price">Price:</label>
+                <input id="new-room-price" [(ngModel)]="newRoom.price" type="text" pInputText>
+            </div>
+
+            <div class="bed-section">
+                <div *ngFor="let bed of newRoom.beds; let i = index; let last = last">
+                    <div class="bed-details">
+                        <h3>Bed {{ i + 1 }}</h3>
+                        <div class="bed-inputs">
+                            <div class="input-field">
+                                <label for="bed-name-{{i}}">Bed Name:</label>
+                                <input id="bed-name-{{i}}" [(ngModel)]="bed.name" type="text"
+                                    placeholder="Enter bed name">
+                            </div>
+
+                            <div class="input-field">
+                                <label for="bed-size-{{i}}">Bed Size:</label>
+                                <input id="bed-size-{{i}}" [(ngModel)]="bed.size" type="text"
+                                    placeholder="Enter bed size">
+                            </div>
+
+                            <div class="input-field">
+                                <label for="bed-count-{{i}}">Bed Count:</label>
+                                <input id="bed-count-{{i}}" [(ngModel)]="bed.count" type="number"
+                                    placeholder="Enter bed count">
+                            </div>
+                        </div>
+                        <div>
+                            <button *ngIf="last" (click)="addNewBed(newRoom)">Add Bed</button>
+                            <button class="delete-bed-button" [disabled]="newRoom.beds.length == 1"
+                                (click)="deleteBed(newRoom,i)">Delete Bed</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h4>Amenities:</h4>
+                <div class="input-field-with-actions">
+                    <input id="new-amenity-name" [(ngModel)]="newAmenityName" type="text" pInputText
+                        placeholder="New amenity">
+                    <button class="add-button" (click)="addAmenity(newRoom, newAmenityName)">
+                        <i class="pi pi-plus"></i>
+                    </button>
+                </div>
+                <div *ngFor="let amenity of newRoom.amenities; let j = index" class="input-field-with-delete">
+                    <input id="amenity-name-{{j}}" [(ngModel)]="amenity.name" type="text" pInputText>
+                    <button class="delete-button" (click)="deleteAmenity(newRoom, amenity.id)">
+                        <i class="pi pi-trash"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <h4>Images:</h4>
+                <div class="input-field-with-actions">
+                    <input id="new-image-url" [(ngModel)]="newImageUrl" type="text" pInputText
+                        placeholder="New image URL">
+                    <button class="add-button" (click)="addImage(newRoom, newImageUrl)">
+                        <i class="pi pi-plus"></i>
+                    </button>
+                </div>
+                <div *ngFor="let url of newRoom.images; let j = index" class="input-field-with-actions">
+                    <input id="room-image-url-{{j}}" [(ngModel)]="newRoom.images[j]" type="text" pInputText>
+                    <button class="delete-button" (click)="deleteImage(newRoom, j)">
+                        <i class="pi pi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="room-actions">
+            <p-button label="Add Room" [disabled]="!isRoomDataValid(newRoom)" (onClick)="addNewRoom()" icon="pi pi-plus"></p-button>
+        </div>
+    </p-card>
+</div>
+
+<div *ngFor="let room of rooms; let i = index" class="room-card">
+    <p-card *ngIf="editRoomId !== room.id" [header]="room.name">
+        <div class="room-details">
+            <h4>Room Price</h4>
+            <p class="price">{{'$' + room.price}}</p>
+
+            <h4>Room Description</h4>
+            <p class="room-description">{{ room.description }}</p>
+
+            <div class="room-beds">
+                <h4>Beds</h4>
+                <p *ngFor="let bed of room.beds">{{ bed.count }} x {{ bed.name }} (Size: {{ bed.size }})</p>
+            </div>
+
+            <div class="room-amenities">
+                <h4>Amenities</h4>
+                <p>{{ room.amenities | joinAmenities }}</p>
+            </div>
+
+            <div class="room-media">
+                <h4>Room Images</h4>
+                <ng-container *ngFor="let url of room.images">
+                    <img [src]="url">
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="room-actions">
+            <p-button label="Edit" (onClick)="editRoomId = room.id" icon="pi pi-pencil"></p-button>
+            <p-button label="Delete" (onClick)="deleteRoom(room.id)" icon="pi pi-trash"
+                styleClass="p-button-danger"></p-button>
+        </div>
+    </p-card>
+
+    <p-card *ngIf="editRoomId === room.id" [header]="room.name">
+        <div class="edit-room-details">
+            <section>
+                <div class="input-field">
+                    <label for="room-name-{{i}}">Room Name:</label>
+                    <input id="room-name-{{i}}" [(ngModel)]="room.name" type="text" pInputText>
+                </div>
+                <div class="input-field">
+                    <label for="room-description-{{i}}">Description:</label>
+                    <textarea id="room-description-{{i}}" [(ngModel)]="room.description" rows="3"
+                        pInputTextarea></textarea>
+                </div>
+                <div class="input-field">
+                    <label for="room-price-{{i}}">Price:</label>
+                    <input id="room-price-{{i}}" [(ngModel)]="room.price" type="text" pInputText>
+                </div>
+            </section>
+
+            <section>
+                <h4>Amenities:</h4>
+                <div *ngFor="let amenity of room.amenities; let j = index" class="input-field-with-delete">
+                    <input id="amenity-name-{{i}}-{{j}}" [(ngModel)]="amenity.name" type="text" pInputText>
+                    <button class="delete-button" (click)="deleteAmenity(room, amenity.id)">
+                        <i class="pi pi-trash"></i>
+                    </button>
+                </div>
+
+                <div class="input-field-with-actions">
+                    <input id="new-amenity-name-{{i}}" [(ngModel)]="newAmenityName" type="text" pInputText
+                        placeholder="New amenity">
+                    <button class="add-button" (click)="addAmenity(room, newAmenityName)">
+                        <i class="pi pi-plus"></i>
+                    </button>
+                </div>
+            </section>
+
+            <section class="bed-section">
+                <div *ngFor="let bed of room.beds; let j = index; let last = last">
+                    <div class="bed-details">
+                        <h3>Bed {{ j + 1 }}</h3>
+                        <div class="bed-inputs">
+                            <div class="input-field">
+                                <label for="bed-name-{{i}}-{{j}}">Bed Name:</label>
+                                <input id="bed-name-{{i}}-{{j}}" [(ngModel)]="bed.name" type="text"
+                                    placeholder="Enter bed name">
+                            </div>
+
+                            <div class="input-field">
+                                <label for="bed-size-{{i}}-{{j}}">Bed Size:</label>
+                                <input id="bed-size-{{i}}-{{j}}" [(ngModel)]="bed.size" type="text"
+                                    placeholder="Enter bed size">
+                            </div>
+
+                            <div class="input-field">
+                                <label for="bed-count-{{i}}-{{j}}">Bed Count:</label>
+                                <input id="bed-count-{{i}}-{{j}}" [(ngModel)]="bed.count" type="number"
+                                    placeholder="Enter bed count">
+                            </div>
+                        </div>
+                        <div>
+                            <button *ngIf="last" (click)="addNewBed(room)">Add New Bed</button>
+                            <button class="delete-bed-button" [disabled]="room.beds.length == 1"
+                                (click)="deleteBed(room, j)">Delete Bed</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Images:</h4>
+                <div *ngFor="let url of room.images; let j = index" class="input-field-with-actions">
+                    <input id="room-image-url-{{i}}-{{j}}" [(ngModel)]="room.images[j]" type="text" pInputText>
+                    <button class="delete-button" (click)="deleteImage(room, j)">
+                        <i class="pi pi-trash"></i>
+                    </button>
+                </div>
+
+                <div class="input-field-with-actions">
+                    <input id="new-image-url-{{i}}" [(ngModel)]="newImageUrl" type="text" pInputText
+                        placeholder="New image URL">
+                    <button class="add-button" (click)="addImage(room, newImageUrl)">
+                        <i class="pi pi-plus"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <div class="edit-actions">
+            <p-button label="Save" [disabled]="!isRoomDataValid(room)" (onClick)="editRoomId = null; modifyRoom(room)" icon="pi pi-check"></p-button>
+            <p-button label="Cancel" (onClick)="editRoomId = null" icon="pi pi-times"></p-button>
+        </div>
+    </p-card>
+</div>

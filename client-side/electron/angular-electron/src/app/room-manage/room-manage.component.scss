@@ -1,0 +1,222 @@
+:host {
+    .room-card {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+
+        .bed-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+
+            button {
+                margin-bottom: 10px;
+                padding: 8px 15px;
+                border: none;
+                border-radius: 4px;
+                margin-right: 10px;
+                background-color: #4CAF50;
+                color: white;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #45a049;
+                }
+            }
+
+            .bed-details {
+                margin-bottom: 10px;
+                display: flex;
+                flex-direction: column;
+
+                p {
+                    margin-right: 10px;
+                }
+
+                .bed-inputs {
+                    display: flex;
+                    flex-direction: column;
+
+                    .input-field {
+                        margin-bottom: 10px;
+
+                        label {
+                            display: block;
+                            margin-bottom: 5px;
+                            font-weight: bold;
+                        }
+
+                        input[type="text"],
+                        input[type="number"] {
+                            width: 100%;
+                            padding: 8px;
+                            border: 1px solid #ccc;
+                            border-radius: 4px;
+                            box-sizing: border-box;
+                        }
+                    }
+                }
+
+                .delete-bed-button {
+                    margin-left: auto;
+                    background-color: #f44336;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+
+                    &:disabled {
+                        background-color: #ccc;
+                        color: #999;
+                        cursor: not-allowed;
+                    }
+
+                    &:hover {
+                        background-color: #d32f2f;
+                    }
+                }
+            }
+        }
+
+        .input-field-with-delete {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-field-with-actions {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .delete-button {
+            background-color: red;
+            right: 0;
+        }
+
+        .add-button i,
+        .delete-button i {
+            pointer-events: none;
+        }
+
+        .add-button,
+        .delete-button {
+            right: 0;
+            border: none;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            padding: 8px 10px;
+            margin-left: 5px;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .add-button {
+            background-color: rgb(59, 130, 246);
+            right: 50px;
+        }
+
+        .delete-button i {
+            pointer-events: none;
+        }
+
+        .p-card {
+            margin-bottom: 10px;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            margin: 10px 0;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .room-details,
+        .room-beds,
+        .room-actions {
+            margin-bottom: 10px;
+        }
+
+        .room-actions {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        p-button {
+            margin-right: 10px;
+        }
+
+
+        .room-beds {
+            p {
+                margin: 5px 0;
+            }
+        }
+
+        .input-field {
+            margin-bottom: 15px;
+
+            label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            input,
+            textarea {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+        }
+
+        .room-description,
+        .room-beds,
+        .room-amenities,
+        .room-media {
+            margin-bottom: 10px;
+
+            h4 {
+                margin-bottom: 5px;
+                font-size: 1.1em;
+                color: #333;
+            }
+        }
+
+        h4 {
+            margin-bottom: 5px;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .price {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .room-description {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+::ng-deep app-header header{
+    background-image: url("../../assets/img/start-img.png");    
+    background-repeat: no-repeat;
+    background-size: cover;
+}

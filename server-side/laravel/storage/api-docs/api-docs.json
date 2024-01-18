@@ -19,7 +19,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -42,7 +42,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -65,7 +65,7 @@
                 "operationId": "listOfRooms",
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -109,6 +109,131 @@
                                             }
                                         }
                                     ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "rooms"
+                ],
+                "operationId": "storeRoom",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "price": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "size": {
+                                        "type": "number"
+                                    },
+                                    "rating": {
+                                        "type": "integer"
+                                    },
+                                    "amenities": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "beds": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid"
+                                                },
+                                                "count": {
+                                                    "type": "number"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Room"
+                                        },
+                                        {
+                                            "properties": {
+                                                "beds": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "allOf": [
+                                                            {
+                                                                "$ref": "#/components/schemas/Bed"
+                                                            },
+                                                            {
+                                                                "properties": {
+                                                                    "count": {
+                                                                        "type": "number",
+                                                                        "format": "uint1"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "amenities": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Amenity"
+                                                    }
+                                                },
+                                                "images": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "format": "url"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
                                 }
                             }
                         }
@@ -165,7 +290,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -245,7 +370,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -289,6 +414,179 @@
                                             }
                                         }
                                     ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "rooms"
+                ],
+                "operationId": "updateRoom",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "room",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "UUID of the room to get"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "price": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "size": {
+                                        "type": "number"
+                                    },
+                                    "rating": {
+                                        "type": "integer"
+                                    },
+                                    "amenities": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "beds": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid"
+                                                },
+                                                "count": {
+                                                    "type": "number"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Room"
+                                        },
+                                        {
+                                            "properties": {
+                                                "beds": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "allOf": [
+                                                            {
+                                                                "$ref": "#/components/schemas/Bed"
+                                                            },
+                                                            {
+                                                                "properties": {
+                                                                    "count": {
+                                                                        "type": "number",
+                                                                        "format": "uint1"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "amenities": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Amenity"
+                                                    }
+                                                },
+                                                "images": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "format": "url"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "rooms"
+                ],
+                "operationId": "deleteRoom",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "room",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "UUID of the room to get"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
                                 }
                             }
                         }
@@ -341,7 +639,7 @@
                 },
                 "responses": {
                     "204": {
-                        "description": "Successful response"
+                        "description": "Success"
                     },
                     "422": {
                         "description": "Validation failed",
@@ -398,7 +696,7 @@
                 },
                 "responses": {
                     "204": {
-                        "description": "Successful response"
+                        "description": "Success"
                     },
                     "422": {
                         "description": "Validation failed",
@@ -471,7 +769,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Successful response",
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -519,7 +817,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -606,7 +904,7 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Successful response"
+                        "description": "Success"
                     }
                 }
             }
@@ -638,7 +936,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -693,7 +991,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {

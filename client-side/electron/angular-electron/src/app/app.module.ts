@@ -22,6 +22,8 @@ import { SearchModule } from './search/search.module';
 import { LoginModule } from './login/login.module';
 import { RegistrationModule } from './registration/registration.module';
 import { RoomModule } from './room/room.module';
+import { RoomManageComponent } from './room-manage/room-manage.component';
+import { RoomManageModule } from './room-manage/room-manage.module';
 
 // AoT requires an exported function for factories
 const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>  new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -43,6 +45,7 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>  new Transl
     LoginModule,
     RoomModule,
     RegistrationModule,
+    RoomManageModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
