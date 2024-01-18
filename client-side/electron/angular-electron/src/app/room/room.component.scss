@@ -76,6 +76,10 @@
                 display: flex;
                 flex-direction: column;
 
+                .room-specs p {
+                    margin: 5px 0;
+                }
+
                 h2 {
                     margin-top: 0;
                     margin-bottom: 5px;
@@ -132,140 +136,66 @@
                         border-radius: 11px;
                     }
 
+
+                    .price {
+                        text-align: right;
+                        margin-top: 15px;
+                        margin-bottom: 10px;
+                    }
+
+
+                    .discounted-price {
+                        font-size: 1.5em;
+                        color: #d9534f;
+                    }
+
+                    .booking-form {
+                        font-family: 'Arial', sans-serif;
+                        width: 300px;
+                        margin: 0 auto;
+                    }
+                    
+                    .field-group {
+                        margin-bottom: 20px;
+                    }
+                    
+                    .field-group label {
+                        display: block;
+                        margin-bottom: 5px;
+                        font-size: 18px;
+                        font-weight: bold;
+                        color: #333;
+                    }
+
                 }
+
+                .payment-conditions h3 {
+                    margin-top: 0;
+                }
+
+                button.ui-button-success {
+                    background-color: #5cb85c;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 1em;
+                }
+            
+                button.ui-button-success:hover {
+                    background-color: #4cae4c;
+                }
+
             }
         }
     }
-
-
-
-
-
-
-
-
-    .hotel-info h1 {
-        margin-top: 0;
-    }
-
-
-    .room-gallery {
-        max-width: 60%;
-        margin-right: 40px;
-    }
-
-    .room-specs p {
-        margin: 5px 0;
-    }
-
-
-
-    .payment-conditions h3 {
-        margin-top: 0;
-    }
-
-    .price {
-        text-align: right;
-        margin-top: 15px;
-        margin-bottom: 10px;
-    }
-
-
-    .original-price {
-        text-decoration: line-through;
-        color: #666;
-    }
-
-    .discounted-price {
-        font-size: 1.5em;
-        color: #d9534f;
-    }
-
-    button.ui-button-success {
-        background-color: #5cb85c;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1em;
-    }
-
-    button.ui-button-success:hover {
-        background-color: #4cae4c;
-    }
-
 }
 
-::ng-deep app-header header {
+:host ::ng-deep app-header header {
     background-image: url("../../assets/img/start-img.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
 }
 
-:host ::ng-deep .p-datepicker {
-    transform: scale(0.7);
-}
-
-:host ::ng-deep .p-calendar .p-inputtext {
-    font-size: 12px;
-    padding: 10px 10px;
-    width: 170px;
-}
-
-.booking-form {
-    font-family: 'Arial', sans-serif;
-    width: 300px;
-    margin: 0 auto;
-}
-
-.field-group {
-    margin-bottom: 20px;
-}
-
-.field-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-}
-
-:host ::ng-deep .p-calendar {
-    width: 100%;
-    position: relative;
-}
-
-:host ::ng-deep .p-calendar .p-inputtext {
-    width: 100%;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    height: 45px;
-    padding: 0 40px 0 10px;
-    line-height: 1.25;
-}
-
-:host ::ng-deep .p-calendar .p-datepicker-trigger {
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-}
-
-::ng-deep .p-calendar .p-datepicker-trigger i {
-    display: none;
-}
-
-::ng-deep .p-calendar .p-datepicker-trigger::before {
-    font-family: "PrimeIcons";
-    content: "\e909";
-    font-size: 1.25em;
-    color: white;
-}

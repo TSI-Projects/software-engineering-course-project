@@ -3,8 +3,8 @@
     <div class="hotel-booking-container" *ngIf="room">
         <h2 class="title">{{room.name}}</h2>
         <div class="parent">
-            <div *ngFor="let image of images; let i = index" [ngClass]="['gallery-item', 'div' + (i + 1)]">
-                <img [src]="image.source" *ngIf="i < 5 ">
+            <div *ngFor="let image of room.images; let i = index" [ngClass]="['gallery-item', 'div' + (i + 1)]">
+                <img [src]="image" *ngIf="i < 5 ">
             </div>
         </div>
 
