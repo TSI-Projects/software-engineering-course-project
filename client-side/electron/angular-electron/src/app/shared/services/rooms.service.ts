@@ -14,7 +14,7 @@ export class RoomsService {
   private filtredRoomsSubject: BehaviorSubject<Room[] | null> = new BehaviorSubject<Room[] | null>([])
   public filtredRooms$: Observable<Room[] | null> = this.filtredRoomsSubject.asObservable();
 
-  private selectedRoomIdCache: string = '9b1999eb-c54e-4011-9784-b37d452cd001';
+  private selectedRoomIdCache: string = '9b1d3ff0-4c47-44b2-8fec-e2fb1e060611';
 
   constructor(
     private _http: HttpClient,
@@ -109,6 +109,9 @@ export interface Room {
   beds: Bed[]
   amenities: Amenities[]
   images: string[]
+  size: number
+  guests: number
+  rating: number
 }
 
 export interface Bed {

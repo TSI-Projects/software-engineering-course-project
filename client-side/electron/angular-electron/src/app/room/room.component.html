@@ -1,41 +1,85 @@
-<div class="room-reservation">
-    <app-header></app-header>
-
-    <div class="room-details" *ngIf="room">
-        <p-carousel [value]="room.images">
-            <ng-template pTemplate="item" let-item>
-                <img [src]="item" alt="Room image">
-            </ng-template>
-        </p-carousel>
-
-        <h2>{{ room.name }}</h2>
-        <p>{{ room.description }}</p>
-        <h3>Price: {{ room.price }}</h3>
-
-        <div class="specifications">
-            <div class="beds">
-                <h4>Beds</h4>
-                <ul>
-                    <li *ngFor="let bed of room.beds">
-                        {{ bed.name }}: {{ bed.size }} - {{ bed.count }} pcs
-                    </li>
-                </ul>
-            </div>
-            <div class="amenities">
-                <h4>Amenities</h4>
-                <div *ngFor="let amenity of room.amenities">
-                    <i [ngClass]="amenity.icon"></i> {{ amenity.name }}
-                </div>
+<app-header></app-header>
+<section class="main">
+    <div class="hotel-booking-container" *ngIf="room">
+        <h2 class="title">{{room.name}}</h2>
+        <div class="parent">
+            <div *ngFor="let image of images; let i = index" [ngClass]="['gallery-item', 'div' + (i + 1)]">
+                <img [src]="image.source" *ngIf="i < 5 ">
             </div>
         </div>
-    </div>
 
-    <div class="booking-form">
-        <h3>Reserve Your Room</h3>
-        <form>
-            <!-- <p-calendar></p-calendar> -->
-            <!-- <p-calendar [(ngModel)]="date"></p-calendar> -->
-            <button pButton type="submit" label="Reserve Now"></button>
-        </form>
+
+        <div class="room-details">
+            <div class="hotel-image-info">
+                <div>
+                    <h2>Gaming Hotel, Riga</h2>
+                    <p>{{room.guests}} guests · {{room.size}} m2 · {{bedsCount}} beds </p>
+                    <p>
+                        <i class="pi pi-star-fill"></i>
+                        <span> {{room.rating}}.51 · 18 reviews </span>
+                    </p>
+                </div>
+                <p-divider></p-divider>
+
+                <div class="room-specs">
+                    <p>{{room.description}}</p>
+                    <div>
+                        <p-divider></p-divider>
+                        <h4>Amenities</h4>
+                        
+                        <div class="amenities">
+                            <div *ngFor="let amenity of room.amenities;" class="amenity-item">
+                                <i class="material-icons-outlined">{{amenity.icon}}</i>
+                                <span>{{amenity.name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <div class="payment-booking">
+                <div class="booking">
+
+                    <form [formGroup]="bookingForm" class="booking-form">
+                        <div class="field-group">
+                          <label for="checkin">Check-In</label>
+                          <p-calendar id="checkin" formControlName="checkIn" [showIcon]="true" 
+                                      [minDate]="today" [maxDate]="bookingForm.get('checkOut')?.value"></p-calendar>
+                        </div>
+                        
+                        <div class="field-group">
+                          <label for="checkout">Check-Out</label>
+                          <p-calendar id="checkout" formControlName="checkOut" [showIcon]="true"
+                                      [minDate]="bookingForm.get('checkIn')?.value" [readonlyInput]="true"></p-calendar>
+                        </div>
+                        <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true"></p-calendar>
+                      </form>
+                      
+                      
+                    <!-- <form >
+                        <span>Check in/out date</span>
+                        <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true"></p-calendar>
+
+                        <div class="price">
+                            <span class="discounted-price">€{{room.price}} / night</span>
+                        </div>
+                        <button pButton type="button" label="Reserve" class="ui-button-success"></button>
+                    </form> -->
+                </div>
+
+                <div class="payment-conditions">
+                    <h3>Flexible Payment Terms</h3>
+                    <p><i class="pi pi-check-circle"></i> Participant discount applied!</p>
+                    <p><i class="pi pi-check-circle"></i> Pay at arrival</p>
+                    <p><i class="pi pi-check-circle"></i> Free cancellation until January 17, 2024</p>
+                    <p><i class="pi pi-check-circle"></i> Pay by card</p>
+                </div>
+            </div>
+
+        </div>
+
+
+
     </div>
-</div>
+</section>

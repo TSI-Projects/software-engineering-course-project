@@ -1,87 +1,268 @@
 :host {
 
+    .main {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-    .room-reservation {
-        .room-details {
-            .carousel {
-                max-width: 600px;
-                margin: auto;
-            }
+        .hotel-booking-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-sizing: border-box;
+            max-width: 1280px;
+            min-width: 700px;
+            padding: 0 80px
+        }
 
-            h2 {
-                color: #333;
-                font-size: 24px;
-            }
+        .parent {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            grid-gap: 15px;
+        }
 
-            h3 {
-                color: #666;
-                font-size: 20px;
-            }
+        .gallery-item {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
 
-            .specifications {
-                display: flex;
-                justify-content: space-around;
-
-                .beds,
-                .amenities {
-                    ul {
-                        list-style: none;
-                        padding: 0;
-                    }
-                }
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
             }
         }
 
-        .booking-form {
-            form {
+        .div1 {
+            grid-area: 1 / 1 / 3 / 3;
+        }
+
+        .div2 {
+            grid-area: 1 / 3 / 2 / 4;
+        }
+
+        .div3 {
+            grid-area: 2 / 3 / 3 / 4;
+        }
+
+        .div4 {
+            grid-area: 2 / 4 / 3 / 5;
+        }
+
+        .div5 {
+            grid-area: 1 / 4 / 2 / 5;
+        }
+
+
+        .title {
+            text-align: left;
+        }
+
+
+        .room-details {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            margin-top: 20px;
+            margin-bottom: 20px;
+            gap: 70px;
+
+            .hotel-image-info {
+                width: 58.33%;
                 display: flex;
                 flex-direction: column;
-                align-items: center;
 
-                p-calendar {
-                    margin-bottom: 20px;
+                h2 {
+                    margin-top: 0;
+                    margin-bottom: 5px;
                 }
 
-                button {
-                    background-color: #007ad9;
-                    color: white;
-                    border: none;
-                    padding: px 20px;
-                    cursor: pointer;
-                    border-radius: 5px;
+                p {
+                    margin: 8px 0;
+                }
 
-                    &:hover {
-                        background-color: darken(#007ad9, 10%);
+                .amenities {
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .amenity-item {
+                        width: 50%;
+                        margin-bottom: 16px;
+
+                        i {
+                            margin-right: 16px;
+                        }
                     }
+                }
+            }
+
+
+            .payment-booking {
+                width: 33.33%;
+                background-color: #f8f8f8;
+                padding: 20px;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                gap: 8.33%;
+
+                .booking {
+                    text-align: right;
+                    width: 100%;
+                    margin-bottom: 20px;
+
+                    form {
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                    }
+
+                    button {
+                        background-color: #c20808;
+                        width: 100%;
+                        border-radius: 11px;
+                    }
+
                 }
             }
         }
     }
 
-    h4 {
-        color: #444;
-        font-size: 18px;
+
+
+
+
+
+
+
+    .hotel-info h1 {
+        margin-top: 0;
+    }
+
+
+    .room-gallery {
+        max-width: 60%;
+        margin-right: 40px;
+    }
+
+    .room-specs p {
+        margin: 5px 0;
+    }
+
+
+
+    .payment-conditions h3 {
+        margin-top: 0;
+    }
+
+    .price {
+        text-align: right;
+        margin-top: 15px;
         margin-bottom: 10px;
     }
 
-    img {
-        width: 100%;
-        height: auto;
+
+    .original-price {
+        text-decoration: line-through;
+        color: #666;
+    }
+
+    .discounted-price {
+        font-size: 1.5em;
+        color: #d9534f;
+    }
+
+    button.ui-button-success {
+        background-color: #5cb85c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
         border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
     }
 
-    // Responsive design adjustments
-    @media (max-width: 768px) {
-        .room-reservation {
-            .specifications {
-                flex-direction: column;
-
-                .beds,
-                .amenities {
-                    margin-bottom: 20px;
-                }
-            }
-        }
-
+    button.ui-button-success:hover {
+        background-color: #4cae4c;
     }
+
 }
+
+::ng-deep app-header header {
+    background-image: url("../../assets/img/start-img.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+:host ::ng-deep .p-datepicker {
+    transform: scale(0.7);
+}
+
+:host ::ng-deep .p-calendar .p-inputtext {
+    font-size: 12px;
+    padding: 10px 10px;
+    width: 170px;
+}
+
+.booking-form {
+    font-family: 'Arial', sans-serif;
+    width: 300px;
+    margin: 0 auto;
+  }
+  
+  .field-group {
+    margin-bottom: 20px;
+  }
+  
+  .field-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  :host ::ng-deep .p-calendar {
+    width: 100%;
+    position: relative;
+  }
+  
+  :host ::ng-deep .p-calendar .p-inputtext {
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    height: 45px;
+    padding: 0 40px 0 10px;
+    line-height: 1.25;
+  }
+  
+  :host ::ng-deep .p-calendar .p-datepicker-trigger {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  
+  ::ng-deep .p-calendar .p-datepicker-trigger i {
+    display: none;
+  }
+  
+  ::ng-deep .p-calendar .p-datepicker-trigger::before {
+    font-family: "PrimeIcons";
+    content: "\e909";
+    font-size: 1.25em;
+    color: white;
+  }
