@@ -14,6 +14,10 @@ import { TooltipModule } from 'primeng/tooltip';
 import { SliderModule } from 'primeng/slider';
 import { CardModule } from 'primeng/card';
 import { BookingComponent } from './booking.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { BookingComponent } from './booking.component';
     DividerModule,
     TooltipModule,
     SliderModule,
-    CardModule
+    CardModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatCardModule,
+    MatFormFieldModule,
   ]
 })
 

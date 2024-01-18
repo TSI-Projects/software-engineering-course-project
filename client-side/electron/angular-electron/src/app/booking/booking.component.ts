@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class BookingComponent {
 
+  public loading: boolean = false
+  load() {
+    throw new Error('Method not implemented.');
+  }
+
 }

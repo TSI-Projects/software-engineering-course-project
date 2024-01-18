@@ -1,0 +1,171 @@
+:host {
+    .wrapper {
+        display: flex;
+        justify-content: center;
+
+        width: 100%;
+        height: 100%;
+        padding: 40px;
+        gap: 50px;
+
+        .pay-info-container {
+            padding: 30px;
+            max-width: 700px;
+
+            .back-button-container {
+                margin-bottom: 40px;
+                font-size: 32px;
+
+                i {
+                    margin-right: 20px;
+                }
+            }
+
+            .trip-info-container {
+                font-size: 22px;
+
+                .date-container {
+                    font-size: 16px;
+
+                    p {
+                        margin: 4px 0;
+
+                        strong {
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+
+            .payment-method-container {
+                margin-bottom: 30px;
+
+                p {
+                    margin: 0 0 22px 0;
+                    font-size: 22px;
+                }
+
+                .payment-method-2,
+                .payment-method-1 {
+                    border: 1px solid gray;
+
+                    padding: 16px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 10px;
+
+                    p {
+                        margin: 5px 0;
+                        font-size: 16px
+                    }
+                }
+
+                .payment-method-1 {
+                    border-radius: 5px 5px 0 0;
+                }
+
+                .payment-method-2 {
+                    border-radius: 0 0 5px 5px;
+                }
+            }
+
+            .user-data-container {
+                padding-bottom: 50px;
+
+                p {
+                    margin: 10px 0 22px 0;
+                    font-size: 22px;
+                }
+
+                input {
+                    width: 100%;
+                    height: 50px;
+                    border-radius: 5px;
+                    font-size: 18px;
+                    padding: 0 10px 0 10px;
+                    margin: 10px 0;
+                }
+
+                .policy {
+                    font-size: 12px;
+                    margin: 0 0 20px 0
+                }
+            }
+        }
+
+        .room-info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+            min-width: 500px;
+
+            .room-info {
+                width: 100%;
+                border: 1px solid gray;
+                border-radius: 10px;
+                padding: 20px;
+
+
+                .room-data {
+                    display: flex;
+                    flex-direction: row;
+                    font-size: 14px;
+
+                    img {
+                        width: 100px;
+                        height: 100px;
+                        margin-right: 15px;
+                        border-radius: 10px;
+                    }
+
+                    p {
+                        margin: 0 0 10px 0;
+                    }
+                }
+            }
+
+            .price-details-container {
+                p {
+                    margin-bottom: 24px;
+                    font-size: 22px;
+
+                    strong {
+                        font-weight: 500;
+                    }
+                }
+
+                .pricing {
+                    display: flex;
+                    justify-content: space-between;
+
+                    p,
+                    span {
+                        margin: 8px 0;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            .total {
+                display: flex;
+                justify-content: space-between;
+
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+:host ::ng-deep p-button .p-button {
+    width: 100%;
+}
+
+:host ::ng-deep app-header header {
+    background-image: url("../../assets/img/start-img.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

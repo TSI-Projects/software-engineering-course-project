@@ -5,7 +5,7 @@ import { CommonModule } from "@angular/common";
 
 const routes: Routes = [
     {
-        path: 'my-reservations',
+        path: 'book',
         component: BookingComponent
     }
 ];
