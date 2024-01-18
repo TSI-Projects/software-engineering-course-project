@@ -21,7 +21,6 @@ class Room extends Model
         'description',
         'price',
         'size',
-        'room_count',
         'rating',
     ];
 
