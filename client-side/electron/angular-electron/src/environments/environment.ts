@@ -7,4 +7,5 @@ export const APP_CONFIG = {
   HotelRoomEndpoint: 'http://localhost/api/v1/rooms',
   DeleteRoomEndpoint: 'http://localhost/api/v1/rooms/delete',
   FilterHotelRoomsEndpoint: 'http://',
+  BookRoomEndpoint: 'http://localhost/api/v1/bookings',
 };

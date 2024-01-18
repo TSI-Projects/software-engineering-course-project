@@ -43,7 +43,7 @@ export class RoomManageComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
-      const resp = await this._roomManageSvc.fetchRoomInfo()
+      const resp = await this._roomManageSvc.fetchRoomsInfo()
       this.rooms = resp.data
     } catch (err) {
       this.handleError(err)

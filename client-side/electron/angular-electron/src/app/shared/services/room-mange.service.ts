@@ -14,7 +14,7 @@ export class RoomManageService {
   ) { }
 
 
-  public fetchRoomInfo(): Promise<RoomsResponse> {
+  public fetchRoomsInfo(): Promise<RoomsResponse> {
     if (!this._auth.isAdminRole()) {
       return Promise.reject(new Error("Permission denied"));
     }

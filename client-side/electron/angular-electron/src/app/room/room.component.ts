@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Room, RoomsService, Bed } from '../shared/services/rooms.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-room',
@@ -8,35 +9,45 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./room.component.scss']
 })
 export class RoomComponent implements OnInit {
-  public room: Room | null = null
-  rangeDates: Date[] | undefined;
-  todayDate: Date = new Date()
- 
-  dateRange = new FormGroup({
+  public room: Room | null = null;
+  public rangeDates: Date[] | undefined;
+  public todayDate: Date = new Date()
+  public dateRange = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
   });
 
-
-  // public images = [
-  //   { source: '../../assets/img/start-img.png', thumbnailImageSrc: '../../assets/img/thumbnail1.png' },
-  //   { source: '../../assets/img/our_rooms_1.png', thumbnailImageSrc: '../../assets/img/thumbnail2.png' },
-  //   { source: '../../assets/img/our_rooms_1.png', thumbnailImageSrc: '../../assets/img/thumbnail2.png' },
-  //   { source: '../../assets/img/our_rooms_1.png', thumbnailImageSrc: '../../assets/img/thumbnail2.png' },
-  //   { source: '../../assets/img/our_rooms_1.png', thumbnailImageSrc: '../../assets/img/thumbnail2.png' },
-  //   { source: '../../assets/img/our_rooms_2.png', thumbnailImageSrc: '../../assets/img/thumbnail3.png' }
-  // ];
-
   constructor(
-    private _roomsService: RoomsService
-  ) { 
+    private _roomsService: RoomsService,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute,
+  ) {
     const tomorrow = new Date(this.todayDate.getTime() + (24 * 60 * 60 * 1000));
-    this.dateRange.setValue({start: this.todayDate, end: tomorrow});
+    this.dateRange.setValue({ start: this.todayDate, end: tomorrow });
   }
 
-  async ngOnInit(): Promise<void> {
-    const resp = await this._roomsService.loadRoom()
+  public async ngOnInit(): Promise<void> {
+    const roomId = this._activatedRoute.snapshot.queryParams['room_id'];
+
+    const resp = await this._roomsService.loadRoom(roomId)
     this.room = resp.data
+  }
+
+  public navigateToBookPage(): void {
+    const date_from = this.dateRange.get('start')?.value as Date
+    const date_to = this.dateRange.get('end')?.value as Date
+
+    this._router.navigate(['/book'], {
+      queryParams: {
+        date_from: date_from.toISOString(),
+        date_to: date_to.toISOString(),
+        day_price: this.room?.price,
+        preview_img: this.room?.images[0],
+        room_name: this.room?.name,
+        room_id: this.room?.id,
+        room_rating: this.room?.rating
+      }
+    });
   }
 
   get bedsCount(): number {

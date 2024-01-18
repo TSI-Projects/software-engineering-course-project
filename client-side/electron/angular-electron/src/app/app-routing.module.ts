@@ -8,6 +8,7 @@ import { SearchRoutingModule } from './search/search-routing.module';
 import { LoginRoutingModule } from './login/login-routing.module';
 import { RegistrationRoutingModule } from './registration/registration-routing.module';
 import { RoomMangeRoutingModule } from './room-manage/room-manage-routing.module';
+import { BookingRoutingModule } from './booking/booking-routing.module';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
     LoginRoutingModule,
     RegistrationRoutingModule,
     RoomMangeRoutingModule,
+    BookingRoutingModule
   ],
   exports: [RouterModule]
 })
