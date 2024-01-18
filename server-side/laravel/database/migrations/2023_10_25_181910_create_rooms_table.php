@@ -10,11 +10,10 @@ return new class extends Migration
     {
         Schema::create('rooms', static function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('price');
+            $table->unsignedFloat('price');
             $table->string('name');
             $table->text('description');
             $table->unsignedTinyInteger('size');
-            $table->unsignedTinyInteger('room_count');
             $table->unsignedTinyInteger('rating');
             $table->timestamps();
         });
