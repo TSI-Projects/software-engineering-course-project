@@ -80,19 +80,17 @@
                                 <p-divider layout="vertical" *ngIf="i < 3 && !last"></p-divider>
                             </ng-container>
                         </div>
-                        <a routerLink="/room/{{room.id}}">More details</a>
+                        <a (click)="selectRoom(room.id)">More details</a>
                     </div>
                     <div class="book">
                         <div class="price">
                             <span class="cash">EUR {{room.price || 'NaN'}}</span>
                             <span class="gray">/night</span>
                         </div>
-                        <button>BOOK NOW</button>
+                        <button (click)="selectRoom(room.id)">BOOK NOW</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    
+    </div> 
 </section>

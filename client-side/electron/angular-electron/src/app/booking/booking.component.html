@@ -1,0 +1,84 @@
+<app-header></app-header>
+<section class="wrapper">
+    <div class="pay-info-container">
+        <div class="back-button-container">
+            <i class="material-icons-outlined">arrow_back_ios</i>
+            <span>Confirm and pay</span>
+        </div>
+
+        <div class="trip-info-container">
+            <p>Your trip</p>
+            <div class="date-container">
+                <p><strong>Dates</strong></p>
+                <p>{{formatedDates}}</p>
+            </div>
+        </div>
+
+        <p-divider></p-divider>
+
+        <div class="payment-method-container">
+            <p>Choose how to pay</p>
+            <div class="payment-method-1">
+                <div>
+                    <p><strong>Pay now</strong></p>
+                    <p>Pay the total (€ {{totalPrice}})</p>
+                </div>
+                <mat-radio-button value="after"></mat-radio-button>
+            </div>
+            <div class="payment-method-2">
+                <div>
+                    <p><strong>Pay in the hotel</strong></p>
+                    <p>Pay the total in the hotel. Extra fee 1% (€ {{nightPrice * nights}} + € {{((nightPrice * nights) * 0.01).toFixed(2)}})</p>
+                </div>
+                <mat-radio-button value="after"></mat-radio-button>
+            </div>
+        </div>
+
+        <p-divider></p-divider>
+
+        <form class="user-data-container" [formGroup]="bookForm">
+            <p>Complete your booking details</p>
+            <input type="text" formControlName="firstName" placeholder="First Name">
+            <input type="text" formControlName="lastName" placeholder="Last Name">
+            <input type="tel" formControlName="phone" placeholder="Phone">
+            <p class="policy">We’ll call or text you to confirm your number. Standard message and data rates apply. Privacy Policy</p>
+            <p-button label="Book" [loading]="loading" (onClick)="book()"></p-button>
+        </form>
+    </div>
+    <div class="room-info-container">
+        <div></div>
+        <div class="room-info">
+            <div class="room-data">
+                <img src="../../assets/img/our_rooms_1.png">
+                <div class="text">
+                    <p>{{roomName}}</p>
+                    <p>
+                        <i class="pi pi-star-fill"></i>
+                        <span> {{roomRating}}.51 (17 reviews)</span>
+                    </p>
+                </div>
+            </div>  
+
+            <p-divider></p-divider>
+
+            <div class="price-details-container">
+                <p><strong>Price details</strong></p>
+                <div class="pricing">
+                    <p>€ {{nightPrice}} x {{nights}} nights</p>
+                    <span>€ {{nightPrice * nights}}</span>
+                </div>
+                <div class="pricing">
+                    <p>Hotel service fee</p>
+                    <span>€ {{((nightPrice * nights) * 0.01).toFixed(2)}}</span>
+                </div>
+            </div>
+
+            <p-divider></p-divider>
+
+            <div class="total">
+                <p>Total (EUR)</p>
+                <span>€ {{totalPrice}}</span>
+            </div>
+        </div>
+    </div>
+</section>

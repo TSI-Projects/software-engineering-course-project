@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Bed, Room, RoomResponse, RoomsService } from '../shared/services/rooms.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -7,7 +8,7 @@ import { Bed, Room, RoomResponse, RoomsService } from '../shared/services/rooms.
   styleUrls: ['./search.component.scss']
 })
 
-export class SearchComponent{
+export class SearchComponent {
   public rangeDates: Date[] | undefined;
   public minDate: Date;
   public adultsCount: number = 0;
@@ -22,6 +23,7 @@ export class SearchComponent{
 
   constructor(
     public _rooms: RoomsService,
+    private _router: Router
   ) {
     this.minDate = new Date()
     this.sortByArray = [
@@ -34,6 +36,12 @@ export class SearchComponent{
   public search(): void {
 
 
+  }
+
+  public selectRoom(room_id: string): void {
+    this._router.navigate(['/room'], {
+      queryParams: { room_id }
+    });
   }
 
   public decrement(count: number): number {

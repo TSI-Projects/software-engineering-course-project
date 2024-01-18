@@ -34,7 +34,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
             </div>
@@ -56,11 +55,8 @@
                             <span class="discounted-price">€{{room.price}} / night</span>
                         </div>
 
-                        <button pButton type="button" label="Reserve" class="ui-button-success"></button>
+                        <button pButton type="button" label="Reserve" class="ui-button-success" (click)="navigateToBookPage()"></button>
                       </form>
-                      
-
-                
                 </div>
 
                 <div class="payment-conditions">
@@ -71,10 +67,6 @@
                     <p><i class="pi pi-check-circle"></i> Pay by card</p>
                 </div>
             </div>
-
         </div>
-
-
-
     </div>
 </section>
