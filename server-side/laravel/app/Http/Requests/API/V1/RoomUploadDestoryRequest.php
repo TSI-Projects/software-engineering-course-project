@@ -10,7 +10,7 @@ class RoomUploadDestoryRequest extends FormRequest
     {
         return [
             'media_ids' => ['required', 'array'],
-            'media_ids' => ['required', 'uuid', 'exists:Plank\\Mediable\\Media,id'],
+            'media_ids' => ['required', 'uuid', 'exists:App\\Models\\Media,id'],
         ];
     }
 }

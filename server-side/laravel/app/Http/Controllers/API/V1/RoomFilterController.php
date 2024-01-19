@@ -13,10 +13,9 @@ class RoomFilterController extends Controller
     {
         $validated = $request->validated();
 
-        $maxGuests = intval($validated['adult_count']) + intval($validated['chlidren_count']);
-
         $orderBy = match ($validated['order_by']['column']) {
             'rating' => 'rooms.rating',
+            'price' => 'rooms.price',
             default => 'id'
         };
 
@@ -28,8 +27,7 @@ class RoomFilterController extends Controller
                     ->join('room_bed', 'beds.id', 'room_bed.bed_id'),
             ])
             ->leftJoin('bookings', 'rooms.id', 'bookings.room_id')
-            ->where('room_count', '<=', $validated['room_count'])
-            ->where('max_guests', '<=', $maxGuests)
+            ->where('max_guests', '<=', $validated['guest_count'])
             ->where(function ($query) use ($request) {
                 $checkoutAt = $request->date('checkout_at')->toDateString();
                 $checkintAt = $request->date('checkin_at')->toDateString();
