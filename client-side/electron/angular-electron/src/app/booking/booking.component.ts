@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookingServiceService } from '../shared/services/booking.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
@@ -25,7 +25,8 @@ export class BookingComponent implements OnInit {
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _bookingSrv: BookingServiceService,
-    private _messageService: MessageService
+    private _messageService: MessageService,
+    private _router: Router
   ) {
     this.bookForm = new FormGroup({
       firstName: new FormControl(''),
@@ -53,6 +54,10 @@ export class BookingComponent implements OnInit {
     const start = moment(this.dateFrom);
     const end = moment(this.dateTo);
     return end.diff(start, 'days') + 1;
+  }
+
+  get formatedRoomRating(): string {
+    return Number(this.roomRating).toFixed(2)
   }
 
   get totalPrice(): string {
@@ -83,6 +88,12 @@ export class BookingComponent implements OnInit {
         this.dateFrom,
         this.dateTo,
       )
+      this._messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Reservation completed successfuly'
+      })
+      this._router.navigate(['/home'])
     } catch (err) {
       this._messageService.add({
         severity: 'error',

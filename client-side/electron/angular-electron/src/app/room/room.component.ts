@@ -45,6 +45,10 @@ export class RoomComponent implements OnInit {
     }, 0) ?? 0;
   }
 
+  get rating(): string {
+    return Number(this.room?.rating).toFixed(2)
+  }
+
   public async ngOnInit(): Promise<void> {
     const roomId = this._activatedRoute.snapshot.queryParams['room_id'];
 
