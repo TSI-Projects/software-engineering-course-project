@@ -1,14 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Room, RoomsService } from '../../shared/services/rooms.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-rooms-filter',
   templateUrl: './rooms-filter.component.html',
   styleUrls: ['./rooms-filter.component.scss']
 })
-export class RoomsFilterComponent implements OnInit, OnDestroy {
-  private roomSubscription: Subscription = new Subscription();
+export class RoomsFilterComponent implements OnInit {
   public minPrice: number = 0
   public maxPrice: number = 0
   public beds: string[] = []
@@ -31,41 +29,22 @@ export class RoomsFilterComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.waitUntilRoomsLoaded()
+    this.loadFilters()
   }
 
-  public ngOnDestroy(): void {
-    this.roomSubscription.unsubscribe()
-  }
 
-  private waitUntilRoomsLoaded(): void {
-    this.roomSubscription.add(this._rooms.rooms$.subscribe(data => {
-      if (!data || data.length == 0) return;
-      this.setMinMaxPrice(data)
-      this.setBedTypes(data)
-      this.setAmenities(data)
-      this.roomSubscription.unsubscribe()
-    }))
+  private async loadFilters(): Promise<void> {
+    const amenitiesResp = await this._rooms.loadAmenities()
+    this.amenities = amenitiesResp.map(amenity => amenity.name)
+
+    const bedTypeResp = await this._rooms.loadBedTypes()
+    this.beds = bedTypeResp.map(bed => bed.name)
   }
 
   private setMinMaxPrice(rooms: Room[]): void {
     const prices = rooms.map(room => parseFloat(room.price));
     this.minPrice = Math.min(...prices)
     this.maxPrice = Math.max(...prices)
-  }
-
-  private setAmenities(rooms: Room[]): void {
-    const allAmanities = rooms.flatMap(room => room.amenities.map(amenity => amenity.name))
-    this.amenities = this.removeArrayDuplications(allAmanities)
-  }
-
-  private setBedTypes(rooms: Room[]): void {
-    const allBedTypes = rooms.flatMap(room => room.beds.map(bed => bed.name));
-    this.beds = this.removeArrayDuplications(allBedTypes)
-  }
-
-  private removeArrayDuplications<T>(array: T[]): T[] {
-    return Array.from(new Set(array));
   }
 
   public filter(): void {

@@ -53,6 +53,35 @@ export class RoomsService {
     });
   }
 
+  public loadAmenities(): Promise<Amenity[]> {
+    return new Promise<Amenity[]>((resolve, reject) => {
+      this._http.get<AmenitiesResponse>(APP_CONFIG.AmenitiesEndpoint)
+        .subscribe({
+          next: (resp: AmenitiesResponse) => {
+            resolve(resp.data);
+          },
+          error: () => {
+            reject(new Error("Failed to fetch amenities. Please try again later"));
+          },
+        });
+    });
+  }
+
+  public loadBedTypes(): Promise<Bed[]> {
+    return new Promise<Bed[]>((resolve, reject) => {
+      this._http.get<BedTypeResponse>(APP_CONFIG.BedsTypeEndpoint)
+        .subscribe({
+          next: (resp: BedTypeResponse) => {
+            resolve(resp.data);
+          },
+          error: () => {
+            reject(new Error("Failed to fetch beds types. Please try again later"));
+          },
+        });
+    });
+  }
+
+
   public updateFiltredRooms(rooms: Room[] | null) {
     this.filtredRoomsSubject.next(rooms)
   }
@@ -71,6 +100,16 @@ export class RoomsService {
   private handleResponseError() {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong :( Please try again later!' })
   }
+}
+
+export interface BedTypeResponse {
+  data: Bed[]
+  meta: Meta
+}
+
+export interface AmenitiesResponse {
+  data: Amenity[]
+  meta: Meta
 }
 
 export interface RoomsResponse {

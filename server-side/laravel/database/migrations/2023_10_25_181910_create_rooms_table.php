@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->unsignedTinyInteger('size');
-            $table->unsignedTinyInteger('rating');
+            $table->unsignedFloat('rating');
             $table->timestamps();
         });
     }
