@@ -13,7 +13,6 @@ class BookingResource extends JsonResource
             'room' => RoomResource::make($this->whenLoaded('room')),
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
-            'country_iso_code' => $this->country_iso_code,
             'phone' => $this->phone,
             'status' => $this->status,
             'checkin_at' => $this->checkin_at,

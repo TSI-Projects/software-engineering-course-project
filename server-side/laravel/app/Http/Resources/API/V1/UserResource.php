@@ -22,8 +22,8 @@ class UserResource extends JsonResource
 
     protected function canSeePrivateFields(): bool
     {
-        $user = Auth::user();
+        $user = Auth::guard('sanctum')->user();
 
-        return $user && ($user->getKey() === $this->resource->getKey() || $user->is_admin);
+        return $user && ($user->getAuthIdentifier() === $this->resource->getKey() || $user->is_admin);
     }
 }

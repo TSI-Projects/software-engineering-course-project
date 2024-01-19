@@ -15,12 +15,9 @@ class StoreBookingRequest extends FormRequest
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
             'phone' => ['required', 'string'],
-            'country_iso_code' => ['required', 'string', 'min:3', 'max:3'],
             'room_id' => ['required', 'uuid', 'exists:App\\Models\\Room,id'],
-            'checkin_at' => ['required', 'date', 'after:now'],
+            'checkin_at' => ['required', 'date', 'after:today'],
             'checkout_at' => ['required', 'date', 'before:+1 month', 'after:checkin_at'],
-            'adult_count' => ['required', 'int', 'max:10'],
-            'children_count' => ['required', 'int', 'max:10'],
         ];
     }
 
@@ -48,27 +45,6 @@ class StoreBookingRequest extends FormRequest
                 if ($exists) {
                     $validator->addFailure('checkin_at', 'validation.rooms.overlaps');
                     $validator->addFailure('checkout_at', 'validation.rooms.overlaps');
-                }
-            },
-            function (Validator $validator) {
-                $validated = $validator->validated();
-
-                if ($validator->errors()->hasAny(['adult_count', 'children_count'])) {
-                    return;
-                }
-
-                $maxGuests = DB::table('beds')
-                    ->selectRaw('(sum(beds.size) * sum(room_bed.count)) as max_guests')
-                    ->join('room_bed', 'beds.id', '=', 'room_bed.bed_id')
-                    ->where('room_bed.room_id', $validated['room_id'])
-                    ->pluck('max_guests')
-                    ->first();
-
-                $guestCount = $validated['adult_count'] + $validated['children_count'];
-
-                if ($guestCount > $maxGuests) {
-                    $validator->addFailure('adult_count', 'validation.rooms.max_guests');
-                    $validator->addFailure('children_count', 'validation.rooms.max_guests');
                 }
             },
         ];
