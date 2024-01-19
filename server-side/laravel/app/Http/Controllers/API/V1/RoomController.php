@@ -6,9 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\API\V1\StoreRoomRequest;
 use App\Http\Resources\API\V1\RoomResource;
 use App\Models\Booking;
-use App\Models\Enums\BookingStatus;
 use App\Models\Room;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Response;
 
@@ -24,14 +22,13 @@ class RoomController extends Controller
         return RoomResource::collection($rooms);
     }
 
-    public function show(Room $room, Request $request)
+    public function show(Room $room)
     {
         $room->loadMedia(['image']);
         $room->load(['beds', 'amenities']);
 
         $bookings = Booking::query()
             ->where('room_id', $room->getKey())
-            ->whereIn('status', [BookingStatus::RESERVED])
             ->whereDate('checkout_at', '<=', now())
             ->get();
 
