@@ -4,12 +4,12 @@ namespace App\Http\Controllers\API\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Response;
 use Laravel\Sanctum\PersonalAccessToken;
 
 class LogoutController extends Controller
 {
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request)
     {
         if (! $bearerToken = $request->bearerToken()) {
             abort(401);

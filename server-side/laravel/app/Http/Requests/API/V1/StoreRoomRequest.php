@@ -13,7 +13,6 @@ class StoreRoomRequest extends FormRequest
             'name' => ['required', 'string', 'min:8'],
             'description' => ['required', 'string', 'min:32'],
             'size' => ['required', 'int', 'min:1'],
-            'rating' => ['required', 'decimal:1,5'],
             'amenities' => ['nullable', 'array:id'],
             'amenities.*.id' => ['nullable', 'uuid', 'exists:App\\Models\\Amenity,id'],
             'beds' => ['nullable', 'array:id,count'],
