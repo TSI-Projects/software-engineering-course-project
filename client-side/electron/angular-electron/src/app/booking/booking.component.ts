@@ -16,19 +16,17 @@ export class BookingComponent implements OnInit {
   public dateTo: string = ''
   public nightPrice: number = 0
   public previewImg: string = ''
-  private roomId: string = ''
+  public roomId: string = ''
   public roomName: string = ''
   public roomRating: string = ''
-
+  public selectedOption: string = 'fee'
   public bookForm: FormGroup
 
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _bookingSrv: BookingServiceService,
     private _messageService: MessageService
-    
   ) {
-
     this.bookForm = new FormGroup({
       firstName: new FormControl(''),
       lastName: new FormControl(''),
@@ -47,19 +45,23 @@ export class BookingComponent implements OnInit {
     }
   }
 
+  get fee(): string {
+    return ((this.nightPrice * this.nights) * 0.01).toFixed(2)
+  }
+
   get nights(): number {
     const start = moment(this.dateFrom);
     const end = moment(this.dateTo);
     return end.diff(start, 'days') + 1;
-
   }
 
-  get totalPrice(): number {
-    const totalWithoutFee = this.nights * this.nightPrice;
-    const fee = totalWithoutFee * 0.01;
-    return totalWithoutFee + fee;
+  get totalPrice(): string {
+    return (this.nights * this.nightPrice).toFixed(2);
   }
 
+  get totalPriceWithFee(): string {
+    return (Number(this.totalPrice) + Number(this.fee)).toFixed(2);
+  }
 
   public ngOnInit(): void {
     this.dateFrom = this._activatedRoute.snapshot.queryParams['date_from'];
@@ -69,7 +71,6 @@ export class BookingComponent implements OnInit {
     this.roomId = this._activatedRoute.snapshot.queryParams['room_id'];
     this.roomName = this._activatedRoute.snapshot.queryParams['room_name'];
     this.roomRating = this._activatedRoute.snapshot.queryParams['room_rating'];
-    
   }
 
   async book(): Promise<void> {
@@ -83,10 +84,10 @@ export class BookingComponent implements OnInit {
         this.dateTo,
       )
     } catch (err) {
-      this._messageService.add({ 
-        severity: 'error', 
-        summary: 'Login Error', 
-        detail: 'Something went wrong :( Please try again later!' 
+      this._messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Something went wrong :( Please try again later!'
       })
     }
   }

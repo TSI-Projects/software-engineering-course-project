@@ -41,6 +41,9 @@ export class AuthService {
   }
 
   public logout(): Promise<void> {
+    localStorage.removeItem(this.TOKEN_KEY_NAME);
+    localStorage.removeItem(this.ROLE_KEY_NAME);
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.token}`
     });
