@@ -17,12 +17,8 @@ export class BookingServiceService {
       return Promise.reject(new Error("Permission denied"));
     }
 
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this._auth.token}`
-    });
-
     return new Promise<BookingResponse>((resolve, reject) => {
-      this._http.post<BookingResponse>(APP_CONFIG.BookRoomEndpoint, { first_name, last_name, phone, room_id, checkin_at, checkout_at }, { headers })
+      this._http.post<BookingResponse>(APP_CONFIG.BookRoomEndpoint, { first_name, last_name, phone, room_id, checkin_at, checkout_at }, { headers: this._auth.authHeader })
         .subscribe({
           next: (resp: BookingResponse) => {
             resolve(resp);

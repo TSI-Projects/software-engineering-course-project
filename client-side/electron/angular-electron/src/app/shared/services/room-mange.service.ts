@@ -37,12 +37,8 @@ export class RoomManageService {
       return Promise.reject(new Error("Permission denied"));
     }
 
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this._auth.token}`
-    });
-
     return new Promise<RoomsResponse>((resolve, reject) => {
-      this._http.delete<RoomsResponse>(`${APP_CONFIG.DeleteRoomEndpoint}/${roomId}`, { headers })
+      this._http.delete<RoomsResponse>(`${APP_CONFIG.DeleteRoomEndpoint}/${roomId}`, { headers: this._auth.authHeader })
         .subscribe({
           next: (resp: RoomsResponse) => {
             resolve(resp);
@@ -59,8 +55,13 @@ export class RoomManageService {
       return Promise.reject(new Error("Permission denied"));
     }
 
+    let formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append(`images[${i}]`, files[i], files[i].name);
+    }
+
     return new Promise<void>((resolve, reject) => {
-      this._http.post(`${APP_CONFIG.HotelRoomsEndpoint}/${roomId}/media/upload`, files, { headers: this._auth.authHeader })
+      this._http.post(`${APP_CONFIG.HotelRoomsEndpoint}/${roomId}/media/upload`, formData, { headers: this._auth.authHeader })
         .subscribe({
           next: () => {
             resolve();
@@ -77,10 +78,6 @@ export class RoomManageService {
       return Promise.reject(new Error("Permission denied"));
     }
 
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this._auth.token}`
-    });
-
     const payload = {
       name: room.name,
       description: room.description,
@@ -91,7 +88,7 @@ export class RoomManageService {
     }
 
     return new Promise<RoomsResponse>((resolve, reject) => {
-      this._http.post<RoomsResponse>(`${APP_CONFIG.HotelRoomsEndpoint}`, payload, { headers })
+      this._http.post<RoomsResponse>(`${APP_CONFIG.HotelRoomsEndpoint}`, payload, { headers: this._auth.authHeader })
         .subscribe({
           next: (resp: RoomsResponse) => {
             resolve(resp);
@@ -108,10 +105,6 @@ export class RoomManageService {
       return Promise.reject(new Error("Permission denied"));
     }
 
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this._auth.token}`
-    });
-
     const payload = {
       name: room.name,
       description: room.description,
@@ -122,7 +115,7 @@ export class RoomManageService {
     }
 
     return new Promise<RoomsResponse>((resolve, reject) => {
-      this._http.patch<RoomsResponse>(`${APP_CONFIG.HotelRoomsEndpoint}/${room.id}`, payload, { headers })
+      this._http.patch<RoomsResponse>(`${APP_CONFIG.HotelRoomsEndpoint}/${room.id}`, payload, { headers: this._auth.authHeader })
         .subscribe({
           next: (resp: RoomsResponse) => {
             resolve(resp);

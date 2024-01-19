@@ -3,7 +3,7 @@ import { RoomManageService } from '../shared/services/room-mange.service';
 import { MessageService } from 'primeng/api';
 import { Amenity, Bed, Room, RoomsService } from '../shared/services/rooms.service';
 import { v4 as uuidv4 } from 'uuid';
-import { FileUpload, FileUploadEvent, FileUploadHandlerEvent } from 'primeng/fileupload';
+import { FileUploadHandlerEvent } from 'primeng/fileupload';
 import { AuthService } from '../shared/services/auth.service';
 
 @Component({

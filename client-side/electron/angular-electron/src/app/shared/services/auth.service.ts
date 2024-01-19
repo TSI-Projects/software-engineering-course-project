@@ -47,9 +47,6 @@ export class AuthService {
   }
 
   public logout(): Promise<void> {
-    localStorage.removeItem(this.TOKEN_KEY_NAME);
-    localStorage.removeItem(this.ROLE_KEY_NAME);
-
     return new Promise<void>((resolve, reject) => {
       return this.http.post<any>(APP_CONFIG.LogoutEndpoint, {}, { headers: this.authHeader })
         .subscribe({
