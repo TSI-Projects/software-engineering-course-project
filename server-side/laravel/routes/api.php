@@ -6,6 +6,7 @@ use App\Http\Controllers\API\V1\Auth\LogoutController;
 use App\Http\Controllers\API\V1\Auth\RegisterController;
 use App\Http\Controllers\API\V1\BedController;
 use App\Http\Controllers\API\V1\BookingController;
+use App\Http\Controllers\API\V1\FilterPriceController;
 use App\Http\Controllers\API\V1\MeBookingController;
 use App\Http\Controllers\API\V1\MeController;
 use App\Http\Controllers\API\V1\RoomController;
@@ -24,6 +25,10 @@ Route::prefix('/v1')->group(static function () {
     Route::prefix('/me')->middleware('auth:sanctum')->group(static function () {
         Route::get('/', [MeController::class, 'index'])->name('me');
         Route::get('/bookings', [MeBookingController::class, 'index'])->name('me.bookings');
+    });
+
+    Route::prefix('/filter')->group(static function () {
+        Route::get('/price', [FilterPriceController::class, 'index'])->name('filter.price');
     });
 
     Route::prefix('/beds')->group(static function () {
@@ -54,7 +59,7 @@ Route::prefix('/v1')->group(static function () {
         Route::delete('/{booking}', [BookingController::class, 'destroy'])->middleware('auth:sanctum')->name('bookings.destroy');
     });
 
-    Route::prefix('users')->group(static function () {
+    Route::prefix('/users')->group(static function () {
         Route::middleware(['auth:sanctum'])->group(static function () {
             Route::get('/{user}/bookings', [UserBookingController::class, 'index'])->name('user_bookings.index');
         });

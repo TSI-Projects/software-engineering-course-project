@@ -11,6 +11,34 @@
         }
     ],
     "paths": {
+        "/filter/price": {
+            "get": {
+                "operationId": "getMinMaxPrice",
+                "tags": [
+                    "filter"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "min": {
+                                            "type": "number"
+                                        },
+                                        "max": {
+                                            "type": "number"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/amenities": {
             "get": {
                 "operationId": "getListOfAmenities",
@@ -1372,6 +1400,10 @@
         }
     },
     "tags": [
+        {
+            "name": "filter",
+            "description": "Everything about filters"
+        },
         {
             "name": "rooms",
             "description": "Everything about rooms"
