@@ -1,5 +1,5 @@
 <header>
-    <img src="../../../../assets/img/logo.png">
+    <img src="../../../../assets/img/logo.png" (click)="clickMenuBtn('/home')">
     <ul>
         <ng-container *ngFor="let item of menuItems">
             <li *ngIf="item.visible && !item.isButton">
@@ -10,9 +10,7 @@
 
     <div class="buttons">
         <ng-container *ngFor="let item of menuItems">
-            <button *ngIf="item.visible && item.isButton" 
-                (click)="clickMenuBtn(item.path)"
-                (click)="item?.action()"
+            <button *ngIf="item.visible && item.isButton" (click)="clickMenuBtn(item.path)" (click)="item?.action()"
                 [class]="item.class">
                 {{ item.label }}
             </button>
