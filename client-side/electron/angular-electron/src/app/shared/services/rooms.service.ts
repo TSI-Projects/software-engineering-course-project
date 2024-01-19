@@ -81,6 +81,20 @@ export class RoomsService {
     });
   }
 
+  public loadPrice(): Promise<PriceResponse> {
+    return new Promise<PriceResponse>((resolve, reject) => {
+      this._http.get<PriceResponse>(APP_CONFIG.PriceEndpoint)
+        .subscribe({
+          next: (resp: PriceResponse) => {
+            resolve(resp);
+          },
+          error: () => {
+            reject(new Error("Failed to fetch beds types. Please try again later"));
+          },
+        });
+    });
+  }
+
 
   public updateFiltredRooms(rooms: Room[] | null) {
     this.filtredRoomsSubject.next(rooms)
@@ -100,6 +114,11 @@ export class RoomsService {
   private handleResponseError() {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong :( Please try again later!' })
   }
+}
+
+export interface PriceResponse {
+  min: number
+  max: number
 }
 
 export interface BedTypeResponse {

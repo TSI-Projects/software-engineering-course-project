@@ -14,4 +14,5 @@ export const APP_CONFIG = {
   RegisterEndpoint: 'http://localhost/api/v1/auth/register',
   AmenitiesEndpoint: 'http://localhost/api/v1/amenities',
   BedsTypeEndpoint: 'http://localhost/api/v1/beds',
+  PriceEndpoint: 'http://localhost/api/v1/filter/price',
 };

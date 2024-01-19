@@ -21,11 +21,11 @@ export class RoomsFilterComponent implements OnInit {
   ) { }
 
   get minValuePriceRange(): number {
-    return Math.round(this.minPrice + (this.rangeValues[0] / 100 * (this.maxPrice - this.minPrice)))
+    return this.minPrice + (this.rangeValues[0] / 100 * (this.maxPrice - this.minPrice)) - 1
   }
 
   get maxValuePriceRange(): number {
-    return Math.round(this.minPrice + (this.rangeValues[1] / 100 * (this.maxPrice - this.minPrice)))
+    return this.minPrice + (this.rangeValues[1] / 100 * (this.maxPrice - this.minPrice)) + 1
   }
 
   public ngOnInit(): void {
@@ -38,12 +38,10 @@ export class RoomsFilterComponent implements OnInit {
 
     const bedTypeResp = await this._rooms.loadBedTypes()
     this.beds = bedTypeResp.map(bed => bed.name)
-  }
 
-  private setMinMaxPrice(rooms: Room[]): void {
-    const prices = rooms.map(room => room.price);
-    this.minPrice = Math.min(...prices)
-    this.maxPrice = Math.max(...prices)
+    const price = await this._rooms.loadPrice()
+    this.minPrice = Number(price.min)
+    this.maxPrice = Number(price.max)
   }
 
   public filter(): void {
