@@ -15,8 +15,8 @@ class RoomUploadController extends Controller
     {
         $this->authorize('uploadMedia', $room);
 
-        $media = array_map(function () {
-            $media = MediaUploader::fromSource()
+        $media = array_map(function ($image) {
+            $media = MediaUploader::fromSource($image)
                 ->useHashForFilename()
                 ->onDuplicateUpdate()
                 ->toDirectory('room/images')
