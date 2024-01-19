@@ -134,14 +134,13 @@ export interface Room {
   id: string
   name: string
   description: string
-  price: string
+  price: number
   beds: Bed[]
   images: string[]
   size: number
   guests: number
   rating: number
   amenities: Amenity[]
-  roomCount: number
 }
 
 export interface Bed {

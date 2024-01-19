@@ -15,11 +15,17 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
+  get authHeader(): HttpHeaders {
+    return new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    });
+  }
+
   get authStatus(): Observable<boolean> {
     return this.authStatusSubject.asObservable();
   }
 
-  get userRole(): string {
+  get role(): string {
     return 'admin'
   }
 
@@ -28,7 +34,7 @@ export class AuthService {
   }
 
   public isAdminRole(): boolean {
-    return this.isAuthenticated() && this.userRole == 'admin';
+    return this.isAuthenticated() && this.role == 'admin';
   }
 
   public saveRole(isAdmin: boolean): void {
@@ -44,12 +50,8 @@ export class AuthService {
     localStorage.removeItem(this.TOKEN_KEY_NAME);
     localStorage.removeItem(this.ROLE_KEY_NAME);
 
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.token}`
-    });
-
     return new Promise<void>((resolve, reject) => {
-      return this.http.post<any>(APP_CONFIG.LogoutEndpoint, {}, { headers })
+      return this.http.post<any>(APP_CONFIG.LogoutEndpoint, {}, { headers: this.authHeader })
         .subscribe({
           next: () => {
             localStorage.removeItem(this.TOKEN_KEY_NAME);

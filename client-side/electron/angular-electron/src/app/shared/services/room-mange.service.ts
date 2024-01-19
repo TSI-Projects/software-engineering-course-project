@@ -10,7 +10,7 @@ import { APP_CONFIG } from '../../../environments/environment';
 export class RoomManageService {
   constructor(
     private _http: HttpClient,
-    private _auth: AuthService
+    private _auth: AuthService,
   ) { }
 
 
@@ -54,6 +54,24 @@ export class RoomManageService {
     });
   }
 
+  public addMedia(files: File[], roomId: string): Promise<void> {
+    if (!this._auth.isAdminRole()) {
+      return Promise.reject(new Error("Permission denied"));
+    }
+
+    return new Promise<void>((resolve, reject) => {
+      this._http.post(`${APP_CONFIG.HotelRoomsEndpoint}/${roomId}/media/upload`, files, { headers: this._auth.authHeader })
+        .subscribe({
+          next: () => {
+            resolve();
+          },
+          error: () => {
+            reject(new Error("Failed to fetch rooms. Please try again later"));
+          },
+        });
+    });
+  }
+
   public addNewRoom(room: Room): Promise<RoomsResponse> {
     if (!this._auth.isAdminRole()) {
       return Promise.reject(new Error("Permission denied"));
@@ -68,7 +86,6 @@ export class RoomManageService {
       description: room.description,
       price: room.price,
       size: room.size,
-      room_count: room.roomCount,
       amenities: room.amenities,
       beds: room.beds
     }
@@ -100,7 +117,6 @@ export class RoomManageService {
       description: room.description,
       price: room.price,
       size: room.size,
-      room_count: room.roomCount,
       amenities: room.amenities,
       beds: room.beds
     }

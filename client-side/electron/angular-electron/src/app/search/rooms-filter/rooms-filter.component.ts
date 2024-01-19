@@ -32,7 +32,6 @@ export class RoomsFilterComponent implements OnInit {
     this.loadFilters()
   }
 
-
   private async loadFilters(): Promise<void> {
     const amenitiesResp = await this._rooms.loadAmenities()
     this.amenities = amenitiesResp.map(amenity => amenity.name)
@@ -42,7 +41,7 @@ export class RoomsFilterComponent implements OnInit {
   }
 
   private setMinMaxPrice(rooms: Room[]): void {
-    const prices = rooms.map(room => parseFloat(room.price));
+    const prices = rooms.map(room => room.price);
     this.minPrice = Math.min(...prices)
     this.maxPrice = Math.max(...prices)
   }
@@ -54,7 +53,7 @@ export class RoomsFilterComponent implements OnInit {
     }
 
     let rooms = this._rooms.rooms.filter(room => {
-      const roomPrice = parseFloat(room.price);
+      const roomPrice = room.price;
       const isPriceInRange = roomPrice >= this.minValuePriceRange && roomPrice <= this.maxValuePriceRange;
       return isPriceInRange
     })

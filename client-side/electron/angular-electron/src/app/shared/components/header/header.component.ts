@@ -44,13 +44,12 @@ export class HeaderComponent implements OnDestroy {
   }
 
   private renderMenu(isAuthenticated: boolean): void {
-    const role = this._auth.userRole;
-
     this.menuItems = [
       { label: 'Home', path: '/home', visible: true, isButton: false },
       { label: 'About us', path: '/home#about-us', visible: true, isButton: false },
       { label: 'Services', path: '/home#services', visible: true, isButton: false },
       { label: 'Our Rooms', path: '/home#our-rooms', visible: isAuthenticated, isButton: false },
+      { label: 'Manage Rooms', path: '/room-manage', visible: this._auth.isAdminRole(), isButton: false },
       { label: 'Sign In', path: '/login', visible: !isAuthenticated, isButton: true, class: 'sign-in-btn' },
       { label: 'Register', path: '/registration', visible: !isAuthenticated, isButton: true, class: 'reg-btn' },
       { label: 'Logout', path: '/logout', visible: isAuthenticated, isButton: true, class: 'sign-in-btn', action: async () => await this._auth.logout() }
