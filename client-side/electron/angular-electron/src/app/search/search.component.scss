@@ -75,7 +75,7 @@
                         h5 {
                             margin: 0 0 10px 0;
                         }
-                        
+
                         ::ng-deep .p-chip {
                             font-size: 12px;
                             padding: 0;
@@ -110,8 +110,8 @@
                                 margin: 0 15px;
                                 padding: 0;
                             }
-                            
-                            ::ng-deep .p-divider.p-divider-vertical:before  {
+
+                            ::ng-deep .p-divider.p-divider-vertical:before {
                                 border-left: 1px solid gray
                             }
                         }
@@ -133,7 +133,7 @@
                             line-height: 22px;
                             text-align: center;
                             height: 50px;
-                           width: 90%;
+                            width: 90%;
                             border-radius: 48px;
                             background: #c20808;
                             color: white;
@@ -208,7 +208,9 @@
         .search-btn {
             width: 100%;
             height: 100%;
-            background-color: red;
+            font-size: 1.5rem;
+            color: white;
+            background-color: #c20808;
         }
     }
 

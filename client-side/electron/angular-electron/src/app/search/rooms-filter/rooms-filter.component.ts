@@ -74,15 +74,27 @@ export class RoomsFilterComponent implements OnInit, OnDestroy {
       return
     }
 
-    this._rooms.updateFiltredRooms(this._rooms.rooms.filter(room => {
+    let rooms = this._rooms.rooms.filter(room => {
       const roomPrice = parseFloat(room.price);
-      const minRangePrice = this.minValuePriceRange;
-      const maxRangePrice = this.maxValuePriceRange;
-      const isPriceInRange = roomPrice >= minRangePrice && roomPrice <= maxRangePrice;
-      const hasSelectedBeds = room.beds.some(bed => this.selectedBedTypes.includes(bed.name));
-      const hasSelectedAmenities = room.amenities.some(amenity => this.selectedAmenities.includes(amenity.name));
-      return isPriceInRange || hasSelectedBeds || hasSelectedAmenities;
-    }));
+      const isPriceInRange = roomPrice >= this.minValuePriceRange && roomPrice <= this.maxValuePriceRange;
+      return isPriceInRange
+    })
+
+    if (this.selectedBedTypes.length > 0) {
+      rooms = rooms.filter(room => {
+        const hasSelectedBeds = room.beds.some(bed => this.selectedBedTypes.includes(bed.name));
+        return hasSelectedBeds
+      })
+    }
+
+    if (this.selectedAmenities.length > 0) {
+      rooms = rooms.filter(room => {
+        const hasSelectedAmenities = room.amenities.some(amenity => this.selectedAmenities.includes(amenity.name));
+        return hasSelectedAmenities
+      })
+    }
+
+    this._rooms.updateFiltredRooms(rooms)
   }
 
   public areFiltersNotSelected(): boolean {
