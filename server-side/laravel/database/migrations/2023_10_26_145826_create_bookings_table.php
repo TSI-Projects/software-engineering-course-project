@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('phone');
             $table->datetime('checkin_at');
             $table->datetime('checkout_at');
-            $table->unsignedTinyInteger('status');
             $table->timestamps();
         });
     }

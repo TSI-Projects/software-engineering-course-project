@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Enums\BookingStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,7 +26,6 @@ class Booking extends Model
     protected $casts = [
         'chekin_at' => 'datetime',
         'checkout_at' => 'datetime',
-        'status' => BookingStatus::class,
     ];
 
     public function room(): BelongsTo

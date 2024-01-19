@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Enums\BookingStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,7 +15,6 @@ class BookingFactory extends Factory
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'phone' => fake()->phoneNumber(),
-            'status' => fake()->randomElement(BookingStatus::cases()),
         ];
 
         if (random_int(1, 100) >= 50) {

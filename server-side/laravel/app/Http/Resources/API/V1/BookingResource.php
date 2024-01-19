@@ -14,7 +14,6 @@ class BookingResource extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'phone' => $this->phone,
-            'status' => $this->status,
             'checkin_at' => $this->checkin_at,
             'checkout_at' => $this->checkout_at,
             'updated_at' => $this->updated_at,

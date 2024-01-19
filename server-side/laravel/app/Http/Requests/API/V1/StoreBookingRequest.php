@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\API\V1;
 
-use App\Models\Enums\BookingStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Validator;
@@ -32,10 +31,6 @@ class StoreBookingRequest extends FormRequest
                 }
 
                 $exists = DB::table('bookings')
-                    ->whereIn('status', [
-                        BookingStatus::AWAITING_PAYMENT,
-                        BookingStatus::RESERVED,
-                    ])
                     ->where(static function ($query) use ($validated) {
                         $query->whereDate('checkin_at', '>=', $validated['checkin_at']);
                         $query->whereDate('checkout_at', '<=', $validated['checkout_at']);
