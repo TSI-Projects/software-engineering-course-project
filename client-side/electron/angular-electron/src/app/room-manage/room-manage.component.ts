@@ -64,8 +64,8 @@ export class RoomManageComponent implements OnInit {
     }
   }
 
-  async customUpload($event: FileUploadHandlerEvent, roomId: string) {
-    await this._roomManageSvc.addMedia($event.files, roomId)
+  async customUpload($event: FileUploadHandlerEvent, room: Room) {
+    await this._roomManageSvc.addMedia($event.files, room.id)
     this._messageService.add({ severity: 'info', summary: 'File Uploaded', detail: '' });
   }
 
@@ -98,44 +98,6 @@ export class RoomManageComponent implements OnInit {
 
   public deleteImage(room: Room, index: number) {
     room.images.splice(index, 1)
-  }
-
-  public addImage(room: Room, newUrl: string) {
-    if (!newUrl) {
-      return
-    }
-    room.images.push(newUrl);
-    this.newImageUrl = ''
-  }
-
-  public addAmenity(room: Room, amenityName: string): void {
-    if (!amenityName) {
-      return
-    }
-
-    room.amenities.push({
-      name: amenityName,
-      id: uuidv4(),
-      icon: '',
-    })
-    this.newAmenityName = ''
-  }
-
-  public deleteAmenity(room: Room, amenityId: string): void {
-    room.amenities = room.amenities.filter(amenity => amenity.id != amenityId);
-  }
-
-  public addNewBed(newRoom: Room): void {
-    newRoom.beds.push({
-      id: '',
-      name: '',
-      size: 0,
-      count: 0
-    })
-  }
-
-  public deleteBed(room: Room, index: number): void {
-    room.beds.splice(index, 1);
   }
 
   public isRoomDataValid(room: Room): boolean {

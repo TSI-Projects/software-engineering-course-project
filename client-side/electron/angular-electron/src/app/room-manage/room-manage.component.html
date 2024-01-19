@@ -164,7 +164,7 @@
                       [customUpload]="true"
                       [multiple]="true" 
                       [maxFileSize]="1000000"
-                      (uploadHandler)="customUpload($event, room.id)"
+                      (uploadHandler)="customUpload($event, room)"
                       accept=".jpg, .png">
                         <ng-template pTemplate="content">
                             <ul *ngIf="uploadedFiles.length">
