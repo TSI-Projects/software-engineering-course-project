@@ -160,7 +160,8 @@
                                 "type": "object",
                                 "properties": {
                                     "price": {
-                                        "type": "string"
+                                        "type": "number",
+                                        "format": "float"
                                     },
                                     "name": {
                                         "type": "string"
@@ -170,9 +171,6 @@
                                     },
                                     "size": {
                                         "type": "number"
-                                    },
-                                    "rating": {
-                                        "type": "integer"
                                     },
                                     "amenities": {
                                         "type": "array",
@@ -281,13 +279,7 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "adult_count": {
-                                        "type": "number"
-                                    },
-                                    "children_count": {
-                                        "type": "number"
-                                    },
-                                    "room_count": {
+                                    "guest_count": {
                                         "type": "number"
                                     },
                                     "order_by": {
@@ -299,7 +291,7 @@
                                             },
                                             "column": {
                                                 "type": "string",
-                                                "enum": ["rating"]
+                                                "enum": ["rating", "price"]
                                             }
                                         }
                                     },
@@ -809,21 +801,9 @@
                                         "type": "string",
                                         "format": "phone"
                                     },
-                                    "country_iso_code": {
-                                        "type": "string",
-                                        "format": "country-code"
-                                    },
                                     "room_id": {
                                         "type": "string",
                                         "format": "uuid"
-                                    },
-                                    "adult_count": {
-                                        "type": "number",
-                                        "format": "uint1"
-                                    },
-                                    "children_count": {
-                                        "type": "number",
-                                        "format": "uint1"
                                     },
                                     "checkin_at": {
                                         "type": "string",
@@ -1264,10 +1244,6 @@
                             "rating": {
                                 "type": "number",
                                 "format": "uint1"
-                            },
-                            "room_count": {
-                                "type": "number",
-                                "format": "uint1"
                             }
                         }
                     }
@@ -1367,25 +1343,12 @@
                     },
                     {
                         "properties": {
-                            "first_name": {
-                                "type": "string",
-                                "format": "text"
-                            },
-                            "last_name": {
-                                "type": "string",
-                                "format": "text"
-                            },
                             "email": {
                                 "type": "string",
                                 "format": "email"
                             },
-                            "phone": {
-                                "type": "string",
-                                "format": "phone"
-                            },
-                            "country_iso_code": {
-                                "type": "string",
-                                "format": "iso-code"
+                            "is_admin": {
+                                "type": "boolean"
                             }
                         }
                     }
