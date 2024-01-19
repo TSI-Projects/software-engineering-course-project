@@ -38,7 +38,7 @@ export class RoomManageService {
     }
 
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this._auth.getToken()}`
+      'Authorization': `Bearer ${this._auth.token}`
     });
 
     return new Promise<RoomsResponse>((resolve, reject) => {
@@ -60,7 +60,7 @@ export class RoomManageService {
     }
 
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this._auth.getToken()}`
+      'Authorization': `Bearer ${this._auth.token}`
     });
 
     const payload = {
@@ -92,7 +92,7 @@ export class RoomManageService {
     }
 
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this._auth.getToken()}`
+      'Authorization': `Bearer ${this._auth.token}`
     });
 
     const payload = {

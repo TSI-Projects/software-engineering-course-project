@@ -18,7 +18,7 @@ export class BookingServiceService {
     }
 
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this._auth.getToken()}`
+      'Authorization': `Bearer ${this._auth.token}`
     });
 
     return new Promise<BookingResponse>((resolve, reject) => {
@@ -35,7 +35,6 @@ export class BookingServiceService {
   }
 
 }
-
 
 interface BookingResponse {
   message: string

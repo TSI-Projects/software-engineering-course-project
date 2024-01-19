@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration-component',
@@ -20,7 +21,8 @@ export class RegistrationComponent {
 
   constructor(
     private _auth: AuthService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private _router: Router,
   ) { }
 
   private validateInputs(pass: string, confirmPass: string): ValidatorFn {
@@ -28,15 +30,17 @@ export class RegistrationComponent {
       const formGroup = control as FormGroup;
       const password = formGroup.controls[pass];
       const confirmPassword = formGroup.controls[confirmPass];
-  
+
       if (!password || !confirmPassword) {
         return null;
       }
-  
+
       const hasUpperCase = /[A-Z]+/.test(password.value);
       const hasLowerCase = /[a-z]+/.test(password.value);
-  
-      if (!hasUpperCase || !hasLowerCase) {
+      const hasNumber = /[0-9]+/.test(password.value);
+      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]+/.test(password.value);
+
+      if (!hasLowerCase || !hasNumber || !hasSpecialChar || !hasUpperCase) {
         password.setErrors({ passwordStrength: true });
       } else {
         if (password.errors && password.errors.passwordStrength) {
@@ -52,7 +56,7 @@ export class RegistrationComponent {
       } else {
         confirmPassword.setErrors(null);
       }
-  
+
       return null;
     };
   }
@@ -60,8 +64,12 @@ export class RegistrationComponent {
   public clickRegisterBtn(email: string, pass: string) {
     this._auth.register(email, pass)
       .subscribe(
-        res => console.log(res),
-        err => this.messageService.add({ severity: 'error', summary: 'Error', detail: `Something went wrong :( Please try again later!` })
+        res => {
+          this._auth.saveToken(res.accessToken)
+          this._auth.saveRole(res.is_admin)
+          this._router.navigate(['/home'])
+        },
+        err => this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error.message ?? `Something went wrong :( Please try again later!` })
       )
   }
 }

@@ -1,14 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { APP_CONFIG } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly REGISTER_URL: string = 'http://localhost/api/v1/auth/register';
-  private readonly LOGIN_URL: string = 'http://localhost/api/v1/auth/login';
-  private tokenKey: string = ''
+  private readonly TOKEN_KEY_NAME: string = 'auth_token';
+  private readonly ROLE_KEY_NAME: string = 'user_role';
   private authStatusSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
 
   constructor(
@@ -23,34 +23,54 @@ export class AuthService {
     return 'admin'
   }
 
+  get token(): string | null {
+    return localStorage.getItem(this.TOKEN_KEY_NAME);
+  }
+
   public isAdminRole(): boolean {
     return this.isAuthenticated() && this.userRole == 'admin';
   }
 
+  public saveRole(isAdmin: boolean): void {
+    localStorage.setItem(this.ROLE_KEY_NAME, isAdmin ? 'admin' : 'user');
+  }
+
   public saveToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+    localStorage.setItem(this.TOKEN_KEY_NAME, token);
     this.updateAuthStatus()
   }
 
-  public getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
-  }
+  public logout(): Promise<void> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    });
 
-  public logout(): void {
-    localStorage.removeItem(this.tokenKey);
-    this.updateAuthStatus()
+    return new Promise<void>((resolve, reject) => {
+      return this.http.post<any>(APP_CONFIG.LogoutEndpoint, {}, { headers })
+        .subscribe({
+          next: () => {
+            localStorage.removeItem(this.TOKEN_KEY_NAME);
+            localStorage.removeItem(this.ROLE_KEY_NAME);
+            this.updateAuthStatus()
+            resolve();
+          },
+          error: () => {
+            reject(new Error("Failed to logout"));
+          },
+        });
+    });
   }
 
   public isAuthenticated(): boolean {
-    return this.getToken() !== null;
+    return this.token !== null;
   }
 
   public register(email: string, password: string): Observable<Response> {
-    return this.http.post<any>(this.REGISTER_URL, { email, password });
+    return this.http.post<any>(APP_CONFIG.RegisterEndpoint, { email, password });
   }
 
   public login(email: string, password: string): Observable<Response> {
-    return this.http.post<any>(this.LOGIN_URL, { email, password });
+    return this.http.post<any>(APP_CONFIG.LoginEndpoint, { email, password });
   }
 
   private updateAuthStatus() {
@@ -59,6 +79,6 @@ export class AuthService {
 }
 
 export interface Response {
-  accessToken: string,
-  message: string
+  accessToken: string
+  is_admin: boolean
 }

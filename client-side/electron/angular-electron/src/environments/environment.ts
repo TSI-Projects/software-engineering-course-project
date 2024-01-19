@@ -8,4 +8,8 @@ export const APP_CONFIG = {
   DeleteRoomEndpoint: 'http://localhost/api/v1/rooms/delete',
   FilterHotelRoomsEndpoint: 'http://',
   BookRoomEndpoint: 'http://localhost/api/v1/bookings',
+
+  LoginEndpoint: 'http://localhost/api/v1/auth/login',
+  LogoutEndpoint: 'http://localhost/api/v1/auth/logout',
+  RegisterEndpoint: 'http://localhost/api/v1/auth/register',
 };

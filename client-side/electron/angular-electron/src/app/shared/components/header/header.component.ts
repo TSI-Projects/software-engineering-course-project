@@ -15,7 +15,7 @@ export class HeaderComponent implements OnDestroy {
 
   constructor(
     private _router: Router,
-    public _auth: AuthService,
+    private _auth: AuthService,
     private _viewportScroller: ViewportScroller,
     private _cdr: ChangeDetectorRef
   ) {
@@ -53,7 +53,7 @@ export class HeaderComponent implements OnDestroy {
       { label: 'Our Rooms', path: '/home#our-rooms', visible: isAuthenticated, isButton: false },
       { label: 'Sign In', path: '/login', visible: !isAuthenticated, isButton: true, class: 'sign-in-btn' },
       { label: 'Register', path: '/registration', visible: !isAuthenticated, isButton: true, class: 'reg-btn' },
-      { label: 'Logout', path: '/logout', visible: isAuthenticated, isButton: true, class: 'sign-in-btn', action: () => this._auth.logout() }
+      { label: 'Logout', path: '/logout', visible: isAuthenticated, isButton: true, class: 'sign-in-btn', action: async () => await this._auth.logout() }
     ];
   }
 }
