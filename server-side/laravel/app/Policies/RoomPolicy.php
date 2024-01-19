@@ -27,7 +27,7 @@ class RoomPolicy
         return false;
     }
 
-    public function updateMedia(User $user, Room $room): bool
+    public function uploadMedia(User $user, Room $room): bool
     {
         return false;
     }
