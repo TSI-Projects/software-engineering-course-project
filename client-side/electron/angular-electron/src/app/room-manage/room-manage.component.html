@@ -136,26 +136,6 @@
                     </p-multiSelect>
                 </section>
 
-                <div class="input-field">
-                    <label>Beds:</label>
-                    <p-multiSelect 
-                      [showToggleAll]="false" 
-                      [options]="beds" 
-                      [(ngModel)]="room.beds" 
-                      placeholder="Select Beds" 
-                      optionLabel="name">
-                        <ng-template let-bed pTemplate="item">
-                            <div class="beds-list">
-                                <div>Bed Type: {{ bed.name }}</div>
-                                <div>
-                                    <span>Bed Count: </span>
-                                    <input [(ngModel)]="bed.count">
-                                </div>
-                            </div>
-                        </ng-template>
-                    </p-multiSelect>
-                </div>
-
                 <section>
                     <h4>Images:</h4>
                     <p-fileUpload  
