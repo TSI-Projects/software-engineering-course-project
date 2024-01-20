@@ -3,11 +3,12 @@
     <div class="search-container">
         <div class="search">
             <p-calendar 
-                [(ngModel)]="rangeDates"
-                selectionMode="range"
-                placeholder="Check-in date - Check-out Date" 
-                [readonlyInput]="true" 
-                [minDate]="minDate">
+              [(ngModel)]="rangeDates" 
+              [numberOfMonths]="2"
+              selectionMode="range"
+              placeholder="Check-in date - Check-out Date" 
+              [readonlyInput]="true" 
+              [minDate]="minDate">
             </p-calendar>
 
             <button class="occupancy-btn" (click)="op.toggle($event)">

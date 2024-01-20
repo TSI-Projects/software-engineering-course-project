@@ -95,6 +95,30 @@ export class RoomsService {
     });
   }
 
+  public searchRooms(checkin: string, checkout: string, direction: string, column: string, guests: number): void {
+    const payload = {
+      guest_count: guests,
+      order_by: { 
+        direction,
+        column: column
+      },
+      checkin_at: checkin,
+      checkout_at: checkout
+    }
+
+    this._http.post<RoomsResponse>(APP_CONFIG.HotelRoomsEndpoint + '/filter', payload)
+      .pipe(
+        map(response => response.data),
+        catchError(() => {
+          this.handleResponseError()
+          return of(null)
+        }))
+      .subscribe(rooms => {
+        this.roomsSubject.next(rooms)
+        this.updateFiltredRooms(rooms)
+      });
+  }
+
 
   public updateFiltredRooms(rooms: Room[] | null) {
     this.filtredRoomsSubject.next(rooms)

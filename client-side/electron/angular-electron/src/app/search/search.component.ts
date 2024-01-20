@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Bed, Room, RoomResponse, RoomsService } from '../shared/services/rooms.service';
+import { Component } from '@angular/core';
+import { RoomsService } from '../shared/services/rooms.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,9 +15,7 @@ export class SearchComponent {
   public childrenCount: number = 0;
   public roomsCount: number = 0;
   public sortByArray: Item[];
-  public sortChoice: string | undefined;
-
-
+  public sortChoice: Item | undefined;
 
   public defaultImg = '../../assets/img/our_rooms_2.png'
 
@@ -29,13 +27,11 @@ export class SearchComponent {
     this.sortByArray = [
       { name: 'Rating' },
       { name: 'Price' },
-      { name: 'Review' }
     ]
   }
 
   public search(): void {
-
-
+    this._rooms.searchRooms(this.rangeDates![0].toISOString(), this.rangeDates![1].toISOString(), "asc", this.sortChoice?.name!.toLowerCase()!, this.childrenCount+ this.adultsCount)
   }
 
   public selectRoom(room_id: string): void {
