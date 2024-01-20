@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { RatingModule } from 'primeng/rating';
 import { SearchComponent } from './search.component';
-import { SearchRoutingModule } from './search-routing.module';
 import { CalendarModule } from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
@@ -24,7 +23,6 @@ import { SliderModule } from 'primeng/slider';
   imports: [
     CommonModule,
     SharedModule,
-    SearchRoutingModule,
     CalendarModule,
     BrowserAnimationsModule,
     OverlayPanelModule,
@@ -35,6 +33,9 @@ import { SliderModule } from 'primeng/slider';
     TooltipModule,
     RoomsFilterModule,
     SliderModule
+  ],
+  exports: [
+    SearchComponent
   ]
 })
 

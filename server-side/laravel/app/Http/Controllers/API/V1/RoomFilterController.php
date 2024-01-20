@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\V1\RoomFilterRequest;
 use App\Models\Bed;
+use App\Models\Booking;
 use App\Models\Room;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 
 class RoomFilterController extends Controller
 {
@@ -20,23 +22,29 @@ class RoomFilterController extends Controller
         };
 
         return Room::query()
-            ->distinct()
-            ->addSelect([
-                'max_guests' => Bed::query()
-                    ->selectRaw('sum(room_bed.count) * sum(beds.size)')
-                    ->join('room_bed', 'beds.id', 'room_bed.bed_id'),
-            ])
-            ->leftJoin('bookings', 'rooms.id', 'bookings.room_id')
-            ->where('max_guests', '<=', $validated['guest_count'])
-            ->where(function ($query) use ($request) {
+            ->from(function (QueryBuilder $query) {
+                return $query
+                    ->from((new Room())->getTable())
+                    ->addSelect([
+                        'rooms.',
+                        'max_guests' => Bed::query()
+                            ->selectRaw('sum(room_bed.count) sum(beds.size)')
+                            ->whereColumn('room_bed.room_id', 'rooms.id')
+                            ->join('room_bed', 'beds.id', 'room_bed.bed_id'),
+                    ]);
+            }, 'rooms')
+            ->whereNotIn('id', static function (QueryBuilder $query) use ($request) {
+                $checkinAt = $request->date('checkin_at')->toDateString();
                 $checkoutAt = $request->date('checkout_at')->toDateString();
-                $checkintAt = $request->date('checkin_at')->toDateString();
 
                 return $query
-                    ->where('checkin_at', '<=', $checkoutAt)
-                    ->where('checkout_at', '>=', $checkintAt);
+                    ->select('room_id')
+                    ->from((new Booking())->getTable())
+                    ->where('checkin_at', '<', $checkoutAt)
+                    ->where('checkout_at', '>', $checkinAt);
             })
+            ->where('max_guests', '<=', $validated['guest_count'])
             ->orderBy($orderBy, $validated['order_by']['direction'])
-            ->get('rooms.*');
+            ->get();
     }
 }
