@@ -12,7 +12,7 @@ import { DividerModule } from 'primeng/divider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatNativeDateModule, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -34,7 +34,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular
     MatNativeDateModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class RoomModule {}

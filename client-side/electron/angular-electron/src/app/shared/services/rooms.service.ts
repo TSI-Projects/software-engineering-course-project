@@ -184,6 +184,7 @@ export interface Room {
   guests: number
   rating: number
   amenities: Amenity[]
+  reserved_dates: ReservedDates[]
 }
 
 export interface Bed {
@@ -197,4 +198,9 @@ export interface Amenity {
   id: string
   name: string
   icon: string
+}
+
+export interface ReservedDates {
+  checkin_at: string
+  checkout_at: string
 }
