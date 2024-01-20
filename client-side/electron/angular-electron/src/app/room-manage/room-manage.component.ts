@@ -21,7 +21,8 @@ export class RoomManageComponent implements OnInit {
     images: [],
     size: 0,
     guests: 0,
-    rating: 0
+    rating: 0,
+    reserved_dates: []
   }
 
   public uploadedFiles: any[] = [];

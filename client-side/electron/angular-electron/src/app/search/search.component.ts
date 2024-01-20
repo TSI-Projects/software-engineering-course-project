@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Bed, Room, RoomResponse, RoomsService } from '../shared/services/rooms.service';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { RoomsService } from '../shared/services/rooms.service';
 
 @Component({
   selector: 'app-search',
@@ -15,33 +14,25 @@ export class SearchComponent {
   public childrenCount: number = 0;
   public roomsCount: number = 0;
   public sortByArray: Item[];
-  public sortChoice: string | undefined;
-
-
-
-  public defaultImg = '../../assets/img/our_rooms_2.png'
+  public sortChoice: Item | undefined;
 
   constructor(
     public _rooms: RoomsService,
-    private _router: Router
   ) {
     this.minDate = new Date()
     this.sortByArray = [
       { name: 'Rating' },
       { name: 'Price' },
-      { name: 'Review' }
     ]
   }
 
   public search(): void {
-
-
-  }
-
-  public selectRoom(room_id: string): void {
-    this._router.navigate(['/room'], {
-      queryParams: { room_id }
-    });
+    this._rooms.searchRooms(
+      this.rangeDates![0].toISOString(),
+      this.rangeDates![1].toISOString(), 
+      "asc", 
+      this.sortChoice?.name!.toLowerCase()!, 
+      this.childrenCount+ this.adultsCount)
   }
 
   public decrement(count: number): number {

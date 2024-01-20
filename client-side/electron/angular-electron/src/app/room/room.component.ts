@@ -56,6 +56,14 @@ export class RoomComponent implements OnInit {
     this.room = resp.data
   }
 
+  public dateFilter = (d: Date | null): boolean => {
+    if (!d) {
+      return false;
+    }
+    const day = d.getTime();
+    return !this.room?.reserved_dates.some(range => day >= new Date(range.checkin_at).getTime() && day <= new Date(range.checkout_at).getTime());
+  }
+
   public navigateToBookPage(): void {
     const date_from = this.dateRange.get('start')?.value as Date
     const date_to = this.dateRange.get('end')?.value as Date

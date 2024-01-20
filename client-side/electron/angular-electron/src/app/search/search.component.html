@@ -3,11 +3,12 @@
     <div class="search-container">
         <div class="search">
             <p-calendar 
-                [(ngModel)]="rangeDates"
-                selectionMode="range"
-                placeholder="Check-in date - Check-out Date" 
-                [readonlyInput]="true" 
-                [minDate]="minDate">
+              [(ngModel)]="rangeDates" 
+              [numberOfMonths]="2"
+              selectionMode="range"
+              placeholder="Check-in date - Check-out Date" 
+              [readonlyInput]="true" 
+              [minDate]="minDate">
             </p-calendar>
 
             <button class="occupancy-btn" (click)="op.toggle($event)">
@@ -57,40 +58,4 @@
             <button class="search-btn" (click)="search()">Search</button>
         </div>
     </div>
-
-    <div class="rooms-list-container">
-        <app-rooms-filter></app-rooms-filter>
-        <div class="rooms-container">
-            <div
-              class="room" 
-              *ngFor="let room of _rooms.filtredRooms$ | async">
-                <h4>{{room.name}}</h4>
-                <div class="room-card">
-                    <img [src]="defaultImg">
-                    <div class="details">
-                        <h5>Room at a glance</h5>
-                        <p-chip class="mb-10" label="Max. guests : {{room.beds.length * 2}} adults, 1 child "></p-chip>
-                        <div>
-                            <p-chip class="mb-10" label="Bed type : 2 twin or 1 queen"></p-chip> 
-                            <p-chip label="Size: 19m²"></p-chip>
-                        </div>
-                        <div class="amenities">
-                            <ng-container *ngFor="let amenitie of room.amenities; let last = last; let i = index">
-                                <i class="material-icons-outlined" pTooltip="{{amenitie.name}}" tooltipPosition="top" *ngIf="i < 4">{{amenitie.icon}}</i>
-                                <p-divider layout="vertical" *ngIf="i < 3 && !last"></p-divider>
-                            </ng-container>
-                        </div>
-                        <a (click)="selectRoom(room.id)">More details</a>
-                    </div>
-                    <div class="book">
-                        <div class="price">
-                            <span class="cash">EUR {{room.price || 'NaN'}}</span>
-                            <span class="gray">/night</span>
-                        </div>
-                        <button (click)="selectRoom(room.id)">BOOK NOW</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> 
 </section>

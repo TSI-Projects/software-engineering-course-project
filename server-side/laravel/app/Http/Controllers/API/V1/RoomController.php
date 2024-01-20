@@ -29,12 +29,8 @@ class RoomController extends Controller
 
         $bookings = Booking::query()
             ->where('room_id', $room->getKey())
-            ->whereDate('checkout_at', '<=', now())
+            ->whereDate('created_at', '<=', now()->addMonth(3))
             ->get();
-
-        $bookings = $bookings->filter(function (Booking $booking) use ($room) {
-            return $booking->room_id === $room->getKey();
-        });
 
         $reservedDates = $bookings->map(fn (Booking $booking) => [
             'checkin_at' => $booking->checkin_at,

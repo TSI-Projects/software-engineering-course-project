@@ -16,7 +16,7 @@ class StoreBookingRequest extends FormRequest
             'phone' => ['required', 'string'],
             'room_id' => ['required', 'uuid', 'exists:App\\Models\\Room,id'],
             'checkin_at' => ['required', 'date', 'after:today'],
-            'checkout_at' => ['required', 'date', 'before:+1 month', 'after:checkin_at'],
+            'checkout_at' => ['required', 'date', 'before:+3 month', 'after:checkin_at'],
         ];
     }
 

@@ -43,14 +43,13 @@
                     <form [formGroup]="dateRange">
                         <mat-form-field appearance="fill">
                             <mat-label>Choice the date</mat-label>
-                            <mat-date-range-input [rangePicker]="picker" [min]="todayDate">
+                            <mat-date-range-input [rangePicker]="picker" [min]="todayDate" [dateFilter]="dateFilter">
                               <input matStartDate formControlName="start">
                               <input matEndDate formControlName="end">
                             </mat-date-range-input>
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-date-range-picker #picker></mat-date-range-picker>
-                          </mat-form-field>
-
+                        </mat-form-field>
                         <div class="price">
                             <span class="discounted-price">€{{room.price}} / night</span>
                         </div>
