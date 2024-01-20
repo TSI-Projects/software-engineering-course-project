@@ -26,14 +26,14 @@ class RoomFilterController extends Controller
                 return $query
                     ->from((new Room())->getTable())
                     ->addSelect([
-                        'rooms.',
+                        'rooms.*',
                         'max_guests' => Bed::query()
-                            ->selectRaw('sum(room_bed.count) sum(beds.size)')
+                            ->selectRaw('sum(room_bed.count) * sum(beds.size)')
                             ->whereColumn('room_bed.room_id', 'rooms.id')
                             ->join('room_bed', 'beds.id', 'room_bed.bed_id'),
                     ]);
             }, 'rooms')
-            ->whereNotIn('id', static function (QueryBuilder $query) use ($request) {
+            ->whereNotIn('rooms.id', static function (QueryBuilder $query) use ($request) {
                 $checkinAt = $request->date('checkin_at')->toDateString();
                 $checkoutAt = $request->date('checkout_at')->toDateString();
 
