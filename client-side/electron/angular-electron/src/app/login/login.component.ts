@@ -29,7 +29,7 @@ export class LoginComponent {
         next: resp => {
           this._auth.saveToken(resp.accessToken)
           this._auth.saveRole(resp.is_admin)
-            this._router.navigate(['/home'])
+          this._router.navigate(['/home'])
         },
         error: () => this._messageService.add({
           severity: 'error',

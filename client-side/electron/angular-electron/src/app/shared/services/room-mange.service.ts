@@ -93,8 +93,8 @@ export class RoomManageService {
           next: (resp: RoomsResponse) => {
             resolve(resp);
           },
-          error: () => {
-            reject(new Error("Failed to fetch rooms. Please try again later"));
+          error: (err) => {
+            reject(new Error(err.error.message));
           },
         });
     });
@@ -120,8 +120,8 @@ export class RoomManageService {
           next: (resp: RoomsResponse) => {
             resolve(resp);
           },
-          error: () => {
-            reject(new Error("Failed to fetch rooms. Please try again later"));
+          error: (err) => {
+            reject(new Error(err.error.message));
           },
         });
     });

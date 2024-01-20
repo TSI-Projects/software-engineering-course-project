@@ -1,4 +1,4 @@
-import { Component, OnInit, Pipe, PipeTransform, ViewChild } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { RoomManageService } from '../shared/services/room-mange.service';
 import { MessageService } from 'primeng/api';
 import { Amenity, Bed, Room, RoomsService } from '../shared/services/rooms.service';
@@ -84,15 +84,12 @@ export class RoomManageComponent implements OnInit {
     }
   }
 
-  public deleteImage(room: Room, index: number) {
-    room.images.splice(index, 1)
-  }
-
   public isRoomDataValid(room: Room): boolean {
     return (
       room.name.trim() !== '' &&
       room.description.trim() !== '' &&
       room.price > 0 &&
+      room.beds.length > 0 &&
       room.beds.every(bed => bed.name.trim() !== '' && bed.size > 0 && bed.count > 0)
     );
   }
