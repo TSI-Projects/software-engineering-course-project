@@ -11,11 +11,11 @@
         }
     ],
     "paths": {
-        "/filter/price": {
+        "/rooms/filter/price": {
             "get": {
                 "operationId": "getMinMaxPrice",
                 "tags": [
-                    "filter"
+                    "rooms"
                 ],
                 "responses": {
                     "200": {
@@ -371,7 +371,7 @@
                 }
             }
         },
-        "/room/{room}": {
+        "/rooms/{room}": {
             "get": {
                 "operationId": "getRoom",
                 "tags": [
@@ -615,7 +615,7 @@
                 }
             }
         },
-        "/room/{room}/media/upload": {
+        "/rooms/{room}/media/upload": {
             "post": {
                 "operationId": "uploadRoomImage",
                 "tags": [
@@ -676,7 +676,7 @@
                 }
             }
         },
-        "/room/{room}/media": {
+        "/rooms/{room}/media": {
             "delete": {
                 "operationId": "deleteRoomImage",
                 "tags": [
@@ -1363,10 +1363,6 @@
         }
     },
     "tags": [
-        {
-            "name": "filter",
-            "description": "Everything about filters"
-        },
         {
             "name": "rooms",
             "description": "Everything about rooms"

@@ -6,11 +6,11 @@ use App\Http\Controllers\API\V1\Auth\LogoutController;
 use App\Http\Controllers\API\V1\Auth\RegisterController;
 use App\Http\Controllers\API\V1\BedController;
 use App\Http\Controllers\API\V1\BookingController;
-use App\Http\Controllers\API\V1\FilterPriceController;
 use App\Http\Controllers\API\V1\MeBookingController;
 use App\Http\Controllers\API\V1\MeController;
 use App\Http\Controllers\API\V1\RoomController;
 use App\Http\Controllers\API\V1\RoomFilterController;
+use App\Http\Controllers\API\V1\RoomFilterPriceController;
 use App\Http\Controllers\API\V1\RoomUploadController;
 use App\Http\Controllers\API\V1\UserBookingController;
 use Illuminate\Support\Facades\Route;
@@ -27,10 +27,6 @@ Route::prefix('/v1')->group(static function () {
         Route::get('/bookings', [MeBookingController::class, 'index'])->name('me.bookings');
     });
 
-    Route::prefix('/filter')->group(static function () {
-        Route::get('/price', [FilterPriceController::class, 'index'])->name('filter.price');
-    });
-
     Route::prefix('/beds')->group(static function () {
         Route::get('/', [BedController::class, 'index'])->name('beds.index');
     });
@@ -41,8 +37,12 @@ Route::prefix('/v1')->group(static function () {
 
     Route::prefix('/rooms')->group(static function () {
         Route::get('/', [RoomController::class, 'index'])->name('rooms.index');
-        Route::post('/filter', RoomFilterController::class)->name('rooms.filter');
         Route::get('/{room}', [RoomController::class, 'show'])->name('rooms.show');
+
+        Route::prefix('/filter')->group(static function () {
+            Route::post('/', RoomFilterController::class)->name('rooms.filter');
+            Route::get('/price', RoomFilterPriceController::class)->name('rooms.filter.price');
+        });
 
         Route::middleware(['auth:sanctum'])->group(static function () {
             Route::post('/{room}/media/upload', [RoomUploadController::class, 'store'])->name('rooms.media.store');

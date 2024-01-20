@@ -9,7 +9,7 @@ class StoreRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'price' => ['required', 'int', 'min:1'],
+            'price' => ['required', 'decimal:2', 'min:1'],
             'name' => ['required', 'string', 'min:8'],
             'description' => ['required', 'string', 'min:32'],
             'size' => ['required', 'int', 'min:1'],

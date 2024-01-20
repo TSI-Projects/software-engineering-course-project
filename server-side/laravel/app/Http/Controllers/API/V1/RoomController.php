@@ -80,7 +80,7 @@ class RoomController extends Controller
                 ->map(fn (array $amenity) => $amenity['id'])
                 ->all();
 
-            $room->amenities()->attach($amenities);
+            $room->amenities()->sync($amenities);
         }
 
         if (isset($validated['beds'])) {
@@ -90,7 +90,7 @@ class RoomController extends Controller
                 ])
                 ->all();
 
-            $room->beds()->attach($beds);
+            $room->beds()->sync($beds);
         }
 
         return RoomResource::make($room);
