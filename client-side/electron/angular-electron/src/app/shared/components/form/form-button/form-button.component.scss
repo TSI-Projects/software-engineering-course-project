@@ -1,0 +1,31 @@
+:host {
+  .button {
+    border-radius: 20px;
+    background: #fff;
+    border: none;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    font-family: Roboto;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 18px;
+    padding: 20px 100px;
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+    transition: background-color 150ms ease-in-out;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &:not(:disabled) {
+      &:hover {
+        background: rgb(235, 235, 235);
+      }
+    }
+
+    &:focus {
+      background: rgba(200, 200, 200);
+    }
+  }
+}
