@@ -18,6 +18,7 @@ class User extends Authenticatable
 
     protected $fillable = [
         'is_admin',
+        'email_verified_at',
         'email',
         'password',
     ];
@@ -30,6 +31,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_admin' => 'boolean',
     ];
 
     public function bookings(): HasMany
