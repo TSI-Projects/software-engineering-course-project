@@ -28,12 +28,13 @@ export class LoginComponent {
       this._auth.login(email!, password!).subscribe({
         next: resp => {
           this._auth.saveToken(resp.accessToken)
-          this._router.navigate(['/home'])
+          this._auth.saveRole(resp.is_admin)
+            this._router.navigate(['/home'])
         },
-        error: () => this._messageService.add({ 
-          severity: 'error', 
-          summary: 'Login Error', 
-          detail: 'Invalid email or password' 
+        error: () => this._messageService.add({
+          severity: 'error',
+          summary: 'Login Error',
+          detail: 'Invalid email or password'
         }),
       });
     }
