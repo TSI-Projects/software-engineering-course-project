@@ -2,34 +2,16 @@
     <app-header></app-header>
 
     <div class="login-container">
-        <form [formGroup]="loginForm" (ngSubmit)="clickSignInBtn()">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter email">
-                <div *ngIf="loginForm.controls.email.invalid && (loginForm.controls.email.dirty || loginForm.controls.email.touched)"
-                    class="alert alert-danger">
-                    <div *ngIf="loginForm.controls.email.errors?.required">
-                        Email is required.
-                    </div>
-                    <div *ngIf="loginForm.controls.email.errors?.email">
-                        Not a valid email.
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" formControlName="password" class="form-control"
-                    placeholder="Enter password">
-                <div *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)"
-                    class="alert alert-danger">
-                    <div *ngIf="loginForm.controls.password.errors?.required">
-                        Password is required.
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
+      <app-form-card [title]="'Sign In'">
+        <form class="content-container" content>
+          <app-form-input [myFormControl]="loginForm.controls.email" [placeholder]="'Email'" [type]="'email'" [errorMessage]="emailError"></app-form-input>
+          <app-form-input [myFormControl]="loginForm.controls.password" [placeholder]="'Password'" [type]="'password'" [errorMessage]="passwordError"></app-form-input>
+          <a class="form-link" href="#" (click)="$event.preventDefault()">Forgot password?</a>
         </form>
+        <div class="footer-container" footer>
+          <app-form-button [title]="'Sign In'" [disabled]="!loginForm.valid" (click)="clickSignInBtn()"></app-form-button>
+          <a class="form-link" href="#" (click)="$event.preventDefault()">Don't have an account?</a>
+        </div>
+      </app-form-card>
     </div>
 </section>

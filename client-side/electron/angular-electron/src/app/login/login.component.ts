@@ -21,6 +21,29 @@ export class LoginComponent {
     private _messageService: MessageService
   ) { }
 
+  get emailError(): string {
+    if (this.loginForm.controls.email.invalid && (this.loginForm.controls.email.dirty || this.loginForm.controls.email.touched)) {
+      if (this.loginForm.controls.email.errors?.required) {
+        return 'Email is required.';
+      }
+
+      if (this.loginForm.controls.email.errors?.email) {
+        return 'Not a valid email.';
+      }
+    }
+
+    return '';
+  }
+
+  get passwordError(): string {
+    if (this.loginForm.controls.password.invalid && (this.loginForm.controls.password.dirty || this.loginForm.controls.password.touched)) {
+      if (this.loginForm.controls.password.errors?.required) {
+        return 'Password is required.';
+      }
+    }
+    return '';
+  }
+
   public clickSignInBtn() {
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
