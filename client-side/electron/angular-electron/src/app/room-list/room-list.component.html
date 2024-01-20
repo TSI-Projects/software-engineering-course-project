@@ -7,7 +7,7 @@
           *ngFor="let room of _rooms.filtredRooms$ | async">
             <h4>{{room.name}}</h4>
             <div class="room-card">
-                <img [src]="defaultImg">
+                <img [src]="room.images[0]">
                 <div class="details">
                     <h5>Room at a glance</h5>
                     <p-chip class="mb-10" label="Max. guests : {{room.beds.length * 2}} adults, 1 child "></p-chip>
