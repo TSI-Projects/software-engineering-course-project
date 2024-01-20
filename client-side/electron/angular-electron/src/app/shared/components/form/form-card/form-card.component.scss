@@ -1,0 +1,73 @@
+:host {
+  .card {
+    display: flex;
+    padding: 40px;
+    width: 450px;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, .95);
+
+    .card-header {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      .card-title {
+        color: #000;
+        text-align: center;
+        font-family: Roboto;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 900;
+        line-height: normal;
+      }
+
+      .card-logo {
+        display: flex;
+        padding: 20px 22.62px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100px;
+        background: #000;
+        box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+
+        img {
+          display: block;
+          width: 40px;
+        }
+      }
+    }
+
+    .card-content {
+      padding: 40px 0;
+      width: 100%;
+
+      ::ng-deep {
+        & > * {
+          flex-grow: 1;
+        }
+      }
+    }
+
+    .card-footer {
+      width: 100%;
+    }
+  }
+
+  ::ng-deep {
+    .form-link {
+      margin-left: 8px;
+      color: #000;
+      font-family: Roboto;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      text-decoration-line: underline;
+    }
+  }
+}

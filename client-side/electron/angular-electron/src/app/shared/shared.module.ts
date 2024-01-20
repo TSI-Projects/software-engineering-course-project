@@ -5,19 +5,26 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { PageNotFoundComponent } from './components/';
 import { WebviewDirective } from './directives/';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { RoomsService } from './services/rooms.service';
 import { MessageService } from 'primeng/api';
 import { HttpClientModule } from '@angular/common/http';
 import { MessagesModule } from 'primeng/messages';
 import { AuthService } from './services/auth.service';
+import { FormInputComponent } from './components/form/form-input/form-input.component';
+import { FormButtonComponent } from './components/form/form-button/form-button.component';
+import { FormCardComponent } from './components/form/form-card/form-card.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
     PageNotFoundComponent,
     HeaderComponent,
-    WebviewDirective
+    WebviewDirective,
+    FormInputComponent,
+    FormButtonComponent,
+    FormCardComponent,
   ],
   providers: [
     RoomsService,
@@ -30,7 +37,17 @@ import { AuthService } from './services/auth.service';
     FormsModule,
     MessagesModule,
     HttpClientModule,
+    BrowserModule,
+    ReactiveFormsModule,
   ],
-  exports: [TranslateModule, WebviewDirective, FormsModule, HeaderComponent]
+  exports: [
+    TranslateModule,
+    WebviewDirective,
+    FormsModule,
+    HeaderComponent,
+    FormInputComponent,
+    FormButtonComponent,
+    FormCardComponent,
+  ]
 })
 export class SharedModule { }

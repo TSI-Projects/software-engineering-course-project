@@ -1,63 +1,16 @@
 <section>
   <app-header></app-header>
-  <div class="reg-container">
-    <form [formGroup]="registrationForm"
-      (ngSubmit)="clickRegisterBtn(registrationForm.get('email')?.value!.toString(), registrationForm.get('password')?.value!.toString())">
-
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" formControlName="email" placeholder="Enter Email">
-
-        <div *ngIf="registrationForm.controls.email.touched && registrationForm.controls.email.errors"
-          class="alert alert-danger">
-          <div *ngIf="registrationForm.controls.email.errors?.required">
-            Email is required.
-          </div>
-          <div *ngIf="registrationForm.controls.email.errors?.email">
-            Please enter a valid email address.
-          </div>
-        </div>
+  <div class="registration-container">
+    <app-form-card [title]="'Sign Up'">
+      <form class="content-container" content>
+        <app-form-input [myFormControl]="registrationForm.controls.email" [placeholder]="'Email'" [type]="'email'" [errorMessage]="emailError"></app-form-input>
+        <app-form-input [myFormControl]="registrationForm.controls.password" [placeholder]="'Password'" [type]="'password'" [errorMessage]="passwordError"></app-form-input>
+        <app-form-input [myFormControl]="registrationForm.controls.confirmPassword" [placeholder]="'Confirm password'" [type]="'password'" [errorMessage]="confirmPasswordError"></app-form-input>
+      </form>
+      <div class="footer-container" footer>
+        <app-form-button [title]="'Sign Up'" [disabled]="!registrationForm.valid" (click)="clickRegisterBtn()"></app-form-button>
+        <a class="form-link" href="#" (click)="$event.preventDefault()">Don't have an account?</a>
       </div>
-
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" formControlName="password" placeholder="Enter Password">
-
-        <div *ngIf="registrationForm.controls.password.touched && registrationForm.controls.password.errors"
-          class="alert alert-danger">
-          <div *ngIf="registrationForm.controls.password.errors?.required">
-            Password is required.
-          </div>
-          <div *ngIf="registrationForm.controls.password.errors?.minlength">
-            Password must be at least {{ registrationForm.controls.password.errors.minlength.requiredLength }}
-            characters long.
-          </div>
-          <div *ngIf="registrationForm.controls.password.errors?.passwordStrength">
-            Your password must contain lowercase and uppercase letters, numbers, and special symbols.
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" id="confirmPassword" formControlName="confirmPassword"
-          placeholder="Enter Confirm Password">
-
-        <div
-          *ngIf="registrationForm.controls.confirmPassword.touched && registrationForm.controls.confirmPassword.errors"
-          class="alert alert-danger">
-          <div *ngIf="registrationForm.controls.confirmPassword.errors?.required">
-            Confirming password is required.
-          </div>
-          <div *ngIf="registrationForm.controls.confirmPassword.errors?.confirmPasswordMismatch">
-            Passwords must match.
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <button type="submit" [disabled]="!registrationForm.valid">Register</button>
-      </div>
-    </form>
+    </app-form-card>
   </div>
 </section>
