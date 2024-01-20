@@ -25,7 +25,8 @@ class Room extends Model
     ];
 
     protected $casts = [
-        "price" => "decimal:2"
+        'rating' => 'decimal:2',
+        'price' => 'decimal:2',
     ];
 
     public static function booted()
