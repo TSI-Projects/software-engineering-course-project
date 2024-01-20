@@ -2,7 +2,6 @@ import { Component, OnInit, Pipe, PipeTransform, ViewChild } from '@angular/core
 import { RoomManageService } from '../shared/services/room-mange.service';
 import { MessageService } from 'primeng/api';
 import { Amenity, Bed, Room, RoomsService } from '../shared/services/rooms.service';
-import { v4 as uuidv4 } from 'uuid';
 import { FileUploadHandlerEvent } from 'primeng/fileupload';
 import { AuthService } from '../shared/services/auth.service';
 
@@ -32,18 +31,7 @@ export class RoomManageComponent implements OnInit {
   public newImageUrl: string = '';
   public newRoom: Room = this.emptyRoom
   public amenities: Amenity[] = [];
-  public beds: Bed[] = [{
-    id: 'asdasd',
-    name: 'Hello world',
-    size: 2,
-    count: 0
-  },
-  {
-    id: 'asasddasd',
-    name: 'Hello world',
-    size: 2,
-    count: 0
-  }];
+  public beds: Bed[] = []
 
 
   constructor(

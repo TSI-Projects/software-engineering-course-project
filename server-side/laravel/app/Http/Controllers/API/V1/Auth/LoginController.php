@@ -28,7 +28,7 @@ class LoginController extends Controller
             abort(403);
         }
 
-        $accessToken = $this->createToken($user);
+        $accessToken = $this->createToken($user, true);
 
         return [
             'accessToken' => $accessToken->plainTextToken,

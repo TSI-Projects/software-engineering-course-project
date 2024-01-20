@@ -83,8 +83,8 @@ export class RoomManageService {
       description: room.description,
       price: room.price,
       size: room.size,
-      amenities: room.amenities,
-      beds: room.beds
+      amenities: room.amenities.map(amenity => ({ id: amenity.id })),
+      beds: room.beds.map(bed => ({ id: bed.id, count: bed.count }))
     }
 
     return new Promise<RoomsResponse>((resolve, reject) => {

@@ -24,6 +24,10 @@ class Room extends Model
         'rating',
     ];
 
+    protected $casts = [
+        "price" => "decimal:2"
+    ];
+
     public static function booted()
     {
         static::observe(RoomObserver::class);
