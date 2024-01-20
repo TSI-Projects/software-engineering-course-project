@@ -29,6 +29,10 @@ class RoomSeeder extends Seeder
 
         $this->attachMedia([
             app()->databasePath('/seeders/images/superior1.jfif'),
+            app()->databasePath('/seeders/images/superior1.jfif'),
+            app()->databasePath('/seeders/images/superior1.jfif'),
+            app()->databasePath('/seeders/images/superior2.jfif'),
+            app()->databasePath('/seeders/images/superior2.jfif'),
             app()->databasePath('/seeders/images/superior2.jfif'),
         ], $room);
 
@@ -58,6 +62,10 @@ class RoomSeeder extends Seeder
 
         $this->attachMedia([
             app()->databasePath('/seeders/images/standart1.jfif'),
+            app()->databasePath('/seeders/images/standart1.jfif'),
+            app()->databasePath('/seeders/images/standart1.jfif'),
+            app()->databasePath('/seeders/images/standart2.jfif'),
+            app()->databasePath('/seeders/images/standart2.jfif'),
             app()->databasePath('/seeders/images/standart2.jfif'),
         ], $room);
 
@@ -86,6 +94,10 @@ class RoomSeeder extends Seeder
 
         $this->attachMedia([
             app()->databasePath('/seeders/images/luxe1.jfif'),
+            app()->databasePath('/seeders/images/luxe1.jfif'),
+            app()->databasePath('/seeders/images/luxe1.jfif'),
+            app()->databasePath('/seeders/images/luxe2.jfif'),
+            app()->databasePath('/seeders/images/luxe2.jfif'),
             app()->databasePath('/seeders/images/luxe2.jfif'),
         ], $room);
 

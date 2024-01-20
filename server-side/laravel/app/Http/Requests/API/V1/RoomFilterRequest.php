@@ -13,8 +13,8 @@ class RoomFilterRequest extends FormRequest
             'checkout_at' => ['required', 'date', 'before:+1 month', 'after:checkin_at'],
             'guest_count' => ['required', 'int'],
             'order_by' => ['required', 'array:direction,column'],
-            'order_by.direction' => ['required', 'string', 'in:asc,desc'],
-            'order_by.column' => ['required', 'string', 'in:rating,price'],
+            'order_by.direction' => ['nullable', 'string', 'in:asc,desc'],
+            'order_by.column' => ['nullable', 'string', 'in:rating,price'],
         ];
     }
 }

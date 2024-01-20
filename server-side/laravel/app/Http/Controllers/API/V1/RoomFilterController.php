@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\V1\RoomFilterRequest;
+use App\Http\Resources\API\V1\RoomResource;
 use App\Models\Bed;
 use App\Models\Booking;
 use App\Models\Room;
@@ -15,13 +16,13 @@ class RoomFilterController extends Controller
     {
         $validated = $request->validated();
 
-        $orderBy = match ($validated['order_by']['column']) {
+        $orderBy = match ($validated['order_by']['column'] ?? null) {
             'rating' => 'rooms.rating',
             'price' => 'rooms.price',
             default => 'id'
         };
 
-        return Room::query()
+        $rooms = Room::query()
             ->from(function (QueryBuilder $query) {
                 return $query
                     ->from((new Room())->getTable())
@@ -44,7 +45,12 @@ class RoomFilterController extends Controller
                     ->where('checkout_at', '>', $checkinAt);
             })
             ->where('max_guests', '<=', $validated['guest_count'])
-            ->orderBy($orderBy, $validated['order_by']['direction'])
+            ->orderBy($orderBy, $validated['order_by']['direction'] ?? 'asc')
             ->get();
+
+        $rooms->loadMedia(['image']);
+        $rooms->load(['beds', 'amenities']);
+
+        return RoomResource::collection($rooms);
     }
 }
