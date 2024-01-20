@@ -1,6 +1,19 @@
 <section>
   <app-header></app-header>
-  <div class="reg-container">
+  <div class="registration-container">
+    <app-form-card [title]="'Sign Up'">
+      <form class="content-container" content>
+        <app-form-input [myFormControl]="registrationForm.controls.email" [placeholder]="'Email'" [type]="'email'" [errorMessage]="emailError"></app-form-input>
+        <app-form-input [myFormControl]="registrationForm.controls.password" [placeholder]="'Password'" [type]="'password'" [errorMessage]="passwordError"></app-form-input>
+        <app-form-input [myFormControl]="registrationForm.controls.confirmPassword" [placeholder]="'Confirm password'" [type]="'password'" [errorMessage]="confirmPasswordError"></app-form-input>
+      </form>
+      <div class="footer-container" footer>
+        <app-form-button [title]="'Sign Up'" [disabled]="!registrationForm.valid" (click)="clickRegisterBtn()"></app-form-button>
+        <a class="form-link" href="#" (click)="$event.preventDefault()">Don't have an account?</a>
+      </div>
+    </app-form-card>
+  </div>
+  <!-- <div class="reg-container">
     <form [formGroup]="registrationForm"
       (ngSubmit)="clickRegisterBtn(registrationForm.get('email')?.value!.toString(), registrationForm.get('password')?.value!.toString())">
 
@@ -59,5 +72,5 @@
         <button type="submit" [disabled]="!registrationForm.valid">Register</button>
       </div>
     </form>
-  </div>
+  </div> -->
 </section>

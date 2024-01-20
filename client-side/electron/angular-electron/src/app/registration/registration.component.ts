@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent {
-
   registrationForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -24,6 +23,52 @@ export class RegistrationComponent {
     private messageService: MessageService,
     private _router: Router,
   ) { }
+
+  get emailError(): string {
+    if (this.registrationForm.controls.email.touched && this.registrationForm.controls.email.errors) {
+      if (this.registrationForm.controls.email.errors?.required) {
+        return 'Email is required.';
+      }
+
+      if (this.registrationForm.controls.email.errors?.email) {
+        return 'Please enter a valid email address.';
+      }
+    }
+
+    return '';
+  }
+
+  get passwordError(): string {
+    if (this.registrationForm.controls.password.touched && this.registrationForm.controls.password.errors) {
+      if (this.registrationForm.controls.password.errors?.required) {
+        return 'Password is required.';
+      }
+
+      if (this.registrationForm.controls.password.errors?.minlength) {
+        return `Password must be at least ${this.registrationForm.controls.password.errors.minlength.requiredLength}`;
+      }
+
+      if (this.registrationForm.controls.password.errors?.passwordStrength) {
+        return 'Your password must contain lowercase and uppercase letters, numbers, and special symbols.';
+      }
+    }
+
+    return '';
+  }
+
+  get confirmPasswordError(): string {
+    if (this.registrationForm.controls.confirmPassword.touched && this.registrationForm.controls.confirmPassword.errors) {
+      if (this.registrationForm.controls.confirmPassword.errors?.required) {
+        return 'Confirming password is required.';
+      }
+
+      if (this.registrationForm.controls.confirmPassword.errors?.confirmPasswordMismatch) {
+        return 'Passwords must match.';
+      }
+    }
+
+    return '';
+  }
 
   private validateInputs(pass: string, confirmPass: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -61,8 +106,11 @@ export class RegistrationComponent {
     };
   }
 
-  public clickRegisterBtn(email: string, pass: string) {
-    this._auth.register(email, pass)
+  public clickRegisterBtn() {
+    const email = this.registrationForm.get('email')?.value ?? '';
+    const password = this.registrationForm.get('password')?.value ?? '';
+
+    this._auth.register(email, password)
       .subscribe(
         res => {
           this._auth.saveToken(res.accessToken)

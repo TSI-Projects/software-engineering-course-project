@@ -1,16 +1,4 @@
 :host {
-  $form-background-color: #f8f8f8;
-  $form-text-color: #333;
-  $error-text-color: #d9534f;
-  $button-background-color: #5cb85c;
-  $button-text-color: #fff;
-  $button-disabled-background-color: #ccc;
-  $border-color: #ddd;
-  $input-border-radius: 4px;
-  $form-padding: 20px;
-  $label-spacing: 5px;
-  $max-form-width: 400px;
-
   section {
     display: flex;
     flex-direction: column;
@@ -23,94 +11,25 @@
     background-repeat: no-repeat;
     background-size: cover;
 
-    .reg-container {
+    .registration-container {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 100%;
       height: 100%;
 
-      form {
-        background-color: $form-background-color;
-        padding: $form-padding;
-        border-radius: $input-border-radius;
-        width: 100%;
-        max-width: $max-form-width;
-        background: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+      .content-container {
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
+      }
 
-        .form-group {
-          display: flex;
-          flex-direction: column;
-          gap: 5px;
-        }
-
-        label {
-          font-size: 16px;
-          display: block;
-          margin-bottom: $label-spacing;
-          color: white;
-        }
-
-        input[type="email"],
-        input[type="password"] {
-          width: 100%;
-          padding: 10px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-
-          &:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
-          }
-        }
-
-        .alert.alert-danger {
-          color: #721c24;
-          background-color: #f8d7da;
-          border-color: #f5c6cb;
-          padding: 5px;
-          border-radius: 4px;
-          font-size: 0.85rem;
-        }
-
-        button {
-          width: 100%;
-          padding: 10px;
-          border: none;
-          border-radius: $input-border-radius;
-          background-color: $button-background-color;
-          color: $button-text-color;
-          background-color: rgb(285,184, 54);
-          font-size: 1em;
-          cursor: pointer;
-          transition: background-color 0.3s;
-
-          &:hover {
-            background-color: darken(rgb(285,184, 54), 10%);
-          }
-
-          &:disabled {
-            background-color: $button-disabled-background-color;
-            cursor: default;
-          }
-        }
+      .footer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
       }
     }
   }
-
-  @media (max-width: 480px) {
-    section {
-      padding: 10px;
-    }
-
-    section form {
-      padding: 15px;
-    }
-  }
-
 }
