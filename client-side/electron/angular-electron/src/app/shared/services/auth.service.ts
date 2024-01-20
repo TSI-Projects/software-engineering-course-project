@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   get role(): string {
-    return 'admin'
+    return localStorage.getItem(this.ROLE_KEY_NAME) ?? '';
   }
 
   get token(): string | null {
