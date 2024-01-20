@@ -124,17 +124,6 @@ export class RoomsService {
     this.filtredRoomsSubject.next(rooms)
   }
 
-  public async getRoom(id: string): Promise<Room | null> {
-    try {
-      const roomData$ = this._http.get<RoomResponse>(`${APP_CONFIG.HotelRoomEndpoint}/${id}`, { params: { include_unavailable_dates: true } })
-      const response = await lastValueFrom(roomData$)
-      return response.data
-    } catch {
-      this.handleResponseError()
-      return null
-    }
-  }
-
   private handleResponseError() {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong :( Please try again later!' })
   }
