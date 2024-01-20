@@ -1,0 +1,25 @@
+:host {
+  .input {
+    display: flex;
+    padding: 16px;
+    align-items: center;
+    width: 100%;
+    border-radius: 10px;
+    background: rgb(255, 255, 255);
+    outline: none;
+    border:none;
+    box-shadow: none;
+    transition: background-color 150ms ease-in-out;
+
+    &:hover {
+      background: rgb(235, 235, 235);
+    }
+  }
+
+  .input-error {
+    font-size: 14px;
+    margin-top: 8px;
+    margin-left: 8px;
+    color: red;
+  }
+}
