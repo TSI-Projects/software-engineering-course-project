@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Room, RoomsService, Bed } from '../shared/services/rooms.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-room',
@@ -26,6 +27,28 @@ export class RoomComponent implements OnInit {
     this.dateRange.setValue({ start: this.todayDate, end: tomorrow });
   }
 
+  get freeCancellationDate(): string {
+    const startDate = (this.dateRange.get('start')?.value ?? new Date()) as Date;
+    const momentDate = moment(startDate)
+    return `${momentDate.format('MMMM')} ${momentDate.format('DD')}, ${momentDate.format('YYYY')}`
+  }
+
+  get guestCount(): number {
+    return this.room?.beds.reduce((bedsCount: number, bed: Bed) => {
+      return bedsCount + bed.count * bed.size;
+    }, 0) ?? 0;
+  }
+
+  get bedsCount(): number {
+    return this.room?.beds.reduce((bedsCount: number, bed: Bed) => {
+      return bedsCount + bed.count;
+    }, 0) ?? 0;
+  }
+
+  get rating(): string {
+    return Number(this.room?.rating).toFixed(2)
+  }
+
   public async ngOnInit(): Promise<void> {
     const roomId = this._activatedRoute.snapshot.queryParams['room_id'];
 
@@ -48,11 +71,5 @@ export class RoomComponent implements OnInit {
         room_rating: this.room?.rating
       }
     });
-  }
-
-  get bedsCount(): number {
-    return this.room?.beds.reduce((bedsCount: number, bed: Bed) => {
-      return bedsCount + bed.count;
-    }, 0) ?? 0;
   }
 }

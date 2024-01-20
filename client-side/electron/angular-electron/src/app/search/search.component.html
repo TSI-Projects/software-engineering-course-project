@@ -54,7 +54,7 @@
               optionLabel="name">
             </p-dropdown>
 
-            <button class="search-btn" (click)="search()"></button>
+            <button class="search-btn" (click)="search()">Search</button>
         </div>
     </div>
 
@@ -69,15 +69,15 @@
                     <img [src]="defaultImg">
                     <div class="details">
                         <h5>Room at a glance</h5>
-                        <p-chip label="Max. guests : {{room.beds.length * 2}} adults, 1 child "></p-chip>
+                        <p-chip class="mb-10" label="Max. guests : {{room.beds.length * 2}} adults, 1 child "></p-chip>
                         <div>
-                            <p-chip  class="mr-10" label="Bed type : 2 twin or 1 queen"></p-chip> 
+                            <p-chip class="mb-10" label="Bed type : 2 twin or 1 queen"></p-chip> 
                             <p-chip label="Size: 19m²"></p-chip>
                         </div>
                         <div class="amenities">
-                            <ng-container *ngFor="let amenitie of room.amenities ; index as i ">
-                                <i class="material-icons-outlined" pTooltip="{{amenitie.name}}" tooltipPosition="top" >{{amenitie.icon || 'desktop_windows'}}</i>
-                                <p-divider *ngIf="room.amenities.length-1 == i && i > 0" layout="vertical"></p-divider>
+                            <ng-container *ngFor="let amenitie of room.amenities; let last = last; let i = index">
+                                <i class="material-icons-outlined" pTooltip="{{amenitie.name}}" tooltipPosition="top" *ngIf="i < 4">{{amenitie.icon}}</i>
+                                <p-divider layout="vertical" *ngIf="i < 3 && !last"></p-divider>
                             </ng-container>
                         </div>
                         <a (click)="selectRoom(room.id)">More details</a>

@@ -19,6 +19,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    RouterModule
   ]
 })
 

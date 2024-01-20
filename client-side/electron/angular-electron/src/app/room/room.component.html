@@ -13,10 +13,10 @@
             <div class="hotel-image-info">
                 <div>
                     <h2>Gaming Hotel, Riga</h2>
-                    <p>{{room.guests}} guests · {{room.size}} m2 · {{bedsCount}} beds </p>
+                    <p>{{guestCount}} guests · {{bedsCount}} beds · {{room.size}} m2  </p>
                     <p>
                         <i class="pi pi-star-fill"></i>
-                        <span> {{room.rating}}.51 · 18 reviews </span>
+                        <span> {{rating}} · 18 reviews </span>
                     </p>
                 </div>
                 <p-divider></p-divider>
@@ -42,10 +42,10 @@
 
                     <form [formGroup]="dateRange">
                         <mat-form-field appearance="fill">
-                            <mat-label>Выберите даты</mat-label>
+                            <mat-label>Choice the date</mat-label>
                             <mat-date-range-input [rangePicker]="picker" [min]="todayDate">
-                              <input matStartDate formControlName="start"  placeholder="Начальная дата">
-                              <input matEndDate formControlName="end" placeholder="Конечная дата">
+                              <input matStartDate formControlName="start">
+                              <input matEndDate formControlName="end">
                             </mat-date-range-input>
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-date-range-picker #picker></mat-date-range-picker>
@@ -63,7 +63,7 @@
                     <h3>Flexible Payment Terms</h3>
                     <p><i class="pi pi-check-circle"></i> Participant discount applied!</p>
                     <p><i class="pi pi-check-circle"></i> Pay at arrival</p>
-                    <p><i class="pi pi-check-circle"></i> Free cancellation until January 17, 2024</p>
+                    <p><i class="pi pi-check-circle"></i> Free cancellation until {{freeCancellationDate}}</p>
                     <p><i class="pi pi-check-circle"></i> Pay by card</p>
                 </div>
             </div>

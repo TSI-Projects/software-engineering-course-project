@@ -58,6 +58,7 @@
                     flex-direction: row;
 
                     .details {
+                        width: 100%;
                         display: flex;
                         flex-direction: column;
                         margin-left: 20px;
@@ -77,13 +78,17 @@
 
                         ::ng-deep .p-chip {
                             font-size: 12px;
-                            margin-bottom: 10px;
                             padding: 0;
                         }
 
                         ::ng-deep .p-chip .p-chip-text {
                             line-height: 1.5;
                             margin: 4px 8px
+                        }
+
+                        .mb-10 {
+                            margin-bottom: 10px;
+                            display: block;
                         }
 
                         .mr-10 {
@@ -105,15 +110,19 @@
                                 margin: 0 15px;
                                 padding: 0;
                             }
-                            
-                            ::ng-deep .p-divider.p-divider-vertical:before  {
+
+                            ::ng-deep .p-divider.p-divider-vertical:before {
                                 border-left: 1px solid gray
                             }
                         }
                     }
 
                     .book {
-                        margin: auto 0 0 auto;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        align-items: flex-end;
+                        width: 100%;
 
 
                         button {
@@ -124,7 +133,7 @@
                             line-height: 22px;
                             text-align: center;
                             height: 50px;
-                            width: 220px;
+                            width: 90%;
                             border-radius: 48px;
                             background: #c20808;
                             color: white;
@@ -199,7 +208,9 @@
         .search-btn {
             width: 100%;
             height: 100%;
-            background-color: red;
+            font-size: 1.5rem;
+            color: white;
+            background-color: #c20808;
         }
     }
 

@@ -17,6 +17,7 @@
         img {
             width: 4rem;
             height: 5rem;
+            cursor: pointer;
         }
 
         ul {
@@ -30,6 +31,16 @@
 
         li {
             padding-right: 50px;
+            cursor: pointer;
+
+            a {
+                transition: color 0.3s ease, transform 0.3s ease;
+            }
+
+            a:hover {
+                color: rgb(238, 59, 187);
+                transform: scale(1.1)
+            }
         }
 
         .buttons {
@@ -42,6 +53,12 @@
                 font-family: Roboto;
                 height: 2.5rem;
                 font-size: 1rem;
+                transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.05);
+                    border-color: rgb(238, 59, 187);
+                }
             }
 
             .sign-in-btn {

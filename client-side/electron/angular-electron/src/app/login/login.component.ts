@@ -30,7 +30,7 @@ export class LoginComponent {
           this._auth.saveToken(resp.accessToken)
           this._router.navigate(['/home'])
         },
-        error: err => this._messageService.add({ 
+        error: () => this._messageService.add({ 
           severity: 'error', 
           summary: 'Login Error', 
           detail: 'Invalid email or password' 

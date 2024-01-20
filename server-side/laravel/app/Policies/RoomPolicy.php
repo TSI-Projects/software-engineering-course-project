@@ -12,7 +12,7 @@ class RoomPolicy
         return $user->is_admin ? true : null;
     }
 
-    public function store(User $user, Room $room): bool
+    public function store(User $user): bool
     {
         return false;
     }

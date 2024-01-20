@@ -22,6 +22,13 @@ button {
   
 }
 
+@font-face {
+  font-family: 'Minecraft';
+  src: url('assets/fonts/minecraft_font.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "~primeicons/primeicons.css";

@@ -14,6 +14,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { JoinAmenitiesPipe, RoomManageComponent } from './room-manage.component';
 import { SliderModule } from 'primeng/slider';
 import { CardModule } from 'primeng/card';
+import { FileUploadModule } from 'primeng/fileupload';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { CardModule } from 'primeng/card';
     DividerModule,
     TooltipModule,
     SliderModule,
-    CardModule
+    CardModule,
+    FileUploadModule,
+    MultiSelectModule
   ]
 })
 

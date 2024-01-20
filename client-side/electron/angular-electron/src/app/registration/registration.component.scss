@@ -11,13 +11,17 @@
   $label-spacing: 5px;
   $max-form-width: 400px;
 
-  .main {
+  section {
     display: flex;
     flex-direction: column;
     height: 100vh;
     margin: 0;
     background-color: #eee;
     box-sizing: border-box;
+    background-image: url("../../assets/img/start-img.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     .reg-container {
       display: flex;
@@ -30,34 +34,48 @@
         background-color: $form-background-color;
         padding: $form-padding;
         border-radius: $input-border-radius;
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
         width: 100%;
         max-width: $max-form-width;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .form-group {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+        }
 
         label {
+          font-size: 16px;
           display: block;
           margin-bottom: $label-spacing;
-          color: $form-text-color;
+          color: white;
         }
 
         input[type="email"],
         input[type="password"] {
           width: 100%;
-          padding: 8px;
-          margin-bottom: 10px;
-          border: 1px solid $border-color;
-          border-radius: $input-border-radius;
-          box-sizing: border-box;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
 
           &:focus {
-            border-color: lighten($border-color, 10%);
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
           }
         }
 
-        .error {
-          color: $error-text-color;
-          font-size: 0.8em;
+        .alert.alert-danger {
+          color: #721c24;
+          background-color: #f8d7da;
+          border-color: #f5c6cb;
+          padding: 5px;
+          border-radius: 4px;
+          font-size: 0.85rem;
         }
 
         button {
@@ -67,12 +85,13 @@
           border-radius: $input-border-radius;
           background-color: $button-background-color;
           color: $button-text-color;
+          background-color: rgb(285,184, 54);
           font-size: 1em;
           cursor: pointer;
           transition: background-color 0.3s;
 
           &:hover {
-            background-color: darken($button-background-color, 10%);
+            background-color: darken(rgb(285,184, 54), 10%);
           }
 
           &:disabled {
@@ -85,11 +104,11 @@
   }
 
   @media (max-width: 480px) {
-    .main {
+    section {
       padding: 10px;
     }
 
-    .main form {
+    section form {
       padding: 15px;
     }
   }
