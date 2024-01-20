@@ -59,6 +59,7 @@ export class AuthService {
           error: () => {
             localStorage.removeItem(this.TOKEN_KEY_NAME);
             localStorage.removeItem(this.ROLE_KEY_NAME);
+            this.updateAuthStatus()
             reject(new Error("Failed to logout"));
           },
         });
