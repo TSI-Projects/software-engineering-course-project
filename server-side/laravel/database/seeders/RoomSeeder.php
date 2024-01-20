@@ -126,7 +126,7 @@ class RoomSeeder extends Seeder
         collect($sources)->each(static function ($source) use ($room) {
             $image = MediaUploader::fromSource($source)
                 ->useHashForFilename()
-                ->onDuplicateUpdate()
+                ->onDuplicateIncrement()
                 ->toDirectory('room/images')
                 ->upload();
 

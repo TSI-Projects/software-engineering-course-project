@@ -44,9 +44,9 @@ class RoomFilterController extends Controller
                     ->where('checkin_at', '<', $checkoutAt)
                     ->where('checkout_at', '>', $checkinAt);
             })
-            ->where('max_guests', '<=', $validated['guest_count'])
+            ->where('max_guests', '>=', $validated['guest_count'])
             ->orderBy($orderBy, $validated['order_by']['direction'] ?? 'asc')
-            ->get();
+            ->get('rooms.*');
 
         $rooms->loadMedia(['image']);
         $rooms->load(['beds', 'amenities']);
