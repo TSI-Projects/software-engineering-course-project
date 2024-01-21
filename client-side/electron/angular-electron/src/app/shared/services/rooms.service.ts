@@ -12,7 +12,7 @@ export class RoomsService {
   public rooms$: Observable<Room[] | null> = this.roomsSubject.asObservable();
 
   private filtredRoomsSubject: BehaviorSubject<Room[] | null> = new BehaviorSubject<Room[] | null>([])
-  public filtredRooms$: Observable<Room[] | null> = this.filtredRoomsSubject.asObservable();
+  private filtredRooms$: Observable<Room[] | null> = this.filtredRoomsSubject.asObservable();
 
   constructor(
     private _http: HttpClient,
@@ -119,6 +119,9 @@ export class RoomsService {
       });
   }
 
+  public getFiltredRoomsObservable(): Observable<Room[] | null> {
+    return this.filtredRooms$
+  }
 
   public updateFiltredRooms(rooms: Room[] | null) {
     this.filtredRoomsSubject.next(rooms)

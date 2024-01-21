@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Room, RoomsService } from '../../shared/services/rooms.service';
+import { RoomsService } from '../../shared/services/rooms.service';
 
 @Component({
   selector: 'app-rooms-filter',

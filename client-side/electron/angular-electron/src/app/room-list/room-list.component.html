@@ -4,7 +4,7 @@
     <div class="rooms-container">
         <div
           class="room" 
-          *ngFor="let room of _rooms.filtredRooms$ | async">
+          *ngFor="let room of _rooms.getFiltredRoomsObservable() | async">
             <h4>{{room.name}}</h4>
             <div class="room-card">
                 <img [src]="room.images[0]">

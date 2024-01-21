@@ -51,7 +51,6 @@ export class RoomComponent implements OnInit {
 
   public async ngOnInit(): Promise<void> {
     const roomId = this._activatedRoute.snapshot.queryParams['room_id'];
-
     const resp = await this._roomsService.loadRoom(roomId)
     this.room = resp.data
   }
